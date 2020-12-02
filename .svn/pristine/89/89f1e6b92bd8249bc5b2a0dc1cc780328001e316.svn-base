@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeRoleDataDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRoleData"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRoleData">
+		<result property="id" column="id"/>
+		<result property="roleId" column="role_id"/>
+		<result property="dataId" column="data_id"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.role_id,
+			t.data_id,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_role_data t
+		<where>
+			<if test="roleId != null and roleId != ''">
+				and t.role_id = #{roleId}			
+			</if>
+			<if test="dataId != null and dataId != ''">
+				and t.data_id = #{dataId}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_role_data t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_type_role_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			role_id,
+			data_id,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{roleId},
+			#{dataId},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_type_role_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			role_id,
+			data_id,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.roleId},
+				#{item.dataId},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_type_role_data
+		<set>
+			role_id = #{roleId},
+			data_id = #{dataId},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_type_role_data
+		<set>
+			<if test="roleId != null">
+			role_id = #{roleId},
+			</if>
+			<if test="dataId != null">
+			data_id = #{dataId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_tenant_type_role_data where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_type_role_data where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

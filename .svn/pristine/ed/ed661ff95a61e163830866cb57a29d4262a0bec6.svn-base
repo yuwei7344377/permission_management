@@ -1,0 +1,160 @@
+package com.dhcc.jn.tenant.service;
+import java.util.List;
+import java.util.Map;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbTenantUser;
+import com.dhcc.jn.tenant.entity.TbUser;
+
+/**
+ * 
+ * 租户service接口
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbTenantUserService{
+	
+ 	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 * @param page
+	 * @return
+	 */
+	public Page<TbTenantUser> findByPage(TbTenantUser tbTenantUser,Page<TbTenantUser> page);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	查询
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 * @return
+	 */
+	public List<TbTenantUser> findBySearch(TbTenantUser tbTenantUser);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	通过ID查询
+	 * </pre>
+	 * 
+	 * @param TbTenantUser
+	 * @return
+	 */
+	public TbTenantUser getById(String zhId);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 */
+	public void add(TbTenantUser tbTenantUser);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	修改
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 */
+	public void update(TbTenantUser tbTenantUser);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param zhId
+	 */
+	public void delete(String zhId);
+	
+
+	/**
+	 * 根据租户名称查询
+	 * @param zhName
+	 * @return
+	 */
+	public TbTenantUser getByZhName(String zhName);
+
+	/**
+	 * 新增租户
+	 * @param user
+	 * @param entity
+	 * @param tbUser
+	 * @param userRole
+	 * @return
+	 */
+	public boolean intsert(TbUser user, TbTenantUser entity,String userName,String passWord,String phone  ,String parentCode, String parentId ,String parentName ,String parentShortName,String companyType);
+
+	/**
+	 * 条件查询
+	 * @param adId
+	 * @param zhShortName
+	 * @param zhCode
+	 * @param zhName
+	 * @return
+	 */
+	public List<TbTenantUser> findByadId(String adId,String zhShortName,String zhCode,String zhName);
+
+	/**
+	 * 根据区划ID查询
+	 * @param adId
+	 * @return
+	 */
+	public TbTenantUser getByadId(String adId);
+
+	/**
+	 * //根据租户ID获取租户、账号信息
+	 * @param zhId
+	 * @return
+	 */
+	public List<Map<String, Object>> getzhIdByTenantAndUser(String zhId);
+
+	/**
+	 * 修改租户
+	 * @param user
+	 * @param entity
+	 * @param userName
+	 * @param passWord
+	 * @param $missing$
+	 * @return
+	 */
+	public boolean edit(TbUser user, TbTenantUser entity, String userName, String passWord, String phone);
+
+
+}

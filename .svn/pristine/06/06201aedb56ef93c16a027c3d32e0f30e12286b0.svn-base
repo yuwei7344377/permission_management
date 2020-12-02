@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.VDataCatalogDao">
+
+    <parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.VDataCatalog"></parameterMap>
+    <resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.VDataCatalog">
+        <result property="id" column="id"/>
+        <result property="pid" column="pid"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="description" column="description"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.id,
+            t.pid,
+            t.name,
+            t.code,
+            t.description,
+            t.create_by,
+            t.create_time,
+            t.update_by,
+            t.update_time,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from v_data_catalog t
+        <where>
+            <if test="pid != null and pid != ''">
+                and t.pid = #{pid}
+            </if>
+            <if test="name != null and name != ''">
+                and t.name = #{name}
+            </if>
+            <if test="code != null and code != ''">
+                and t.code = #{code}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from v_data_catalog t
+        where t.id = #{value}
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into v_data_catalog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            pid,
+            name,
+            code,
+            description,
+            create_by,
+            create_time,
+            update_by,
+            update_time,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{pid},
+            #{name},
+            #{code},
+            #{description},
+            #{createBy},
+            #{createTime},
+            #{updateBy},
+            #{updateTime},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into v_data_catalog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            pid,
+            name,
+            code,
+            description,
+            create_by,
+            create_time,
+            update_by,
+            update_time,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.pid},
+                #{item.name},
+                #{item.code},
+                #{item.description},
+                #{item.createBy},
+                #{item.createTime},
+                #{item.updateBy},
+                #{item.updateTime},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update v_data_catalog
+        <set>
+            pid = #{pid},
+            name = #{name},
+            code = #{code},
+            description = #{description},
+            create_by = #{createBy},
+            create_time = #{createTime},
+            update_by = #{updateBy},
+            update_time = #{updateTime},
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update v_data_catalog
+        <set>
+            <if test="pid != null">
+                pid = #{pid},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="code != null">
+                code = #{code},
+            </if>
+            <if test="description != null">
+                description = #{description},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateBy != null">
+                update_by = #{updateBy},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete
+        from v_data_catalog
+        where id = #{value}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from v_data_catalog where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--/删除用户的上级目录-->
+    <delete id="delParentList" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_data
+        where zh_type_id = #{zhTypeId}
+          and data_id = #{parentIds}
+          and data_from = '0'
+    </delete>
+
+    <!--删除用户的数据清单-->
+    <delete id="delParentOrData" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_data
+        where zh_type_id = #{zhTypeId}
+          and parent_id = #{parentIds}
+          and data_from = '1'
+    </delete>
+
+    <!--添加用户数据清单-->
+    <insert id="insertUserData" parameterType="java.util.List">
+        insert into tb_tenant_type_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            zh_type_id,
+            data_id,
+            parent_id,
+            data_from,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.zhTypeId},
+                #{item.dataId},
+                #{item.parentId},
+                #{item.dataFrom},
+            </trim>
+        </foreach>
+    </insert>
+
+    <!--获取角色中的数据产品资源是否选中-->
+    <select id="getRoleDataProductResources" resultType="map">
+        select t.data_id,t1.role_id,v.name,case when t.id is null then false else true end checked
+        from tb_tenant_type_data t
+        left join tb_tenant_type_role_data t1 on t1.data_id = t.data_id and t1.role_id = #{roleId}
+        left join v_data_product v on v.id = t1.data_id
+        where t.data_from = '0' and t.zh_type_id = #{zhTypeId}
+    </select>
+
+    <!--删除数据产品资源父级目录-->
+    <delete id="delProductParentList" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_role_data
+        where role_id = #{roleId}
+          and data_id = #{parentIds}
+          and data_from = '0'
+    </delete>
+
+    <!--删除角色数据产品资源-->
+    <delete id="delDataOrProduct" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_role_data
+        where role_id = #{roleId}
+          and parent_id = #{parentIds}
+          and data_from = '1'
+    </delete>
+
+    <!--添加角色数据产品资源-->
+    <insert id="inserProductData" parameterType="java.util.List">
+        insert into tb_tenant_type_role_data
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            role_id,
+            data_id,
+            parent_id,
+            data_from,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.roleId},
+                #{item.dataId},
+                #{item.parentId},
+                #{item.dataFrom},
+            </trim>
+        </foreach>
+    </insert>
+    
+	<select id="getRoleDataTree" resultMap="resultMap">
+		SELECT distinct
+			ss.id,
+			ss.code as catalog_code,
+			ss.`name` as catalog_name,
+			ss.pid as pid
+		FROM
+			tb_tenant_type_role r,
+			tb_tenant_type_role_data s,
+			v_data_catalog ss
+		WHERE
+			r.zh_type_id = #{zhTypeId}
+		AND r.role_code = 'admin'
+		AND r.id = s.role_id
+		AND s.data_id = ss.id
+		AND s.data_from = #{dataFrom}
+		AND (ss.pid IS NULL OR ss.pid = '')
+	</select>
+    
+	<!-- select id="findBySearch" resultMap="resultMap">
+		SELECT distinct
+			ss.code as catalog_code,
+			ss.`name` as catalog_name,
+			ss.pid as pid
+		FROM
+			tb_tenant_type_role r,
+			tb_tenant_type_role_data s,
+			v_data_catalog ss
+		WHERE
+			r.zh_type_id = #{zhTypeId}
+		AND r.role_code = 'admin'
+		AND r.id = s.role_id
+		AND s.data_id = ss.id
+		AND s.data_from = #{dataFrom}
+		AND ss.pid = #{pid}
+	</select-->
+		
+	<select id="findBySearch" resultMap="resultMap">
+		SELECT 
+			<include refid="columnSql"/>
+		from  v_data_catalog t
+		where t.pid=#{pid}
+	</select>
+	
+
+    <!--查找数据展示列父节点-->
+    <select id="findParentId" resultMap="resultMap">
+        select * from v_data_catalog v where v.pid is null or v.pid = ''
+    </select>
+</mapper>

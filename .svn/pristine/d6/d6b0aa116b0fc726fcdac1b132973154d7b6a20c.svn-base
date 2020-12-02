@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantUserDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantUser"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantUser">
+		<result property="zhId" column="zh_id"/>
+		<result property="adId" column="ad_id"/>
+		<result property="zhTypeId" column="zh_type_id"/>
+		<result property="zhName" column="zh_name"/>
+		<result property="zhShortName" column="zh_short_name"/>
+		<result property="zhCode" column="zh_code"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.zh_id,
+			t.ad_id,
+			t.zh_type_id,
+			t.zh_name,
+			t.zh_short_name,
+			t.zh_code,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_user t
+		<where>
+			<if test="adId != null and adId != ''">
+				and t.ad_id = #{adId}			
+			</if>
+			<if test="zhTypeId != null and zhTypeId != ''">
+				and t.zh_type_id = #{zhTypeId}			
+			</if>
+			<if test="zhCode != null and zhCode != ''">
+				and t.zh_code like '%${zhCode}%'			
+			</if>
+			<if test="zhName != null and zhName != ''">
+				and t.zh_name like '%${zhName}%'		
+			</if>
+			<if test="zhShortName != null and zhShortName != ''">
+				and t.zh_short_name like '%${zhShortName}%'				
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_user t
+		where t.zh_id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			zh_id,
+			ad_id,
+			zh_type_id,
+			zh_name,
+			zh_short_name,
+			zh_code,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{zhId},
+			#{adId},
+			#{zhTypeId},
+			#{zhName},
+			#{zhShortName},
+			#{zhCode},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			zh_id,
+			ad_id,
+			zh_type_id,
+			zh_name,
+			zh_short_name,
+			zh_code,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.zhId},
+				#{item.adId},
+				#{item.zhTypeId},
+				#{item.zhName},
+				#{item.zhShortName},
+				#{item.zhCode},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_user
+		<set>
+			ad_id = #{adId},
+			zh_type_id = #{zhTypeId},
+			zh_name = #{zhName},
+			zh_short_name = #{zhShortName},
+			zh_code = #{zhCode},
+		</set>
+		where zh_id = #{zhId}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_user
+		<set>
+			<if test="adId != null">
+			ad_id = #{adId},
+			</if>
+			<if test="zhTypeId != null">
+			zh_type_id = #{zhTypeId},
+			</if>
+			<if test="zhName != null">
+			zh_name = #{zhName},
+			</if>
+			<if test="zhShortName != null">
+			zh_short_name = #{zhShortName},
+			</if>
+			<if test="zhCode != null">
+			zh_code = #{zhCode},
+			</if>
+		</set>
+		where zh_id = #{zhId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_tenant_user where zh_id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_user where zh_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 根据行政区划ID查询 -->
+  	<select id="getByadId" resultMap="resultMap">
+		select 
+			<include refid="columnSql"/>
+		FROM tb_tenant_user t
+		where t.ad_id=#{adId};
+	</select>
+	
+	<!--根据租户名称查询 -->
+  	<select id="getByZhName" resultMap="resultMap">
+		select 
+			<include refid="columnSql"/>
+		FROM tb_tenant_user t
+		where t.zh_name=#{zhName} and t.ad_id=#{adId}
+	</select>
+	<!-- 根据租户ID查询租户，账号信息 -->
+  	<select id="getzhIdByTenantAndUser" resultType="map">
+		SELECT
+			t.*, u.*
+		FROM
+			tb_tenant_user t,
+			tb_user u
+		WHERE
+			t.zh_id = #{zhId}
+		AND u.zh_id = #{zhId}
+	</select>
+</mapper>

@@ -1,0 +1,199 @@
+package com.dhcc.jn.tenant.controller;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.entity.VCompantype;
+import com.dhcc.jn.tenant.service.VCompantypeService;
+
+/**
+ * 
+ * 企业类型controller
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Controller
+@RequestMapping("/vCompantype")
+public class VCompantypeController extends BaseController {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private VCompantypeService vCompantypeService;
+	
+
+	/**
+	 * 获取企业类型list
+	 * @return
+	 */
+	@PostMapping("/findByCompanType")
+	@ResponseBody
+	public JSONObject findByCompanType() {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			List<VCompantype> list = vCompantypeService.findAll();
+			if (null != list && !list.isEmpty()) {
+				return ResponseMessage.returnInfo(true, list, null, null);
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, null);
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param vCompantype
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/list")
+	public String list(VCompantype vCompantype,Page<VCompantype> page,HttpServletRequest request){
+		
+		try {
+			
+			request.setAttribute("page", vCompantypeService.findByPage(vCompantype, page));
+		} catch (Exception e) {
+		
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/vCompantypeList";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	新增修改页面初始化
+	 * </pre>
+	 * 
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/vCompantype")
+	public String vCompantype(String id,HttpServletRequest request){
+		
+		try {
+			
+			if(ValidateUtils.isNotEmpty(id)){
+				
+				VCompantype vCompantype = vCompantypeService.getById(id);
+				request.setAttribute("vCompantype", vCompantype);
+			}
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/vCompantype";
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	保存
+	 * </pre>
+	 * 
+	 * @param vCompantype
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(VCompantype vCompantype){
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			// 修改
+			if(ValidateUtils.isNotEmpty(vCompantype.getId())){
+				
+				vCompantypeService.update(vCompantype);
+			}
+			// 新增
+			else{
+				
+				vCompantypeService.add(vCompantype);
+			}
+			json.put("result", "save_success");
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+			json.put("result", "save_fail");
+		}
+		
+		return json.toString();
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String delete(String id){
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			vCompantypeService.delete(id);
+			json.put("result", "delete_success");
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+			json.put("result", "delete_fail");
+		}
+		
+		return json.toString();
+	}
+}

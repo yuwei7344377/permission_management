@@ -1,0 +1,184 @@
+package com.dhcc.jn.tenant.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.VDataProduct;
+import com.dhcc.jn.tenant.entity.VRoletype;
+import com.dhcc.jn.tenant.service.VDataProductService;
+
+/**
+ * 数据产品信息controller
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+@RestController
+@RequestMapping("/vDataProduct")
+public class VDataProductController extends BaseController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private VDataProductService vDataProductService;
+
+    /**
+     * +
+     * 获取所有的数据产品资源(标注该用户类型是否选中)
+     */
+    @RequestMapping("getDataProductResources")
+    public JSONObject getDataProductResources(VDataProduct vDataProduct,Page<VDataProduct> page) {
+        try {
+
+            return ResponseMessage.returnInfo(true, vDataProductService.getDataProductResources(vDataProduct,page), null, null);
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+            return ResponseMessage.returnInfo(false, null, e.getMessage(), "error");
+        }
+
+    }
+
+
+    /**
+     * <pre>
+     * 	2020-07-23 jlf
+     * 	分页查询
+     * @param vDataProduct
+     * @param page
+     * @param request
+     * @return
+     */
+    @RequestMapping("/list")
+    public String list(VDataProduct vDataProduct, Page<VDataProduct> page, HttpServletRequest request) {
+
+        try {
+
+            request.setAttribute("page", vDataProductService.findByPage(vDataProduct, page));
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+        }
+
+        return "test/vDataProductList";
+    }
+
+    /**
+     * <pre>
+     * 	2020-07-23 jlf
+     * 	新增修改页面初始化
+     * </pre>
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("/vDataProduct")
+    public String vDataProduct(String id, HttpServletRequest request) {
+
+        try {
+
+            if (ValidateUtils.isNotEmpty(id)) {
+
+                VDataProduct vDataProduct = vDataProductService.getById(id);
+                request.setAttribute("vDataProduct", vDataProduct);
+            }
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+        }
+
+        return "test/vDataProduct";
+    }
+
+    /**
+     * <pre>
+     * 	2020-07-23 jlf
+     * 	保存
+     * </pre>
+     *
+     * @param vDataProduct
+     * @return
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public String save(VDataProduct vDataProduct) {
+
+        JSONObject json = new JSONObject();
+
+        try {
+
+            // 修改
+            if (ValidateUtils.isNotEmpty(vDataProduct.getId())) {
+
+                vDataProductService.update(vDataProduct);
+            }
+            // 新增
+            else {
+
+                vDataProductService.add(vDataProduct);
+            }
+            json.put("result", "save_success");
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+            json.put("result", "save_fail");
+        }
+
+        return json.toString();
+    }
+
+    /**
+     * <pre>
+     * 	2020-07-23 jlf
+     * 	删除
+     * </pre>
+     *
+     * @param id
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(String id) {
+
+        JSONObject json = new JSONObject();
+
+        try {
+
+            vDataProductService.delete(id);
+            json.put("result", "delete_success");
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+            json.put("result", "delete_fail");
+        }
+
+        return json.toString();
+    }
+}

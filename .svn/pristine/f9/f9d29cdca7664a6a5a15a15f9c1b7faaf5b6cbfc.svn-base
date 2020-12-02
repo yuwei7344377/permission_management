@@ -1,0 +1,145 @@
+package com.dhcc.jn.tenant.service.impl;
+
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbRoleDao;
+import com.dhcc.jn.tenant.entity.TbRole;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.service.TbRoleService;
+
+/**
+ * 角色表service实现类
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+@Service("tbRoleService")
+public class TbRoleServiceImpl implements TbRoleService {
+
+    @Autowired
+    private TbRoleDao tbRoleDao;
+    
+    @Override
+    @Transactional
+    public Page<TbRole> findByPage(TbRole tbRole, Page<TbRole> page) {
+
+        page.setResult(tbRoleDao.find(tbRole, page));
+
+        return page;
+    }
+
+    @Override
+    @Transactional
+    public List<TbRole> findBySearch(TbRole tbRole) {
+
+        return tbRoleDao.find(tbRole);
+    }
+
+    @Override
+    @Transactional
+    public TbRole getById(String roleId) {
+
+        return tbRoleDao.getById(roleId);
+    }
+
+    @Override
+    @Transactional
+    public void add(TbRole tbRole) {
+
+        tbRole.setRoleId(ResourceUtils.getUUID());
+        tbRoleDao.add(tbRole);
+    }
+
+    @Override
+    @Transactional
+    public void update(TbRole tbRole) {
+
+        tbRoleDao.update(tbRole);
+    }
+
+    @Override
+    @Transactional
+    public void delete(String roleId) {
+
+        tbRoleDao.delete(roleId);
+    }
+
+    @Override
+    @Transactional
+    public List<Map<String, Object>> findAll(String zhTypeId,String zhId) {
+
+        return tbRoleDao.findZhTypeIdByTenantTypeRoleAndZhIdByRole(zhId,zhTypeId);
+    }
+
+    @Override
+    @Transactional
+    public TbRole getByzhIdAndRoleCode(String zhId, String roleCode) {
+        return tbRoleDao.getByzhIdAndRoleCode(zhId, roleCode);
+    }
+
+    @Override
+    @Transactional
+    public TbRole getByzhIdAndRoleName(String zhId, String roleName) {
+        return tbRoleDao.getByzhIdAndRoleName(zhId, roleName);
+    }
+
+    @Override
+    @Transactional
+    public List<TbRole> getByzhId(String zhId) {
+        return tbRoleDao.getByzhId(zhId);
+    }
+
+    @Override
+    @Transactional
+    public boolean save(TbUser user, TbRole role) {
+        role.setRoleId(UUID.randomUUID().toString().replaceAll("-", ""));
+        role.setCreateDate(new Date());
+        role.setCreateUserName(user.getUsername());
+        role.setCreateUser(user.getUserId());
+        tbRoleDao.add(role);
+        return true;
+    }
+
+    @Override
+    @Transactional
+    public boolean edit(TbUser user, TbRole role) {
+        TbRole entity = tbRoleDao.getById(role.getRoleId());
+        if (null != entity.getRoleId()) {
+            entity.setRoleCode(role.getRoleCode());
+            entity.setRoleName(role.getRoleName());
+            entity.setUpdateDate(new Date());
+            entity.setUpdateUser(user.getUserId());
+            entity.setUpdateUserName(user.getUsername());
+            tbRoleDao.update(entity);
+            return true;
+        }
+        return false;
+    }
+
+
+}

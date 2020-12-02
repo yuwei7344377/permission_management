@@ -1,0 +1,1730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7233cea9-b46f-440c-9609-523c2eea6ef2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/deployment.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okhttp3_okhttp_3_14_9.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_squareup_okio_okio_1_17_2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_codec_commons_codec_1_14.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_6.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpclient_4_5_12.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_httpcomponents_httpcore_4_4_13.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjrt_1_9_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_aspectj_aspectjweaver_1_9_5.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_aop_2_3_1_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jn_tenant_server.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jn_tenant_server.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_3_5_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_mybatis_mybatis_spring_2_0_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_devtools_2_3_1_RELEASE.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/webapps/debug.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/webapps/debug.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/webapps/erorr.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/webapps/erorr.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/webapps/info.log" beforeDir="false" afterPath="$PROJECT_DIR$/logs/webapps/info.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.dhcc.jn.tenant" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.dhcc.jn.tenant/core" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.dhcc.jn.tenant/core/pom.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/META-INF/maven/com.dhcc.jn.tenant/core/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/TenantServerApplication.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/common" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/common/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/common/ResultObject.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/dao" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/dao/DataSourceConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/dao/SqlSessionFactoryConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/server" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/server/GlobalCorsConfig.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/service" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/config/service/TransactionManagementConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbAdministrativeDivisionController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbCoalRelatedController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbOrgController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbResourceApplicationTypeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbResourceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbRoleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbRoleDataController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbRoleResourceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeDataController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeResourceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeRoleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeRoleDataController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantTypeRoleResourceController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbTenantUserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbUserController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbUserOrgController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbUserPoundController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/TbUserRoleController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/VCompantypeController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/VDataCatalogController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/controller/VDataProductController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbAdministrativeDivisionDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbCoalRelatedDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbOrgDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbResourceApplicationTypeDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbResourceDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbRoleDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbRoleDataDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbRoleResourceDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeDataDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeResourceDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeRoleDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeRoleDataDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantTypeRoleResourceDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbTenantUserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbUserDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbUserOrgDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbUserPoundDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/TbUserRoleDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/VCompantypeDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/VDataCatalogDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dao/VDataProductDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dto" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/dto/Execution.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbAdministrativeDivision.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbCoalRelated.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbOrg.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbResourceApplicationType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbRoleData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbRoleResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantType.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantTypeData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantTypeResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantTypeRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantTypeRoleData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantTypeRoleResource.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbTenantUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbUser.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbUserOrg.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbUserPound.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/TbUserRole.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/VCompantype.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/VDataCatalog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/entity/VDataProduct.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/enums" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/enums/GlobalConsts.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/enums/StateEnum.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/error" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/error/BusinessException.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/error/CommonError.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/error/EmBusinessError.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/error/Exception.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbAdministrativeDivisionService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbCoalRelatedService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbOrgService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbResourceApplicationTypeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbResourceService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbRoleDataService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbRoleResourceService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeDataService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeResourceService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeRoleDataService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeRoleResourceService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantTypeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbTenantUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbUserOrgService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbUserPoundService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbUserRoleService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/TbUserService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/VCompantypeService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/VDataCatalogService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/VDataProductService.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbAdministrativeDivisionServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbCoalRelatedServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbOrgServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbResourceApplicationTypeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbResourceServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbRoleDataServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbRoleResourceServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbRoleServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeDataServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeResourceServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeRoleDataServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeRoleResourceServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeRoleServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantTypeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbTenantUserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbUserOrgServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbUserPoundServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbUserRoleServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/TbUserServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/VCompantypeServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/VDataCatalogServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/service/impl/VDataProductServiceImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils/DESUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils/HttpServletRequestUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils/PageCalculator.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils/ResourceUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/utils/VinUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/web" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/dhcc/jn/tenant/web/tenantInfoApiController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/base" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/base/BaseController.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/base/BaseDao.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/base/BaseEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/constant" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/constant/Globals.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/constant/SessionAttr.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/convert" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/convert/DateConvert.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/interceptor" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/interceptor/DateConvertEditor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/interceptor/EncodingInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/model" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/model/UploadModel.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/CountSqlHelper.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/Page.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/Page2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/PaginationInterceptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/Dialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/DialectFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/DB2Dialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/DerbyDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/H2Dialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/HSQLDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/MySQLDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/OracleDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/PostgreSQLDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/SQLServerDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/persistence/dialect/db/SybaseDialect.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/ContextHolderUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/CookieUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/DES.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/DateTools.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/DesUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/IpUtil.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/ssm/common/util/ValidateUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/logback.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbAdministrativeDivision-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbCoalRelated-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbOrg-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbResource-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbResourceApplicationType-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbRole-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbRoleData-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbRoleResource-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantType-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantTypeData-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantTypeResource-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantTypeRole-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantTypeRoleData-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantTypeRoleResource-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbTenantUser-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbUser-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbUserOrg-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbUserPound-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/tbUserRole-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/vCompantype-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/vDataCatalog-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/vDataProduct-sql.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mybatis-config.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc/jn" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc/jn/dcs" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc/jn/dcs/DcsServerApplicationTests.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc/jn/dcs/dao" beforeDir="true" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/dhcc/jn/dcs/dao/TestTSBaseUserDao.class" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="jn_tenant@121.36.4.200" type="feb32156:DbDataSourceImpl" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="isMigrated" value="true" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="jn_tenant_system_server" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbResourceController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4680">
+              <caret line="203" column="30" selection-start-line="203" selection-start-column="30" selection-end-line="203" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantUserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="52">
+              <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/utils/oConvertUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="11258">
+              <caret line="465" column="35" selection-start-line="465" selection-start-column="35" selection-end-line="465" selection-end-column="35" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="4498">
+              <caret line="173" column="29" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/VDataCatalogServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1118">
+              <caret line="103" column="12" lean-forward="true" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/TbResource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2886">
+              <caret line="118" column="15" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="15" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>checked</find>
+      <find>select</find>
+      <find>remark</find>
+      <find>getUserTypeFunctionList</find>
+      <find>resultMap</find>
+      <find>#&quot;</find>
+      <find>treeData.split</find>
+      <find>findRoleResourcesParent</find>
+      <find>getUserRoleResources</find>
+      <find>findParentId</find>
+      <find>getDataProduct</find>
+      <find>getUserTypeDataList</find>
+      <find>tbTenantType</find>
+      <find>资源标识</find>
+      <find>children</find>
+      <find>resource_flag</find>
+      <find>tbResourceApplicationType</find>
+      <find>find</find>
+      <find>*</find>
+      <find>treedat</find>
+      <find>treeData</find>
+      <find>String treeData</find>
+      <find>添加用户类型关系</find>
+      <find>split(&quot;#&quot;);</find>
+      <find>.split(&quot;#&quot;)</find>
+      <find>tbResource</find>
+      <find>getDataProductResources</find>
+      <find>getUserFunctionalResources</find>
+      <find>getRoleDataProductResources</find>
+      <find>getUserRoleResourc</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/TenantServerApplication.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/Test.jsp" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/error/EmBusinessError.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/ApplicationSystemService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbTenantTypeDataMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/generatorConfig.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/ApplicationSystemController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/ApplicationSystemServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbAdministrativeDivisionController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbAdministrativeDivisionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbAdministrativeDivisionDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/TbTenantTypeData.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbResourceService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbResourceDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbRoleResourceController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeDataController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbTenantTypeDataService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbTenantTypeDataServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbTenantTypeDataDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/tbTenantTypeData-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/VDataCatalog.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/tbResourceApplicationType-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbResourceServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbResourceApplicationTypeController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbResourceController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/tbResource-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/VDataProductController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/VDataProductService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/VDataProductServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/VDataProductDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/vDataProduct-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/tbTenantTypeRole-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeRoleController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbTenantTypeRoleServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbTenantTypeRoleService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbTenantTypeRoleDao.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mapper/vDataCatalog-sql.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/VDataCatalogController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/VDataCatalogService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/VDataCatalogServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/VDataCatalogDao.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/TbResource.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JRebelWorkspace">
+    <option name="jrebelEnabledAutocompile" value="true" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="localRepository" value="F:\repository" />
+        <option name="mavenHome" value="F:/apache-maven-3.3.9" />
+        <option name="userSettingsFile" value="F:\apache-maven-3.3.9\conf\settings.xml" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="tenant_core" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="tenant_core" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="7" />
+    <option name="y" value="109" />
+    <option name="width" value="1346" />
+    <option name="height" value="580" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tenant" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tenant" type="462c0819:PsiDirectoryNode" />
+              <item name="dao" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tenant" type="462c0819:PsiDirectoryNode" />
+              <item name="entity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tenant" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="tenant" type="462c0819:PsiDirectoryNode" />
+              <item name="service" type="462c0819:PsiDirectoryNode" />
+              <item name="impl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="mapper" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jn_tenant_system_server" type="b2602c69:ProjectViewProjectNode" />
+              <item name="jn_tenant_system_server" type="462c0819:PsiDirectoryNode" />
+              <item name="target" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pom.xml" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15429688" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.language" />
+  </component>
+  <component name="RebelAgentSelection">
+    <selection>jr</selection>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.dhcc.jn.tenant.service.impl" />
+      <recent name="com.dhcc.jn.tenant.service" />
+      <recent name="com.dhcc.jn.tenant.entity" />
+      <recent name="com.dhcc.jn.tenant.controller" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\jn_tenant_server\src\main\java\com\dhcc\jn\tenant\dao" />
+      <recent name="E:\jn_tenant_server\src\main\resources\static" />
+      <recent name="E:\jn_tenant_server\src\main\java\com\dhcc\jn\tenant" />
+      <recent name="E:\jn_tenant_server\src\main\resources" />
+    </key>
+  </component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean" />
+      <command value="mvn install" />
+    </option>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.TenantServerApplication">
+    <configuration name="Unnamed" type="Remote" nameIsGenerated="true">
+      <module name="jn_tenant_server" />
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" />
+      <option name="HOST" value="119.3.223.216" />
+      <option name="PORT" value="5005" />
+      <option name="AUTO_RESTART" value="false" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="5005" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <method v="2" />
+    </configuration>
+    <configuration name="TenantServerApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jn_tenant_server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.dhcc.jn.tenant.TenantServerApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
+      <deployment />
+      <server-settings>
+        <option name="BASE_DIRECTORY_NAME" value="_jn_tenant_system_server" />
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="Tomcat Catalina" />
+      <predefined_log_file id="Tomcat Manager" />
+      <predefined_log_file id="Tomcat Host Manager" />
+      <predefined_log_file id="Tomcat Localhost Access" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="13020" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="13021" />
+      </RunnerSettings>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Cover">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Debug">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="JRebel Executor">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <ConfigurationWrapper VM_VAR="JAVA_OPTS" RunnerId="Run">
+        <option name="USE_ENV_VARIABLES" value="true" />
+        <STARTUP>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </STARTUP>
+        <SHUTDOWN>
+          <option name="USE_DEFAULT" value="true" />
+          <option name="SCRIPT" value="" />
+          <option name="VM_PARAMETERS" value="" />
+          <option name="PROGRAM_PARAMETERS" value="" />
+        </SHUTDOWN>
+      </ConfigurationWrapper>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Remote" ALTERNATIVE_JRE_ENABLED="false">
+      <option name="LOCAL" value="false" />
+      <deployment />
+      <server-settings>
+        <data>
+          <option name="targets">
+            <list>
+              <WatchedTargetModelImpl>
+                <option name="name" value="CONTEXT_XML" />
+                <name>CONTEXT_XML</name>
+              </WatchedTargetModelImpl>
+              <StagingTargetModelImpl>
+                <option name="name" value="STAGING" />
+                <name>STAGING</name>
+              </StagingTargetModelImpl>
+            </list>
+          </option>
+          <option name="transportHostId" />
+        </data>
+      </server-settings>
+      <predefined_log_file enabled="true" id="Tomcat" />
+      <predefined_log_file enabled="true" id="TOMCAT_LOCALHOST_LOG_ID" />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="12951" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="JRebel Debug">
+        <option name="DEBUG_PORT" value="12952" />
+        <option name="LOCAL" value="false" />
+      </RunnerSettings>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Remote.Unnamed" />
+      <item itemvalue="Spring Boot.TenantServerApplication" />
+    </list>
+  </component>
+  <component name="SvnConfiguration" cleanupOnStartRun="true">
+    <configuration>C:\Users\Administrator\AppData\Roaming\Subversion</configuration>
+    <supportedVersion>125</supportedVersion>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7233cea9-b46f-440c-9609-523c2eea6ef2" name="Default Changelist" comment="" />
+      <created>1595301588025</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1595301588025</updated>
+      <workItem from="1595301590900" duration="867000" />
+      <workItem from="1595302562964" duration="167000" />
+      <workItem from="1595302761461" duration="10285000" />
+      <workItem from="1596264730037" duration="11768000" />
+      <workItem from="1596417530785" duration="25136000" />
+      <workItem from="1596504081401" duration="21056000" />
+      <workItem from="1596531243242" duration="7420000" />
+      <workItem from="1596595342233" duration="6053000" />
+      <workItem from="1596679286229" duration="7099000" />
+      <workItem from="1597131657831" duration="1414000" />
+      <workItem from="1597134036611" duration="54000" />
+      <workItem from="1597134105822" duration="46000" />
+      <workItem from="1597134198407" duration="5612000" />
+      <workItem from="1597284957211" duration="1917000" />
+      <workItem from="1597398840497" duration="2273000" />
+      <workItem from="1597458234468" duration="11199000" />
+      <workItem from="1599017477381" duration="812000" />
+      <workItem from="1605946624820" duration="754000" />
+      <workItem from="1606876983762" duration="265000" />
+    </task>
+    <task id="LOCAL-00001">
+      <created>1595319033918</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1595319033934</updated>
+    </task>
+    <task id="LOCAL-00002" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596426198636</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1596426198637</updated>
+    </task>
+    <task id="LOCAL-00003" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596426261096</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1596426261096</updated>
+    </task>
+    <task id="LOCAL-00004" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596436976352</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1596436976352</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596437473687</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1596437473687</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596441673288</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1596441673288</updated>
+    </task>
+    <task id="LOCAL-00007" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596441785633</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1596441785633</updated>
+    </task>
+    <task id="LOCAL-00008" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596441884349</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1596441884349</updated>
+    </task>
+    <task id="LOCAL-00009" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596441951581</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1596441951581</updated>
+    </task>
+    <task id="LOCAL-00010" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596442000332</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1596442000332</updated>
+    </task>
+    <task id="LOCAL-00011" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596442121668</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1596442121668</updated>
+    </task>
+    <task id="LOCAL-00012" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596443497782</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1596443497782</updated>
+    </task>
+    <task id="LOCAL-00013" summary="修改获取所有数据列表展示树的结构  20200803">
+      <created>1596447442132</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1596447442132</updated>
+    </task>
+    <task id="LOCAL-00014" summary="修改新增字段Xml  20200803">
+      <created>1596448076582</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1596448076582</updated>
+    </task>
+    <task id="LOCAL-00015" summary="20200803">
+      <created>1596532493235</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1596532493235</updated>
+    </task>
+    <task id="LOCAL-00016" summary="修改获取用户类型下数据目录 20200803">
+      <created>1596537169799</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1596537169799</updated>
+    </task>
+    <task id="LOCAL-00017" summary="修改获取用户类型下数据目录 20200803">
+      <created>1596537987567</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1596537987567</updated>
+    </task>
+    <task id="LOCAL-00018" summary="修改获取用户类型下数据目录 20200803">
+      <created>1596538014493</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1596538014493</updated>
+    </task>
+    <task id="LOCAL-00019" summary="修改获取用户类型下数据目录 20200803">
+      <created>1596538312185</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1596538312185</updated>
+    </task>
+    <task id="LOCAL-00020">
+      <created>1596611866574</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1596611866575</updated>
+    </task>
+    <task id="LOCAL-00021">
+      <created>1596613313137</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1596613313137</updated>
+    </task>
+    <task id="LOCAL-00022">
+      <created>1596615461805</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1596615461805</updated>
+    </task>
+    <task id="LOCAL-00023">
+      <created>1596623913088</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1596623913088</updated>
+    </task>
+    <task id="LOCAL-00024">
+      <created>1596682583543</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1596682583543</updated>
+    </task>
+    <task id="LOCAL-00025">
+      <created>1596682854991</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1596682854991</updated>
+    </task>
+    <task id="LOCAL-00026">
+      <created>1596683146746</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1596683146746</updated>
+    </task>
+    <task id="LOCAL-00027">
+      <created>1596684226916</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1596684226916</updated>
+    </task>
+    <task id="LOCAL-00028">
+      <created>1596685574971</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1596685574971</updated>
+    </task>
+    <task id="LOCAL-00029">
+      <created>1596685612429</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1596685612429</updated>
+    </task>
+    <task id="LOCAL-00030">
+      <created>1596685634855</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1596685634855</updated>
+    </task>
+    <task id="LOCAL-00031">
+      <created>1596685683986</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1596685683986</updated>
+    </task>
+    <task id="LOCAL-00032" summary="应用系统管理添加排序 2020-08-14">
+      <created>1597399396847</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1597399396847</updated>
+    </task>
+    <task id="LOCAL-00033" summary="应用资源管理添加排序 2020-08-14">
+      <created>1597399708877</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1597399708877</updated>
+    </task>
+    <task id="LOCAL-00034" summary="应用系统管理添加编码模糊查询 2020-08-14">
+      <created>1597399963307</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1597399963307</updated>
+    </task>
+    <task id="LOCAL-00035" summary="取消数据列表parentId必传 2020-08-14">
+      <created>1597401023542</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1597401023542</updated>
+    </task>
+    <task id="LOCAL-00036">
+      <created>1597458997522</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1597458997522</updated>
+    </task>
+    <task id="LOCAL-00037" summary="修改">
+      <created>1597462837253</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1597462837253</updated>
+    </task>
+    <task id="LOCAL-00038" summary="修改">
+      <created>1597471905429</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1597471905430</updated>
+    </task>
+    <task id="LOCAL-00039" summary="修改">
+      <created>1597473067747</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1597473067747</updated>
+    </task>
+    <task id="LOCAL-00040" summary="修改">
+      <created>1597473607018</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1597473607018</updated>
+    </task>
+    <task id="LOCAL-00041" summary="修改">
+      <created>1597480099659</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1597480099659</updated>
+    </task>
+    <option name="localTasksCounter" value="42" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="114197000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.47697368" weight="0.23712121" />
+      <window_info id="Structure" order="1" sideWeight="0.50970876" side_tool="true" weight="0.2621212" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5230263" side_tool="true" weight="0.19772728" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info id="JRebel" order="8" sideWeight="0.50268334" side_tool="true" weight="0.23712121" />
+      <window_info anchor="bottom" id="Problems" order="0" weight="0.32894737" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Run" order="3" weight="0.5115132" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.55757576" weight="0.36842105" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.3289689" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32894737" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" sideWeight="0.49848485" visible="true" weight="0.4243421" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.44242424" side_tool="true" weight="0.5378289" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.52796054" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32894737" />
+      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.32894737" />
+      <window_info anchor="bottom" id="File Transfer" order="15" weight="0.32730263" />
+      <window_info anchor="bottom" id="JRebel Executor" order="16" />
+      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.49924242" weight="0.52138156" />
+      <window_info anchor="bottom" id="JRebel Console" order="18" sideWeight="0.44166666" side_tool="true" weight="0.44407895" />
+      <window_info anchor="right" id="Word Book" order="0" side_tool="true" weight="0.32954547" />
+      <window_info anchor="right" id="JRebel Setup Guide" order="1" weight="0.32954547" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.18863636" />
+      <window_info anchor="right" id="Palette" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="aiXcoder" order="8" />
+      <window_info anchor="right" id="Database" order="9" weight="0.32954547" />
+      <window_info anchor="right" id="Palette&#9;" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Remote Host" order="12" weight="0.32954547" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49029127" visible="true" weight="0.2590909" />
+      <window_info id="Structure" order="1" sideWeight="0.50970876" side_tool="true" weight="0.2621212" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Image Layers" order="3" />
+      <window_info id="Capture Tool" order="4" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="6" sideWeight="0.5131579" side_tool="true" weight="0.22348484" />
+      <window_info id="Web" order="7" side_tool="true" />
+      <window_info id="JRebel" order="8" sideWeight="0.50268334" side_tool="true" weight="0.23712121" />
+      <window_info anchor="bottom" id="Problems" order="0" weight="0.32894737" />
+      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info active="true" anchor="bottom" id="Run" order="3" visible="true" weight="0.43421054" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.55757576" weight="0.26480263" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="7" weight="0.3289689" />
+      <window_info anchor="bottom" id="Spring" order="8" weight="0.32894737" />
+      <window_info anchor="bottom" id="Terminal" order="9" sideWeight="0.49848485" weight="0.4243421" />
+      <window_info anchor="bottom" id="Docker" order="10" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.44242424" side_tool="true" weight="0.5378289" />
+      <window_info anchor="bottom" id="Messages" order="12" weight="0.52796054" />
+      <window_info anchor="bottom" id="Java Enterprise" order="13" weight="0.32894737" />
+      <window_info anchor="bottom" id="Database Changes" order="14" weight="0.32894737" />
+      <window_info anchor="bottom" id="File Transfer" order="15" weight="0.59046054" />
+      <window_info anchor="bottom" id="JRebel Executor" order="16" />
+      <window_info anchor="bottom" id="Version Control" order="17" sideWeight="0.49924242" weight="0.52138156" />
+      <window_info anchor="bottom" id="JRebel Console" order="18" sideWeight="0.44166666" side_tool="true" weight="0.44407895" />
+      <window_info anchor="right" id="Word Book" order="0" side_tool="true" weight="0.32954547" />
+      <window_info anchor="right" id="JRebel Setup Guide" order="1" weight="0.32954547" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="2" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="3" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="4" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="5" weight="0.18863636" />
+      <window_info anchor="right" id="Palette" order="6" />
+      <window_info anchor="right" id="Capture Analysis" order="7" />
+      <window_info anchor="right" id="aiXcoder" order="8" />
+      <window_info anchor="right" id="Database" order="9" weight="0.32954547" />
+      <window_info anchor="right" id="Palette&#9;" order="10" />
+      <window_info anchor="right" id="Theme Preview" order="11" />
+      <window_info anchor="right" id="Remote Host" order="12" weight="0.32954547" />
+    </layout-to-restore>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="修改获取所有数据列表展示树的结构  20200803" />
+    <MESSAGE value="修改新增字段Xml  20200803" />
+    <MESSAGE value="20200803" />
+    <MESSAGE value="修改获取用户类型下数据目录 20200803" />
+    <MESSAGE value="应用系统管理添加排序 2020-08-14" />
+    <MESSAGE value="应用资源管理添加排序 2020-08-14" />
+    <MESSAGE value="应用系统管理添加编码模糊查询 2020-08-14" />
+    <MESSAGE value="取消数据列表parentId必传 2020-08-14" />
+    <MESSAGE value="修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/ApplicationSystemController.java</url>
+          <line>87</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/ApplicationSystemServiceImpl.java</url>
+          <line>73</line>
+          <properties />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="jar://F:/repository/org/springframework/spring-aop/5.2.7.RELEASE/spring-aop-5.2.7.RELEASE.jar!/org/springframework/aop/framework/ReflectiveMethodInvocation.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbAdministrativeDivisionController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="113" column="85" lean-forward="true" selection-start-line="113" selection-start-column="85" selection-end-line="113" selection-end-column="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbAdministrativeDivision-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1014">
+          <caret line="39" column="71" lean-forward="true" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbAdministrativeDivisionServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="54" column="47" selection-start-line="54" selection-start-column="43" selection-end-line="54" selection-end-column="47" />
+          <folding>
+            <element signature="e#1986#1987#0" expanded="true" />
+            <element signature="e#2044#2045#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbAdministrativeDivisionService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="56" column="42" selection-start-line="56" selection-start-column="42" selection-end-line="56" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://F:/repository/org/springframework/spring-web/5.2.7.RELEASE/spring-web-5.2.7.RELEASE.jar!/org/springframework/web/method/support/InvocableHandlerMethod.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="41">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/TbTenantTypeData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+          <folding>
+            <element signature="e#1820#1821#0" expanded="true" />
+            <element signature="e#1850#1851#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbResourceDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="54" column="84" selection-start-line="54" selection-start-column="84" selection-end-line="54" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbRoleResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="17" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeRoleDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="7" lean-forward="true" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="26">
+          <caret line="1" column="7" lean-forward="true" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbTenantTypeRoleData-sql.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbTenantTypeDataService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2522">
+          <caret line="100" column="55" selection-start-line="100" selection-start-column="40" selection-end-line="100" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbTenantType-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="22" column="27" selection-start-line="22" selection-start-column="13" selection-end-line="22" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-119">
+          <caret line="38" column="18" selection-start-line="38" selection-start-column="18" selection-end-line="38" selection-end-column="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/VDataCatalog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1482">
+          <caret line="65" column="32" selection-start-line="65" selection-start-column="24" selection-end-line="65" selection-end-column="32" />
+          <folding>
+            <element signature="e#999#1000#0" expanded="true" />
+            <element signature="e#1021#1022#0" expanded="true" />
+            <element signature="e#1078#1079#0" expanded="true" />
+            <element signature="e#1109#1110#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/common/persistence/Page.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="479">
+          <caret line="31" column="19" lean-forward="true" selection-start-line="24" selection-start-column="54" selection-end-line="31" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeDataController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="910">
+          <caret line="51" column="64" selection-start-line="51" selection-start-column="56" selection-end-line="51" selection-end-column="64" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbTenantTypeDataServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2106">
+          <caret line="90" column="49" selection-start-line="90" selection-start-column="49" selection-end-line="90" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbTenantTypeDataDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="858">
+          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="73" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbTenantTypeData-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3562">
+          <caret line="137" column="8" selection-start-line="137" selection-start-column="8" selection-end-line="137" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbResourceApplicationTypeServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="47" column="54" selection-start-line="47" selection-start-column="52" selection-end-line="47" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbResourceApplicationType-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="235">
+          <caret line="34" column="56" selection-start-line="34" selection-start-column="56" selection-end-line="34" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/common/ResponseMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="119" column="29" selection-start-line="119" selection-start-column="29" selection-end-line="119" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbResourceApplicationTypeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="693">
+          <caret line="55" column="14" lean-forward="true" selection-start-line="55" selection-start-column="14" selection-end-line="55" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbResourceApplicationTypeService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="64" column="44" selection-start-line="64" selection-start-column="37" selection-end-line="64" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/common/base/BaseEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="676">
+          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+          <folding>
+            <element signature="e#548#549#0" expanded="true" />
+            <element signature="e#564#565#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbResourceService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="66" column="22" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/common/base/BaseDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbResourceServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="70" column="21" selection-start-line="70" selection-start-column="11" selection-end-line="70" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbResource-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="364">
+          <caret line="65" column="11" selection-start-line="65" selection-start-column="11" selection-end-line="65" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/VDataProductController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="59" column="95" selection-start-line="59" selection-start-column="72" selection-end-line="59" selection-end-column="95" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/VDataProductService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="373">
+          <caret line="111" column="69" selection-start-line="111" selection-start-column="69" selection-end-line="111" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/VDataProductServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="94" column="40" selection-start-line="94" selection-start-column="40" selection-end-line="94" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/VDataProductDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="269">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/vDataProduct-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="232" column="9" selection-start-line="232" selection-start-column="9" selection-end-line="232" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/tbTenantTypeRole-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="278">
+          <caret line="175" column="48" lean-forward="true" selection-start-line="175" selection-start-column="48" selection-end-line="175" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantTypeRoleController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="253">
+          <caret line="172" column="96" lean-forward="true" selection-start-line="172" selection-start-column="96" selection-end-line="172" selection-end-column="96" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/TbTenantTypeRoleService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="145" column="78" selection-start-line="145" selection-start-column="78" selection-end-line="145" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/TbTenantTypeRoleServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="140" column="53" selection-start-line="140" selection-start-column="53" selection-end-line="140" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/TbTenantTypeRoleDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="271">
+          <caret line="73" column="62" selection-start-line="73" selection-start-column="36" selection-end-line="73" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/VDataCatalogController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="123" column="76" selection-start-line="123" selection-start-column="76" selection-end-line="123" selection-end-column="76" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/VDataCatalogService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="112" column="30" selection-start-line="112" selection-start-column="30" selection-end-line="112" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mapper/vDataCatalog-sql.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="215" column="87" selection-start-line="215" selection-start-column="81" selection-end-line="215" selection-end-column="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/dao/VDataCatalogDao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="45" column="156" selection-start-line="45" selection-start-column="156" selection-end-line="45" selection-end-column="156" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbResourceController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4680">
+          <caret line="203" column="30" selection-start-line="203" selection-start-column="30" selection-end-line="203" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/controller/TbTenantUserController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="52">
+          <caret line="2" column="7" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/utils/oConvertUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="11258">
+          <caret line="465" column="35" selection-start-line="465" selection-start-column="35" selection-end-line="465" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4498">
+          <caret line="173" column="29" selection-start-line="173" selection-start-column="26" selection-end-line="173" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/entity/TbResource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2886">
+          <caret line="118" column="15" selection-start-line="118" selection-start-column="15" selection-end-line="118" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/dhcc/jn/tenant/service/impl/VDataCatalogServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1118">
+          <caret line="103" column="12" lean-forward="true" selection-start-line="103" selection-start-column="12" selection-end-line="103" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>jn_tenant_server</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

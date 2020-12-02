@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbRoleResourceDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbRoleResource"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbRoleResource">
+		<result property="id" column="id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="roleId" column="role_id"/>
+		<result property="resourceId" column="resource_id"/>
+		<result property="state" column="state"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_id,
+			t.role_id,
+			t.resource_id,
+			t.state,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_role_resource t
+		<where>
+			<if test="zhId != null and zhId != ''">
+				and t.zh_id = #{zhId}			
+			</if>
+			<if test="roleId != null and roleId != ''">
+				and t.role_id = #{roleId}			
+			</if>
+			<if test="resourceId != null and resourceId != ''">
+				and t.resource_id = #{resourceId}			
+			</if>
+			<if test="state != null and state != ''">
+				and t.state = #{state}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_role_resource t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_role_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			role_id,
+			resource_id,
+			state,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhId},
+			#{roleId},
+			#{resourceId},
+			#{state},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_role_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			role_id,
+			resource_id,
+			state,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhId},
+				#{item.roleId},
+				#{item.resourceId},
+				#{item.state},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_role_resource
+		<set>
+			zh_id = #{zhId},
+			role_id = #{roleId},
+			resource_id = #{resourceId},
+			state = #{state},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_role_resource
+		<set>
+			<if test="zhId != null">
+			zh_id = #{zhId},
+			</if>
+			<if test="roleId != null">
+			role_id = #{roleId},
+			</if>
+			<if test="resourceId != null">
+			resource_id = #{resourceId},
+			</if>
+			<if test="state != null">
+			state = #{state},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_role_resource where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_role_resource where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<!-- 根据该角色id列出所有应用系统+功能资源list -->
+	<select id="findResource" resultType="map">
+		select  w1.resource_id,w1.resource_name,w1.isopen ,w1.app_type_code,w1.app_type_name,w1.app_type_order,
+		case when w2.resource_id is not null then 'ture' else 'false' end as checked 
+		from (
+		SELECT ss.resource_id,ss.resource_name,ss.isopen ,ss.app_type_code,a.app_type_name,a.app_type_order
+		from  tb_tenant_type_role r ,tb_tenant_type_role_resource s,tb_resource ss ,tb_resource_application_type a
+		where r.zh_type_id = #{zhTypeId}  and r.role_code = 'admin' and r.id = s.role_id  and ss.resource_id = s.resource_id 
+		 and a.app_type_code = ss.app_type_code and a.app_type_code = #{appTypeCode}
+		) w1
+		left join (
+		select s1.resource_id 
+		from tb_role r1,tb_role_resource s1 
+		where r1.role_id  = #{roleId} and r1.role_id = s1.role_id 
+		) w2 on w1.resource_id = w2.resource_id
+		order by w1.app_type_order 
+	</select>
+	<select id="getByzhTypeId" resultType="map">
+		SELECT DISTINCT
+			ss.app_type_code,
+			a.app_type_name
+		FROM
+			tb_tenant_type_role r,
+			tb_tenant_type_role_resource s,
+			tb_resource ss,
+			tb_resource_application_type a
+		WHERE
+			r.zh_type_id = #{zhTypeId}
+		AND r.id = #{roleId}
+		AND r.role_code = 'admin'
+		AND r.id = s.role_id
+		AND ss.resource_id = s.resource_id
+		AND a.app_type_code = ss.app_type_code
+	</select>
+	<!-- 根据租户ID和角色ID查询-->
+	<select id="getzhIdAndroleIdByRoleResource" resultMap="resultMap">
+		SELECT <include refid="columnSql"/>
+		from tb_role_resource t
+		where t.zh_id=#{zhId} AND t.role_id=#{roleId};
+	</select>
+		
+	<!-- 根据角色ID查询 -->
+  	<select id="getByRoleId" resultMap="resultMap">
+		select 
+			<include refid="columnSql"/>
+		FROM tb_role_resource t
+		where t.role_id=#{roleId};
+	</select>
+	
+	<!-- 根据角色ID删除 -->
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+		delete from tb_role_resource t where t.role_id = #{roleId}
+	</delete>
+</mapper>

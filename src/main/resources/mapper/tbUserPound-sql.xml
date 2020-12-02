@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbUserPoundDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbUserPound"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbUserPound">
+		<result property="id" column="id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="bfCode" column="bf_code"/>
+		<result property="inBdCode" column="in_bd_code"/>
+		<result property="outBdCode" column="out_bd_code"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_id,
+			t.user_id,
+			t.bf_code,
+			t.in_bd_code,
+			t.out_bd_code,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user_pound t
+		<where>
+			<if test="zhId != null and zhId != ''">
+				and t.zh_id = #{zhId}			
+			</if>
+			<if test="userId != null and userId != ''">
+				and t.user_id = #{userId}			
+			</if>
+			<if test="bfCode != null and bfCode != ''">
+				and t.bf_code = #{bfCode}			
+			</if>
+			<if test="inBdCode != null and inBdCode != ''">
+				and t.in_bd_code = #{inBdCode}			
+			</if>
+			<if test="outBdCode != null and outBdCode != ''">
+				and t.out_bd_code = #{outBdCode}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user_pound t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_user_pound
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			user_id,
+			bf_code,
+			in_bd_code,
+			out_bd_code,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhId},
+			#{userId},
+			#{bfCode},
+			#{inBdCode},
+			#{outBdCode},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_user_pound
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			user_id,
+			bf_code,
+			in_bd_code,
+			out_bd_code,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhId},
+				#{item.userId},
+				#{item.bfCode},
+				#{item.inBdCode},
+				#{item.outBdCode},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_user_pound
+		<set>
+			zh_id = #{zhId},
+			user_id = #{userId},
+			bf_code = #{bfCode},
+			in_bd_code = #{inBdCode},
+			out_bd_code = #{outBdCode},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_user_pound
+		<set>
+			<if test="zhId != null">
+			zh_id = #{zhId},
+			</if>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="bfCode != null">
+			bf_code = #{bfCode},
+			</if>
+			<if test="inBdCode != null">
+			in_bd_code = #{inBdCode},
+			</if>
+			<if test="outBdCode != null">
+			out_bd_code = #{outBdCode},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_user_pound where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_user_pound where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantType"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantType">
+		<result property="zhTypeId" column="zh_type_id"/>
+		<result property="zhTypeCode" column="zh_type_code"/>
+		<result property="zhTypeName" column="zh_type_name"/>
+		<result property="zhTypeIcon" column="zh_type_icon"/>
+	</resultMap>
+
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.zh_type_id,
+			t.zh_type_code,
+			t.zh_type_name,
+			t.zh_type_icon,
+		</trim>
+	</sql>
+
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+		<include refid="columnSql"></include>
+		from tb_tenant_type t
+		<where>
+			<if test="zhTypeCode != null and zhTypeCode != ''">
+				and t.zh_type_code = #{zhTypeCode}
+			</if>
+			<if test="zhTypeName != null and zhTypeName != ''">
+				and t.zh_type_name = #{zhTypeName}
+			</if>
+		</where>
+	</select>
+
+	<select id="getById" parameterType="java.lang.String" resultType="com.dhcc.jn.tenant.entity.TbTenantType">
+		select
+		<include refid="columnSql"></include>
+		from tb_tenant_type t
+		where t.zh_type_id = #{value}
+	</select>
+
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			zh_type_id,
+			zh_type_code,
+			zh_type_name,
+			zh_type_icon,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{zhTypeId},
+			#{zhTypeCode},
+			#{zhTypeName},
+			#{zhTypeIcon},
+		</trim>
+	</insert>
+
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			zh_type_id,
+			zh_type_code,
+			zh_type_name,
+			zh_type_icon,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.zhTypeId},
+				#{item.zhTypeCode},
+				#{item.zhTypeName},
+				#{item.zhTypeIcon},
+			</trim>
+		</foreach>
+	</insert>
+
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_type
+		<set>
+			zh_type_code = #{zhTypeCode},
+			zh_type_name = #{zhTypeName},
+			zh_type_icon = #{zhTypeIcon},
+		</set>
+		where zh_type_id = #{zhTypeId}
+	</update>
+
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_type
+		<set>
+			<if test="zhTypeCode != null">
+				zh_type_code = #{zhTypeCode},
+			</if>
+			<if test="zhTypeName != null">
+				zh_type_name = #{zhTypeName},
+			</if>
+			<if test="zhTypeIcon != null">
+				zh_type_icon = #{zhTypeIcon},
+			</if>
+		</set>
+		where zh_type_id = #{zhTypeId}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_tenant_type where zh_type_id = #{value}
+	</delete>
+
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_type where zh_type_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+</mapper>

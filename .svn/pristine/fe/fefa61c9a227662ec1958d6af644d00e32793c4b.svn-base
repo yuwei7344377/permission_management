@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbAdministrativeDivisionDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbAdministrativeDivision"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbAdministrativeDivision">
+		<result property="adId" column="ad_id"/>
+		<result property="adCode" column="ad_code"/>
+		<result property="adName" column="ad_name"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="parentCode" column="parent_code"/>
+		<result property="parentName" column="parent_name"/>
+		<result property="adLevel" column="ad_level"/>
+		<result property="createId" column="create_id"/>
+		<result property="createName" column="create_name"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateId" column="update_id"/>
+		<result property="updateName" column="update_name"/>
+		<result property="updateDate" column="update_date"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.ad_id,
+			t.ad_code,
+			t.ad_name,
+			t.parent_id,
+			t.parent_code,
+			t.parent_name,
+			t.ad_level,
+			t.create_id,
+			t.create_name,
+			t.create_date,
+			t.update_id,
+			t.update_name,
+			t.update_date,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_administrative_division t
+		<where>
+			<if test="adId != null and adId != ''">
+				and t.ad_id = #{adId}			
+			</if>
+			<if test="adCode != null and adCode != ''">
+				and t.ad_code = #{adCode}			
+			</if>
+			<if test="adName != null and adName != ''">
+				and t.ad_name = #{adName}			
+			</if>
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id = #{parentId} and t.ad_level in(1,2,3) 		
+			</if>
+			<if test="parentCode != null and parentCode != ''">
+				and t.parent_code = #{parentCode}			
+			</if>
+			<if test="parentName != null and parentName != ''">
+				and t.parent_name = #{parentName}			
+			</if>
+			<if test="adLevel != null and adLevel != ''">
+				and t.ad_level = #{adLevel}			
+			</if>
+		</where>
+		order by t.ad_id
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_administrative_division t
+		where t.ad_id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_administrative_division
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ad_id,
+			ad_code,
+			ad_name,
+			parent_id,
+			parent_code,
+			parent_name,
+			ad_level,
+			create_id,
+			create_name,
+			create_date,
+			update_id,
+			update_name,
+			update_date,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{adId},
+			#{adCode},
+			#{adName},
+			#{parentId},
+			#{parentCode},
+			#{parentName},
+			#{adLevel},
+			#{createId},
+			#{createName},
+			#{createDate},
+			#{updateId},
+			#{updateName},
+			#{updateDate},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_administrative_division
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			ad_id,
+			ad_code,
+			ad_name,
+			parent_id,
+			parent_code,
+			parent_name,
+			ad_level,
+			create_id,
+			create_name,
+			create_date,
+			update_id,
+			update_name,
+			update_date,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.adId},
+				#{item.adCode},
+				#{item.adName},
+				#{item.parentId},
+				#{item.parentCode},
+				#{item.parentName},
+				#{item.adLevel},
+				#{item.createId},
+				#{item.createName},
+				#{item.createDate},
+				#{item.updateId},
+				#{item.updateName},
+				#{item.updateDate},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_administrative_division
+		<set>
+			ad_code = #{adCode},
+			ad_name = #{adName},
+			parent_id = #{parentId},
+			parent_code = #{parentCode},
+			parent_name = #{parentName},
+			ad_level = #{adLevel},
+			create_id = #{createId},
+			create_name = #{createName},
+			create_date = #{createDate},
+			update_id = #{updateId},
+			update_name = #{updateName},
+			update_date = #{updateDate},
+		</set>
+		where ad_id = #{adId}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_administrative_division
+		<set>
+			<if test="adCode != null">
+			ad_code = #{adCode},
+			</if>
+			<if test="adName != null">
+			ad_name = #{adName},
+			</if>
+			<if test="parentId != null">
+			parent_id = #{parentId},
+			</if>
+			<if test="parentCode != null">
+			parent_code = #{parentCode},
+			</if>
+			<if test="parentName != null">
+			parent_name = #{parentName},
+			</if>
+			<if test="adLevel != null">
+			ad_level = #{adLevel},
+			</if>
+			<if test="createId != null">
+			create_id = #{createId},
+			</if>
+			<if test="createName != null">
+			create_name = #{createName},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateId != null">
+			update_id = #{updateId},
+			</if>
+			<if test="updateName != null">
+			update_name = #{updateName},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+		</set>
+		where ad_id = #{adId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_administrative_division where ad_id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_administrative_division where ad_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<!-- 查询山西下所有行政区划 -->
+	<select id="findByParentId" resultMap="resultMap">
+		select  <include refid="columnSql"/>
+		from  tb_administrative_division t
+		where  t.ad_id like '14%' and (t.parent_id is null or t.parent_id = '' )
+	</select>
+	
+</mapper>

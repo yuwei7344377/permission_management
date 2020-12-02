@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbCoalPoundDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbCoalPound"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbCoalPound">
+		<result property="id" column="id"/>
+		<result property="qyId" column="qy_id"/>
+		<result property="qyName" column="qy_name"/>
+		<result property="bfCode" column="bf_code"/>
+		<result property="inBdCode" column="in_bd_code"/>
+		<result property="outBdCode" column="out_bd_code"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.qy_id,
+			t.qy_name,
+			t.bf_code,
+			t.in_bd_code,
+			t.out_bd_code,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_coal_pound t
+		<where>
+			<if test="qyId != null and qyId != ''">
+				and t.qy_id = #{qyId}			
+			</if>
+			<if test="qyName != null and qyName != ''">
+				and t.qy_name = #{qyName}			
+			</if>
+			<if test="bfCode != null and bfCode != ''">
+				and t.bf_code = #{bfCode}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_coal_pound t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_coal_pound
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			qy_id,
+			qy_name,
+			bf_code,
+			in_bd_code,
+			out_bd_code,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{qyId},
+			#{qyName},
+			#{bfCode},
+			#{inBdCode},
+			#{outBdCode},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_coal_pound
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			qy_id,
+			qy_name,
+			bf_code,
+			in_bd_code,
+			out_bd_code,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.qyId},
+				#{item.qyName},
+				#{item.bfCode},
+				#{item.inBdCode},
+				#{item.outBdCode},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_coal_pound
+		<set>
+			qy_id = #{qyId},
+			qy_name = #{qyName},
+			bf_code = #{bfCode},
+			in_bd_code = #{inBdCode},
+			out_bd_code = #{outBdCode},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_coal_pound
+		<set>
+			<if test="qyId != null">
+			qy_id = #{qyId},
+			</if>
+			<if test="qyName != null">
+			qy_name = #{qyName},
+			</if>
+			<if test="bfCode != null">
+			bf_code = #{bfCode},
+			</if>
+			<if test="inBdCode != null">
+			in_bd_code = #{inBdCode},
+			</if>
+			<if test="outBdCode != null">
+			out_bd_code = #{outBdCode},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_coal_pound where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_coal_pound where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+	<select id="findByqiIdAndbfCode" resultMap="resultMap">
+		SELECT t.in_bd_code ,t.out_bd_code
+		FROM tb_coal_pound t 
+		WHERE t.qy_id = #{qyCode} AND t.bf_code= #{bfCode}
+	</select>
+</mapper>

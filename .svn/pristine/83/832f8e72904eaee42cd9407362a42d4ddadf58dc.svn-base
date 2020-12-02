@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbResourceApplicationTypeDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbResourceApplicationType"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbResourceApplicationType">
+		<result property="appTypeId" column="app_type_id"/>
+		<result property="appTypeCode" column="app_type_code"/>
+		<result property="appTypeName" column="app_type_name"/>
+		<result property="appTypeShortName" column="app_type_short_name"/>
+		<result property="appTypeOrder" column="app_type_order"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.app_type_id,
+			t.app_type_code,
+			t.app_type_name,
+			t.app_type_short_name,
+			t.app_type_order,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_resource_application_type t
+		<where>
+			<if test="appTypeId != null and appTypeId != ''">
+				and t.app_type_id = #{appTypeId}			
+			</if>
+			<if test="appTypeCode != null and appTypeCode != ''">
+				and t.app_type_code = #{appTypeCode}			
+			</if>
+			<if test="appTypeName != null and appTypeName != ''">
+				and t.app_type_name = #{appTypeName}			
+			</if>
+			<if test="appTypeShortName != null and appTypeShortName != ''">
+				and t.app_type_short_name = #{appTypeShortName}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_resource_application_type t
+		where t.app_type_id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_resource_application_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			app_type_id,
+			app_type_code,
+			app_type_name,
+			app_type_short_name,
+			app_type_order,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{appTypeId},
+			#{appTypeCode},
+			#{appTypeName},
+			#{appTypeShortName},
+			#{appTypeOrder},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_resource_application_type
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			app_type_id,
+			app_type_code,
+			app_type_name,
+			app_type_short_name,
+			app_type_order,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.appTypeId},
+				#{item.appTypeCode},
+				#{item.appTypeName},
+				#{item.appTypeShortName},
+				#{item.appTypeOrder},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_resource_application_type
+		<set>
+			app_type_code = #{appTypeCode},
+			app_type_name = #{appTypeName},
+			app_type_short_name = #{appTypeShortName},
+			app_type_order = #{appTypeOrder},
+		</set>
+		where app_type_id = #{appTypeId}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_resource_application_type
+		<set>
+			<if test="appTypeCode != null">
+			app_type_code = #{appTypeCode},
+			</if>
+			<if test="appTypeName != null">
+			app_type_name = #{appTypeName},
+			</if>
+			<if test="appTypeShortName != null">
+			app_type_short_name = #{appTypeShortName},
+			</if>
+			<if test="appTypeOrder != null">
+			app_type_order = #{appTypeOrder},
+			</if>
+		</set>
+		where app_type_id = #{appTypeId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_resource_application_type where app_type_id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_resource_application_type where app_type_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

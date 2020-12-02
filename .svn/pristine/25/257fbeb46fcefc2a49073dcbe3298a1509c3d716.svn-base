@@ -1,0 +1,77 @@
+package com.dhcc.jn.tenant.dao;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.dhcc.jn.tenant.common.base.BaseDao;
+import com.dhcc.jn.tenant.entity.TbOrg;
+
+/**
+ * 
+ * 组织表dao接口.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbOrgDao extends BaseDao<TbOrg, String> {
+
+	/**
+	 * 查询所有组织
+	 * @return
+	 */
+	List<TbOrg> findAll();
+	/**
+	 * 获取租户下的所有的组织（组织名称（模糊查询）、级别（精确查询）；）
+	 * @param zhId
+	 * @param $missing$
+	 * @return
+	 */
+	List<TbOrg> findOrgByzhId(String zhId);
+
+	/**
+	 * 组织名唯一校验
+	 * @param orgName
+	 * @return
+	 */
+	TbOrg getByOrgName(@Param("orgName")String orgName,@Param("zhId")String zhId);
+	/**
+	 * //（组织名称（模糊查询）、级别（精确查询）；）
+	 * @param orgName
+	 * @param orgType
+	 * @return
+	 */
+	List<TbOrg> getByOrgNameAndOrgType(@Param("orgName")String orgName, @Param("orgType")String orgType);
+	
+	/**
+	 * 查询市级组织
+	 * @return
+	 */
+	List<TbOrg> getTbOrgTree();
+	
+	/**
+	 * 查询市级下的运营中心
+	 * @param parentOrgId
+	 * @return
+	 */
+	List<TbOrg> findBySearch(String parentOrgId);
+
+
+}

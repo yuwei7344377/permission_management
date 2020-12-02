@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbRoleDataDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbRoleData"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbRoleData">
+		<result property="id" column="id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="roleId" column="role_id"/>
+		<result property="dataId" column="data_id"/>
+		<result property="state" column="state"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="dataFrom" column="data_from"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_id,
+			t.role_id,
+			t.data_id,
+			t.state,
+			t.parent_id,
+			t.data_from,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_role_data t
+		<where>
+			<if test="zhId != null and zhId != ''">
+				and t.zh_id = #{zhId}			
+			</if>
+			<if test="roleId != null and roleId != ''">
+				and t.role_id = #{roleId}			
+			</if>
+			<if test="dataId != null and dataId != ''">
+				and t.data_id = #{dataId}			
+			</if>
+			<if test="state != null and state != ''">
+				and t.state = #{state}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_role_data t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_role_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			role_id,
+			data_id,
+			state,
+			parent_id,
+			data_from,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhId},
+			#{roleId},
+			#{dataId},
+			#{state},
+			#{parentId},
+			#{dataFrom},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_role_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			role_id,
+			data_id,
+			state,
+			parent_id,
+			data_from,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhId},
+				#{item.roleId},
+				#{item.dataId},
+				#{item.state},
+				#{item.parentId},
+				#{item.dataFrom},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_role_data
+		<set>
+			zh_id = #{zhId},
+			role_id = #{roleId},
+			data_id = #{dataId},
+			state = #{state},
+			parent_id = #{parentId},
+			data_from = #{dataFrom},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_role_data
+		<set>
+			<if test="zhId != null">
+			zh_id = #{zhId},
+			</if>
+			<if test="roleId != null">
+			role_id = #{roleId},
+			</if>
+			<if test="dataId != null">
+			data_id = #{dataId},
+			</if>
+			<if test="state != null">
+			state = #{state},
+			</if>
+			<if test="parentId != null">
+			parent_id = #{parentId},
+			</if>
+			<if test="dataFrom != null">
+			data_from = #{dataFrom},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_role_data where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_role_data where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<!-- 根据租户类型ID，角色ID，数据目类ID查询数据资源 -->
+	<select id="findData" resultType="map">
+		<!-- select  w1.*,
+		case when w2.parent_id is not null then 'ture' else 'false' end as checked 
+		from (
+			SELECT  a.id,a.name as product_name,a.code as product_code,ss.name as catalog_naem,ss.code as catalog_code
+			FROM tb_tenant_type_role r,tb_tenant_type_role_data s,v_data_catalog ss ,v_data_product a
+			WHERE r.zh_type_id = #{zhTypeId}  and r.role_code = 'admin' and r.id = s.role_id and ss.id = a.catalog_id and a.catalog_id = #{catalogId}
+		) w1
+		left join (
+			select s1.parent_id 
+			from tb_role r1,tb_role_data s1 
+			where r1.role_id  = #{roleId} and r1.role_id = s1.role_id 
+		) w2 on w1.id = w2.parent_id -->
+		select  w1.*,
+		case when w2.data_id is not null then '1' else '0' end as checked 
+		from (
+			SELECT  a.id as productId,a.name as productName,a.`status`
+			FROM tb_tenant_type_role r,tb_tenant_type_role_data s ,v_data_product a
+			WHERE r.zh_type_id = #{zhTypeId}  and r.role_code = 'admin' and r.id = s.role_id and s.data_id = a.id and s.parent_id = #{catalogId}
+		) w1
+		left join (
+			select s1.data_id
+			from tb_role r1,tb_role_data s1 
+			where r1.role_id  =  #{roleId}  and r1.role_id = s1.role_id 
+		) w2 on w1.productId = w2.data_id
+	</select>
+	
+	<!-- 获取数据资源目录树 -->
+	<select id="findDataTree" resultType="map">
+		SELECT distinct a.id, ss.code as catalog_code,a.name as product_name
+		from  tb_tenant_type_role r ,tb_tenant_type_role_data s,v_data_catalog ss ,v_data_product a
+		where r.zh_type_id = #{zhTypeId}  and r.role_code = 'admin' and r.id = s.role_id  and ss.id = a.catalog_id and r.id=#{roleId}
+	</select>
+	
+	<!-- 根据租户ID和角色ID查询-->
+	<select id="getzhIdAndroleIdByRoleData" resultMap="resultMap">
+		SELECT <include refid="columnSql"/>
+		from tb_role_data t
+		where t.zh_id=#{zhId} AND t.role_id=#{roleId};
+	</select>
+	
+	<!-- 根据角色ID删除 -->
+	<delete id="deleteByRoleId" parameterType="java.lang.String">
+		delete from tb_role_data  
+		where role_id = #{roleId}
+		<if test="parentId != null and parentId != ''">
+			and parent_id = #{parentId} 	
+		</if>
+		<if test="parentId == null or parentId == ''">
+			and parent_id is null
+		</if>
+	</delete>
+</mapper>

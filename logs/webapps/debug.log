@@ -1,0 +1,25 @@
+2020-08-15 11:31:28.834 [main] DEBUG com.dhcc.jn.tenant.TenantServerApplication - Running with Spring Boot v2.3.1.RELEASE, Spring v5.2.7.RELEASE
+2020-08-15 11:32:01.395 [http-nio-8099-exec-3] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@54d28a49]
+2020-08-15 11:32:01.422 [http-nio-8099-exec-3] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:32:01.663 [http-nio-8099-exec-3] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:35:14.091 [http-nio-8099-exec-1] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@62e6d908]
+2020-08-15 11:35:14.092 [http-nio-8099-exec-1] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:35:14.092 [http-nio-8099-exec-1] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:35:26.133 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@62e6d908]
+2020-08-15 11:35:26.135 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:35:26.138 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:37:24.587 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@4bbf869f]
+2020-08-15 11:37:24.588 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:37:24.589 [http-nio-8099-exec-4] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:37:30.899 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@4bbf869f]
+2020-08-15 11:37:30.900 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:37:30.901 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:37:53.960 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@4bbf869f]
+2020-08-15 11:37:53.961 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:37:53.962 [http-nio-8099-exec-5] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:38:43.766 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@4bbf869f]
+2020-08-15 11:38:43.767 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:38:43.768 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)
+2020-08-15 11:38:59.780 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ooo Using Connection [com.mysql.cj.jdbc.ConnectionImpl@4bbf869f]
+2020-08-15 11:38:59.781 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==>  Preparing: select GROUP_CONCAT(CONCAT(b.zh_type_id)SEPARATOR ',') as zh_type_id,t.* from tb_resource t,tb_tenant_type_resource b where t.resource_id = b.resource_id and t.resource_id = ? 
+2020-08-15 11:38:59.782 [http-nio-8099-exec-6] DEBUG com.dhcc.jn.tenant.dao.TbResourceDao.getById - ==> Parameters: 5(String)

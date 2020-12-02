@@ -1,0 +1,303 @@
+package com.dhcc.jn.tenant.service.impl;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dhcc.jn.tenant.common.Constants;
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbCoalRelatedDao;
+import com.dhcc.jn.tenant.dao.TbOrgDao;
+import com.dhcc.jn.tenant.dao.TbTenantUserDao;
+import com.dhcc.jn.tenant.dao.TbUserDao;
+import com.dhcc.jn.tenant.dao.TbUserOrgDao;
+import com.dhcc.jn.tenant.dao.TbUserRoleDao;
+import com.dhcc.jn.tenant.entity.TbCoalRelated;
+import com.dhcc.jn.tenant.entity.TbOrg;
+import com.dhcc.jn.tenant.entity.TbTenantUser;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.entity.TbUserOrg;
+import com.dhcc.jn.tenant.entity.TbUserRole;
+import com.dhcc.jn.tenant.service.TbTenantUserService;
+
+/**
+ * 
+ * 租户service实现类
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Service("tbTenantUserService")
+public class TbTenantUserServiceImpl implements TbTenantUserService {
+
+	
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private TbTenantUserDao tbTenantUserDao;
+	@Autowired
+	private TbUserDao tbUserDao;
+	@Autowired
+	private TbUserRoleDao tbUserRoleDao;
+	@Autowired
+	private TbOrgDao tbOrgDao;
+	@Autowired
+	private TbUserOrgDao tbUserOrgDao;
+	@Autowired
+	private TbCoalRelatedDao tbCoalRelatedDao;
+	
+	@Override
+	public Page<TbTenantUser> findByPage(TbTenantUser tbTenantUser, Page<TbTenantUser> page) {
+
+		page.setResult(tbTenantUserDao.find(tbTenantUser, page));
+		
+		return page;
+	}
+	
+	@Override
+	public List<TbTenantUser> findBySearch(TbTenantUser tbTenantUser) {
+
+		return tbTenantUserDao.find(tbTenantUser);
+	}
+	
+	@Override
+	public TbTenantUser getById(String zhId) {
+
+		return tbTenantUserDao.getById(zhId);
+	}
+
+	@Override
+	public void add(TbTenantUser tbTenantUser) {
+
+		tbTenantUser.setZhId(ResourceUtils.getUUID());
+		tbTenantUserDao.add(tbTenantUser);
+	}
+	
+	@Override
+	public void update(TbTenantUser tbTenantUser) {
+
+		tbTenantUserDao.update(tbTenantUser);
+	}
+
+	@Override
+	public void delete(String zhId) {
+
+		tbTenantUserDao.delete(zhId);
+	}
+ 	
+
+	@Override
+	public TbTenantUser getByZhName(String zhName) {
+		return tbTenantUserDao.getByZhName(zhName);
+	}
+
+	@Override
+	public boolean intsert(TbUser user, TbTenantUser entity, String userName,String passWord,String phone ,String parentCode, String parentId ,String parentName ,String parentShortName,String companyType) {
+		String id = UUID.randomUUID().toString().replaceAll("-", "");
+		String ordId = UUID.randomUUID().toString().replaceAll("-", "");
+		String userId = UUID.randomUUID().toString().replaceAll("-", "");
+		if (null != entity) {
+			try {
+				//租户表tb_tenant_user
+				entity.setZhId(id);
+				tbTenantUserDao.add(entity);
+				
+				//组织表tb_org（顶级组织）
+				TbOrg org = new TbOrg();
+				org.setId(ordId);
+				org.setZhId(id);
+				org.setOrgCode(ordId);
+				org.setOrgName(entity.getZhName());
+				org.setOrgType(Constants.ORGTYPE);
+				org.setOrgOrder(Constants.ORGORDER);
+				org.setCreateId(user.getUserId());
+				org.setCreateName(user.getUsername());
+				org.setCreateDate(new Date());
+				tbOrgDao.add(org);
+				
+				//账号表tb_user（user_state=1,delete_flag=0）
+				TbUser tbUser = new TbUser();
+				tbUser.setUserId(userId);
+				tbUser.setZhId(id);
+				tbUser.setUsername(userName);
+				tbUser.setPassword(passWord);
+				tbUser.setPhone(phone);
+				tbUser.setUserState(Constants.USERSTATE);//状态
+				tbUser.setDeleteFlag(Constants.DELETEFLAG);
+				tbUser.setCreateBy(user.getUserId());
+				tbUser.setCreateName(user.getUsername());
+				tbUser.setCreateDate(new Date());
+				tbUser.setDriver(Constants.DRIVER);
+				tbUserDao.add(tbUser);
+				
+				//角色表tb_user_role
+				TbUserRole userRole = new TbUserRole();
+				userRole.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				userRole.setZhId(id);
+				userRole.setUserId(userId);
+				userRole.setRoleSource(Constants.ROLESOURCE);
+				userRole.setCreateDate(new Date());
+				userRole.setCreateUser(user.getUserId());
+				userRole.setCreateUserName(user.getUsername());
+				tbUserRoleDao.add(userRole);
+				
+				//账户组织表tb_user_org
+				TbUserOrg userOrg = new TbUserOrg();
+				userOrg.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+				userOrg.setZhId(id);
+				userOrg.setUserId(userId);
+				userOrg.setOrgId(ordId);
+				userOrg.setCreateDate(new Date());
+				userOrg.setCreateUser(user.getUserId());
+				userOrg.setCreateUserName(user.getUsername());
+				tbUserOrgDao.add(userOrg);
+				
+				/**
+				 * 企业表tb_coal_related（企业编号和租户表tb_tenant_user中企业编号一致）
+				 * tb_coal_related
+				 * 插入id、
+				 * code、
+				 * name、
+				 * org_short_name、
+				 * parent_id、
+				 * parent_code、
+				 * parent_name、
+				 * parent_short_name、
+				 * org_level（==4）、
+				 * create_name、
+				 * create_by、
+				 * create_date、
+				 * is_collect（==1）、
+				 * company_type（企业类型，前端传过来）、
+				 * org_type_code（==2）、
+				 * org_type_name（企业）、
+				 * check_status（==2）
+				 */
+				TbCoalRelated tbCoalRelated = new TbCoalRelated();
+				String sql = tbCoalRelatedDao.getByMaxID(parentCode);
+				String coalRelatedId = "";
+				if (null != sql) {
+					coalRelatedId = (Integer.valueOf(sql) + 1) + "";
+				}else {
+					coalRelatedId = (Integer.valueOf(parentCode) + 1) + "";
+				}
+				//UUID.randomUUID().toString().replaceAll("-", "")
+				tbCoalRelated.setId(coalRelatedId);
+				tbCoalRelated.setCode(coalRelatedId);//企业编码
+				tbCoalRelated.setName(entity.getZhName());//企业名称
+				tbCoalRelated.setOrgShortName(entity.getZhShortName());//企业简称
+				tbCoalRelated.setParentId(parentId);//上级机构id
+				tbCoalRelated.setParentCode(parentCode);//上级机构编码
+				tbCoalRelated.setParentName(parentName);//上级机构名称
+				tbCoalRelated.setParentShortName(parentShortName);//上级机构简称
+				tbCoalRelated.setOrgLevel(Constants.ORGLEVEL);
+				tbCoalRelated.setCreateName(user.getUsername());
+				tbCoalRelated.setCreateBy(user.getUserId());
+				tbCoalRelated.setCreateDate(new Date());
+				tbCoalRelated.setIsCollect(Constants.ISCOLLECT);
+				tbCoalRelated.setCompanyType(companyType);
+				tbCoalRelated.setOrgTypeCode(Constants.ORGTYPECODE);
+				tbCoalRelated.setOrgTypeName(Constants.ORGTYPENAME);
+				tbCoalRelated.setCheckStatus(Constants.CHECKSTATUS);
+				tbCoalRelatedDao.add(tbCoalRelated);
+				
+			} catch (Exception e) {
+				logger.error("新增租户信息失败！" + e.getMessage(), e);
+				return false;
+			}
+			return true;
+		} else {
+			// 传参为空则返回空值错误信息
+			return false;
+		}
+	}
+
+	@Override
+	public List<TbTenantUser> findByadId(String adId,String zhShortName,String zhCode,String zhName) {
+		return tbTenantUserDao.find(adId,zhCode,zhName,zhShortName);
+	}
+
+	@Override
+	public TbTenantUser getByadId(String adId) {
+		return tbTenantUserDao.getByadId(adId);
+	}
+
+	/**
+	 * //根据租户ID获取租户、账号信息
+	 */
+	@Override
+	public List<Map<String, Object>> getzhIdByTenantAndUser(String zhId) {
+		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+		Map<String, Object> map = tbTenantUserDao.getzhIdByTenantAndUser(zhId);
+		list.add(map);
+		return list;
+	}
+
+	@Override
+	public boolean edit(TbUser user, TbTenantUser entity, String userName, String passWord, String phone) {
+		if (null != user.getUserId()) {
+			if (null != entity.getZhId()) {
+				TbTenantUser tenantUser = tbTenantUserDao.getById(entity.getZhId());
+				if (null != tenantUser) {
+					TbTenantUser tbTenantUser = new TbTenantUser();
+					tbTenantUser.setZhId(entity.getZhId());
+					tbTenantUser.setZhName(entity.getZhName());
+					tbTenantUser.setZhShortName(entity.getZhShortName());
+					tbTenantUser.setZhTypeId(entity.getZhTypeId());
+					tbTenantUser.setUpdateDate(new Date());
+					tbTenantUser.setUpdateUser(user.getUserId());
+					tbTenantUser.setUpdateUserName(user.getUsername());
+					tbTenantUserDao.updateNotNull(tbTenantUser);
+					
+					TbUser tbUser = tbUserDao.getByzhIdAndState(entity.getZhId(),Constants.USERSTATE);
+					if (null != tbUser.getUserId()) {
+						TbUser userEntity = new TbUser();
+						userEntity.setUserId(tbUser.getUserId());
+						userEntity.setUsername(userName);
+						userEntity.setPassword(passWord);
+						userEntity.setPhone(phone);
+						userEntity.setUpdateBy(user.getUserId());
+						userEntity.setUpdateDate(new Date());
+						userEntity.setUpdateName(user.getUsername());
+						tbUserDao.updateNotNull(userEntity);
+						return true;
+					}else {
+						return false;
+					}
+				}else {
+					return false;
+				}
+			}else {
+				return false;
+			}
+		}else {
+			return false;
+		}
+	}
+	
+}

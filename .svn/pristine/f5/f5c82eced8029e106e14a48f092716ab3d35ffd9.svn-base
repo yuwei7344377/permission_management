@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeRoleDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRole"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRole">
+		<result property="id" column="id"/>
+		<result property="zhTypeId" column="zh_type_id"/>
+		<result property="roleCode" column="role_code"/>
+		<result property="roleName" column="role_name"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_type_id,
+			t.role_code,
+			t.role_name,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_role t
+		<where>
+			<if test="zhTypeId != null and zhTypeId != ''">
+				and t.zh_type_id = #{zhTypeId}			
+			</if>
+			<if test="roleCode != null and roleCode != ''">
+				and t.role_code = #{roleCode}			
+			</if>
+			<if test="roleName != null and roleName != ''">
+				and t.role_name = #{roleName}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_role t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_type_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			role_code,
+			role_name,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhTypeId},
+			#{roleCode},
+			#{roleName},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_type_role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			role_code,
+			role_name,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhTypeId},
+				#{item.roleCode},
+				#{item.roleName},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_type_role
+		<set>
+			zh_type_id = #{zhTypeId},
+			role_code = #{roleCode},
+			role_name = #{roleName},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_type_role
+		<set>
+			<if test="zhTypeId != null">
+			zh_type_id = #{zhTypeId},
+			</if>
+			<if test="roleCode != null">
+			role_code = #{roleCode},
+			</if>
+			<if test="roleName != null">
+			role_name = #{roleName},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_tenant_type_role where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_type_role where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

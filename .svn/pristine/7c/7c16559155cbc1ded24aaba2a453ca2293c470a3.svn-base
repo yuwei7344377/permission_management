@@ -1,0 +1,40 @@
+package com.dhcc.jn.tenant.dao;
+import com.dhcc.jn.tenant.common.base.BaseDao;
+import com.dhcc.jn.tenant.entity.TbCoalRelated;
+
+/**
+ * 
+ * 企业表dao接口.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbCoalRelatedDao extends BaseDao<TbCoalRelated, String> {
+
+	/**
+	 * 查询某行政区划下最大的ID
+	 * @param parentCode
+	 * @return
+	 */
+	String getByMaxID(String parentCode);
+
+
+}

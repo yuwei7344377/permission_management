@@ -1,0 +1,83 @@
+package com.dhcc.jn.tenant.service.impl;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbCoalRelatedDao;
+import com.dhcc.jn.tenant.entity.TbCoalRelated;
+import com.dhcc.jn.tenant.service.TbCoalRelatedService;
+
+/**
+ * 
+ * 企业表service实现类
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Service("tbCoalRelatedService")
+public class TbCoalRelatedServiceImpl implements TbCoalRelatedService {
+
+	@Autowired
+	private TbCoalRelatedDao tbCoalRelatedDao;
+	
+	@Override
+	public Page<TbCoalRelated> findByPage(TbCoalRelated tbCoalRelated, Page<TbCoalRelated> page) {
+
+		page.setResult(tbCoalRelatedDao.find(tbCoalRelated, page));
+		
+		return page;
+	}
+	
+	@Override
+	public List<TbCoalRelated> findBySearch(TbCoalRelated tbCoalRelated) {
+
+		return tbCoalRelatedDao.find(tbCoalRelated);
+	}
+	
+	@Override
+	public TbCoalRelated getById(String id) {
+
+		return tbCoalRelatedDao.getById(id);
+	}
+
+	@Override
+	public void add(TbCoalRelated tbCoalRelated) {
+
+		tbCoalRelated.setId(ResourceUtils.getUUID());
+		tbCoalRelatedDao.add(tbCoalRelated);
+	}
+	
+	@Override
+	public void update(TbCoalRelated tbCoalRelated) {
+
+		tbCoalRelatedDao.update(tbCoalRelated);
+	}
+
+	@Override
+	public void delete(String id) {
+
+		tbCoalRelatedDao.delete(id);
+	}
+ 	
+}

@@ -1,0 +1,195 @@
+package com.dhcc.jn.tenant.service.impl;
+
+import com.alibaba.druid.util.StringUtils;
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.VDataCatalogDao;
+import com.dhcc.jn.tenant.entity.TbTenantTypeData;
+import com.dhcc.jn.tenant.entity.TbTenantTypeRoleData;
+import com.dhcc.jn.tenant.entity.VDataCatalog;
+import com.dhcc.jn.tenant.service.VDataCatalogService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 数据目录service实现类
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+@Service("vDataCatalogService")
+public class VDataCatalogServiceImpl implements VDataCatalogService {
+
+    @Autowired
+    private VDataCatalogDao vDataCatalogDao;
+
+    @Override
+    @Transactional
+    public Page<VDataCatalog> findByPage(VDataCatalog vDataCatalog, Page<VDataCatalog> page) {
+
+        page.setResult(vDataCatalogDao.find(vDataCatalog, page));
+
+        return page;
+    }
+
+    @Override
+    @Transactional
+    public List<VDataCatalog> findBySearch(VDataCatalog vDataCatalog) {
+
+        return vDataCatalogDao.find(vDataCatalog);
+    }
+
+    @Override
+    @Transactional
+    public VDataCatalog getById(String id) {
+
+        return vDataCatalogDao.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public void add(VDataCatalog vDataCatalog) {
+
+        vDataCatalog.setId(ResourceUtils.getUUID());
+        vDataCatalogDao.add(vDataCatalog);
+    }
+
+    @Override
+    @Transactional
+    public void update(VDataCatalog vDataCatalog) {
+
+        vDataCatalogDao.update(vDataCatalog);
+    }
+
+    @Override
+    @Transactional
+    public void delete(String id) {
+
+        vDataCatalogDao.delete(id);
+    }
+
+    @Override
+    @Transactional
+    public void saveUserData(String zhTypeId, String parentIds, String treeData) {
+
+        String[] parentIdArray = parentIds.split("#");
+
+        //没有选取数据清单
+        if (StringUtils.isEmpty(treeData)) {
+
+            vDataCatalogDao.delParentList(zhTypeId, parentIdArray[parentIdArray.length - 1]);
+
+        } else {
+            vDataCatalogDao.delParentOrData(zhTypeId, parentIdArray[parentIdArray.length - 1]);
+            //选了数据清单
+            String[] datas = treeData.split("#");
+
+            TbTenantTypeData tb = new TbTenantTypeData();
+            List<TbTenantTypeData> tbList = new ArrayList<>();
+            //添加数据目录
+            for (int i = 0; i < parentIdArray.length; i++) {
+                if (i == 0) {
+                    tb.setParentId(null);
+                } else {
+                    tb.setParentId(parentIdArray[i - 1]);
+                }
+                tb.setId(ResourceUtils.getUUID().replace("-", ""));
+                tb.setZhTypeId(zhTypeId);
+                tb.setDataId(parentIdArray[i]);
+                tb.setDataFrom("0");
+                tbList.add(tb);
+            }
+            //添加数据资源
+            for (String dataId : datas) {
+                tb.setId(ResourceUtils.getUUID().replace("-", ""));
+                tb.setZhTypeId(zhTypeId);
+                tb.setParentId(parentIdArray[parentIdArray.length - 1]);
+                tb.setDataId(dataId);
+                tb.setDataFrom("1");
+                tbList.add(tb);
+            }
+
+            vDataCatalogDao.insertUserData(tbList);
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<Map<String, Object>> getRoleDataProductResources(String roleId, String zhTypeId) {
+
+        return vDataCatalogDao.getRoleDataProductResources(roleId, zhTypeId);
+    }
+
+    @Override
+    @Transactional
+    public void saveDataResources(String roleId, String parentIds, String treeData) {
+
+        String[] parentIdArray = parentIds.split("#");
+
+        //没有选取数据产品资源
+        if (StringUtils.isEmpty(treeData)) {
+
+            vDataCatalogDao.delProductParentList(roleId, parentIdArray[parentIdArray.length - 1]);
+
+        } else {
+            vDataCatalogDao.delDataOrProduct(roleId, parentIdArray[parentIdArray.length - 1]);
+            //选了数据产品资源
+            String[] datas = treeData.split("#");
+
+            TbTenantTypeRoleData tbData = new TbTenantTypeRoleData();
+            List<TbTenantTypeRoleData> tbList = new ArrayList<>();
+            //添加数据产品资源
+            for (int i = 0; i < parentIdArray.length; i++) {
+                if (i == 0) {
+                    tbData.setParentId(null);
+                } else {
+                    tbData.setParentId(parentIdArray[i - 1]);
+                }
+                tbData.setId(ResourceUtils.getUUID().replace("-", ""));
+                tbData.setRoleId(roleId);
+                tbData.setDataId(parentIdArray[i]);
+                tbData.setDataFrom("0");
+                tbList.add(tbData);
+            }
+            //添加数据产品资源
+            for (String dataId : datas) {
+                tbData.setId(ResourceUtils.getUUID().replace("-", ""));
+                tbData.setRoleId(roleId);
+                tbData.setParentId(parentIdArray[parentIdArray.length - 1]);
+                tbData.setDataId(dataId);
+                tbData.setDataFrom("1");
+                tbList.add(tbData);
+            }
+
+            vDataCatalogDao.inserProductData(tbList);
+        }
+    }
+
+    @Override
+    @Transactional
+    public List<VDataCatalog> findarentId() {
+
+        return vDataCatalogDao.findarentId();
+    }
+}

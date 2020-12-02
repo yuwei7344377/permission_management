@@ -1,0 +1,67 @@
+package com.dhcc.jn.tenant.dao;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.dhcc.jn.tenant.common.base.BaseDao;
+import com.dhcc.jn.tenant.entity.TbResource;
+
+/**
+ * 
+ * 功能资源dao接口.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbResourceDao extends BaseDao<TbResource, String> {
+	/**
+	 * 获取父级别菜单list信息
+	 */
+	List<TbResource> getParentMenu(@Param("appTypeCode") String appTypeCode);
+
+	/**
+	 * 验证功能资源唯一标识
+	 * @param resourceFlag
+	 * @return
+	 */
+    int findEffectiveResourceLogo(@Param("resourceFlag") String resourceFlag);
+
+	/**
+	 * 查找角色下的应用资源父节点
+	 * @param
+	 * @param
+	 * @param
+	 * @return
+	 */
+    List<TbResource> findRoleResourcesParent();
+
+	/**
+	 * 获取角色下的应用资源父节点
+	 *
+	 * @param roleId
+	 * @param zhTypeId
+	 * @param appTypeCode
+	 * @return
+	 */
+	List<Map<String, Object>> getUserRoleResources(@Param("roleId") String roleId, @Param("zhTypeId") String zhTypeId, @Param("appTypeCode") String appTypeCode);
+
+}

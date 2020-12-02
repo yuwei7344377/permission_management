@@ -1,0 +1,334 @@
+package com.dhcc.jn.tenant.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbTenantUserDao;
+import com.dhcc.jn.tenant.entity.TbTenantUser;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.service.TbTenantUserService;
+import com.dhcc.jn.tenant.service.TbUserService;
+
+/**
+ * 
+ * 租户controller
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author
+ * 
+ *         <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ *         </pre>
+ * 
+ * @version $Rev$
+ *
+ *          <p/>
+ *          $Id$
+ *
+ */
+@Controller
+@RequestMapping("/tbTenantUser")
+public class TbTenantUserController extends BaseController {
+
+	private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private TbTenantUserService tbTenantUserService;
+
+	@Autowired
+	private TbUserService tbUserService;
+
+	@Autowired
+	private TbTenantUserDao tbTenantUserDao;
+	
+	/**
+	 * 查询某行政区划下的租户 条件查询 分页查询
+	 * 
+	 * @param adId
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/findByadId")
+	@ResponseBody
+	public JSONObject findByadId(TbTenantUser tbTenantUser, Page<TbTenantUser> page ) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			Page<TbTenantUser> page1 = tbTenantUserService.findByPage(tbTenantUser, page);
+			return ResponseMessage.returnInfo(true, page1, null, null);
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+			
+		}
+	}
+
+	/**
+	 * //新增租户
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/add")
+	@ResponseBody
+	public JSONObject add(TbTenantUser entity,String userName,String passWord,String phone,String parentCode, String parentId ,String parentName ,String parentShortName,String companyType ) {
+
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+
+		if (null != user.getUserId()) {
+			if (null != entity.getZhName()) {
+				// 企业名称唯一判断
+				TbTenantUser tbTenantUser = tbTenantUserService.getByZhName(entity.getZhName());
+				if (null != tbTenantUser) {
+					boolean seccess = tbTenantUserService.intsert(user, entity,  userName, passWord, phone, parentCode,  parentId , parentName , parentShortName, companyType);
+					if (seccess) {
+
+						return ResponseMessage.returnInfo(true, null, null, "save_success");
+
+					} else {
+
+						return ResponseMessage.returnInfo(true, null, null, "save_fail");
+					}
+				} else {
+
+					return ResponseMessage.returnInfo(false, null, null, "该租户already_exists");
+				}
+			} else {
+
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请输入租户名称！");
+			}
+		} else {
+
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * //修改租户
+	 * 
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/edit")
+	@ResponseBody
+	public JSONObject edit(TbTenantUser entity,String userName,String passWord,String phone ) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+
+		if (null != user.getUserId()) {
+			TbTenantUser tenantUser = tbTenantUserService.getById(entity.getZhId());
+			if (null != tenantUser) {
+				boolean seccess = tbTenantUserService.edit(user,entity,userName,passWord,phone);
+				if (seccess) {
+					return ResponseMessage.returnInfo(true, null, null, "save_success");
+				}else {
+					return ResponseMessage.returnInfo(true, null, null, "save_fail");
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "未查询到租户信息");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * //删除租户
+	 * 
+	 * @param zhId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/delete")
+	@ResponseBody
+	public JSONObject delete(String zhId ) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+
+		if (null != user.getUserId()) {
+			List<TbUser> list = tbUserService.getByzhId(zhId);
+			if (list != null && !list.isEmpty()) {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "租户下还有其他账户，请确认后删除");
+			} else {
+				tbTenantUserService.delete(zhId);
+				return ResponseMessage.returnInfo(true, null, null, "delete_success");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	
+	/**
+	 * //根据租户ID获取租户、账号信息
+	 * @param zhId
+	 * @return
+	 */
+	@PostMapping("/getzhIdByTenantAndUser")
+	@ResponseBody
+	public JSONObject getzhIdByTenantAndUser(String zhId) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != zhId) {
+				List<Map<String, Object>> list = tbTenantUserService.getzhIdByTenantAndUser(zhId);
+				if (null != list && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				}else {
+					return ResponseMessage.returnInfo(false, null, null, null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择租户");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * //企业名称唯一校验
+	 * 
+	 * @param zhName
+	 * @return
+	 */
+	@PostMapping("/getByzhName")
+	@ResponseBody
+	public JSONObject getByzhName(String zhName ) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != zhName) {
+				TbTenantUser entity = tbTenantUserService.getByZhName(zhName);
+				if (null != entity) {
+					return ResponseMessage.returnInfo(false, null, null, "企业名already_exists");
+				} else {
+					return ResponseMessage.returnInfoSpecial(true, null, null, "企业名称可用");
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请输入企业名");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/list")
+	public String list(TbTenantUser tbTenantUser, Page<TbTenantUser> page, HttpServletRequest request) {
+
+		try {
+
+			request.setAttribute("page", tbTenantUserService.findByPage(tbTenantUser, page));
+		} catch (Exception e) {
+
+			logger.error(e.getMessage(), e);
+		}
+
+		return "test/tbTenantUserList";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增修改页面初始化
+	 * </pre>
+	 * 
+	 * @param zhId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/tbTenantUser")
+	public String tbTenantUser(String zhId, HttpServletRequest request) {
+
+		try {
+
+			if (ValidateUtils.isNotEmpty(zhId)) {
+
+				TbTenantUser tbTenantUser = tbTenantUserService.getById(zhId);
+				request.setAttribute("tbTenantUser", tbTenantUser);
+			}
+		} catch (Exception e) {
+
+			logger.error(e.getMessage(), e);
+		}
+
+		return "test/tbTenantUser";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	保存
+	 * </pre>
+	 * 
+	 * @param tbTenantUser
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(TbTenantUser tbTenantUser) {
+
+		JSONObject json = new JSONObject();
+
+		try {
+
+			// 修改
+			if (ValidateUtils.isNotEmpty(tbTenantUser.getZhId())) {
+
+				tbTenantUserService.update(tbTenantUser);
+			}
+			// 新增
+			else {
+
+				tbTenantUserService.add(tbTenantUser);
+			}
+			json.put("result", "save_success");
+		} catch (Exception e) {
+
+			logger.error(e.getMessage(), e);
+			json.put("result", "save_fail");
+		}
+
+		return json.toString();
+	}
+
+}

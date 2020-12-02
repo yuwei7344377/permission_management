@@ -1,0 +1,69 @@
+package com.dhcc.jn.tenant.dao;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.dhcc.jn.tenant.common.base.BaseDao;
+import com.dhcc.jn.tenant.entity.TbRoleData;
+
+/**
+ * 
+ * 角色数据资源清单表dao接口.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbRoleDataDao extends BaseDao<TbRoleData, String> {
+
+	/**
+	 * 根据租户ID和角色ID查询
+	 * @param zhId
+	 * @param roleId
+	 * @return
+	 */
+	List<TbRoleData> getzhIdAndroleIdByRoleData(@Param("zhId")String zhId, @Param("roleId")String roleId);
+
+	/**
+	 * 根据角色ID删除
+	 * @param roleId
+	 */
+	void deleteByRoleId(String roleId);
+
+	/**
+	 * 根据租户类型ID，角色ID，数据目类ID查询数据资源
+	 * @param zhTypeId
+	 * @param roleId
+	 * @param catalogId
+	 * @return
+	 */
+	List<Map<String, Object>> findData(@Param("zhTypeId")String zhTypeId, @Param("roleId")String roleId, @Param("catalogId")String catalogId);
+
+	/**
+	 * 获取数据资源树
+	 * @param zhTypeId
+	 * @return
+	 */
+	List<Map<String, Object>> findDataTree(@Param("roleId")String roleId,@Param("zhTypeId")String zhTypeId);
+
+
+
+}

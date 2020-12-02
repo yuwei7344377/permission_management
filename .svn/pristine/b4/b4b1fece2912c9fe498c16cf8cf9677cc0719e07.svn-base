@@ -1,0 +1,141 @@
+package com.dhcc.jn.tenant.service.impl;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.dhcc.jn.tenant.common.Constants;
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbRoleDataDao;
+import com.dhcc.jn.tenant.entity.TbRoleData;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.service.TbRoleDataService;
+
+/**
+ * 
+ * 角色数据资源清单表service实现类
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Service("tbRoleDataService")
+public class TbRoleDataServiceImpl implements TbRoleDataService {
+
+	@Autowired
+	private TbRoleDataDao tbRoleDataDao;
+	
+	@Override
+	public Page<TbRoleData> findByPage(TbRoleData tbRoleData, Page<TbRoleData> page) {
+
+		page.setResult(tbRoleDataDao.find(tbRoleData, page));
+		
+		return page;
+	}
+	
+	@Override
+	public List<TbRoleData> findBySearch(TbRoleData tbRoleData) {
+
+		return tbRoleDataDao.find(tbRoleData);
+	}
+	
+	@Override
+	public TbRoleData getById(String id) {
+
+		return tbRoleDataDao.getById(id);
+	}
+
+	@Override
+	public void add(TbRoleData tbRoleData) {
+
+		tbRoleData.setId(ResourceUtils.getUUID());
+		tbRoleDataDao.add(tbRoleData);
+	}
+	
+	@Override
+	public void update(TbRoleData tbRoleData) {
+
+		tbRoleDataDao.update(tbRoleData);
+	}
+
+	@Override
+	public void delete(String id) {
+
+		tbRoleDataDao.delete(id);
+	}
+
+	@Override
+	public List<TbRoleData> getzhIdAndroleIdByRoleData(String zhId, String roleId) {
+		return tbRoleDataDao.getzhIdAndroleIdByRoleData(zhId,roleId);
+	}
+
+    /**
+     * 根据租户类型ID，角色ID，数据目类ID查询数据资源
+     */
+	@Override
+	public List<Map<String, Object>> findData(String zhTypeId, String roleId,String catalogId) {
+		
+		return tbRoleDataDao.findData(zhTypeId,roleId,catalogId);
+	}
+
+	/**
+	 * 获取数据资源树
+	 */
+	@Override
+	public List<Map<String, Object>> findDataTree(String roleId,String zhTypeId) {
+		return tbRoleDataDao.findDataTree(roleId,zhTypeId);
+	}
+	
+	/**
+	 * 给角色分配功能资源
+	 * 先查出原来分配的功能资源，删除后重新分配
+	 */
+	@Override
+	public boolean operateRoleData(TbUser user, String zhId, String roleId, String dataIds,String parentId) {
+		if (null != user.getUserId()) {
+			if (null != roleId) {
+				tbRoleDataDao.deleteByRoleId(roleId,parentId);
+				
+				if(null != dataIds && !dataIds.equals("")) {
+					
+					String[] dataId = dataIds.split(",");
+					for(String date : dataId) {
+						TbRoleData entity = new TbRoleData();
+						entity.setId(UUID.randomUUID().toString().replaceAll("-", ""));
+						entity.setZhId(zhId);
+						entity.setRoleId(roleId);
+						entity.setDataId(date);
+						entity.setParentId(parentId);
+						entity.setState(Constants.STATE);
+						tbRoleDataDao.add(entity);
+					}
+				}
+				return true;
+			}
+		}else {
+			return false;
+		}
+		return false;
+	}
+ 	
+}

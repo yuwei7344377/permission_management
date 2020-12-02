@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeRoleDao">
+
+    <parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRole"></parameterMap>
+    <resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeRole">
+        <result property="id" column="id"/>
+        <result property="zhTypeId" column="zh_type_id"/>
+        <result property="roleCode" column="role_code"/>
+        <result property="roleName" column="role_name"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.id,
+            t.zh_type_id,
+            t.role_code,
+            t.role_name,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_tenant_type_role t
+        <where>
+            <if test="zhTypeId != null and zhTypeId != ''">
+                and t.zh_type_id = #{zhTypeId}
+            </if>
+            <if test="roleCode != null and roleCode != ''">
+                and t.role_code = #{roleCode}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and t.role_name = #{roleName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_tenant_type_role t
+        where t.id = #{value}
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into tb_tenant_type_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            zh_type_id,
+            role_code,
+            role_name,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{id},
+            #{zhTypeId},
+            #{roleCode},
+            #{roleName},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into tb_tenant_type_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            zh_type_id,
+            role_code,
+            role_name,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.zhTypeId},
+                #{item.roleCode},
+                #{item.roleName},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update tb_tenant_type_role
+        <set>
+            zh_type_id = #{zhTypeId},
+            role_code = #{roleCode},
+            role_name = #{roleName},
+        </set>
+        where id = #{id}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update tb_tenant_type_role
+        <set>
+            <if test="zhTypeId != null">
+                zh_type_id = #{zhTypeId},
+            </if>
+            <if test="roleCode != null">
+                role_code = #{roleCode},
+            </if>
+            <if test="roleName != null">
+                role_name = #{roleName},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_role
+        where id = #{value}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_tenant_type_role where id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--获取某一个用户类型下所有角色列表-->
+    <select id="getUserTypeFunctionList" resultType="map">
+        SELECT tr.*
+        from tb_tenant_type_role tr
+        <where>
+            <if test="zhTypeId != null and zhTypeId != ''">
+                and tr.zh_type_id = #{zhTypeId}
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and tr.role_name like '%${roleName}%'
+            </if>
+        </where>
+    </select>
+
+    <!--角色编码唯一验证-->
+    <select id="getEffectiveCoding" resultType="map">
+        select count(1) as count
+        from tb_role r
+        where r.role_code = #{roleCode}
+        union
+        select count(1) as count
+        from tb_tenant_type tt,
+             tb_tenant_type_role tr
+        where tr.zh_type_id = #{zhTypeId}
+          and tr.role_code = #{roleCode}
+    </select>
+
+    <!-- 角色编码唯一查询 -->
+    <select id="getByRoleCode" resultMap="resultMap">
+        select
+        <include refid="columnSql"/>
+        FROM tb_tenant_type_role t
+        where t.role_code=#{roleCode};
+    </select>
+
+    <!-- 角色名称唯一查询-->
+    <select id="getByRoleName" resultMap="resultMap">
+        select
+        <include refid="columnSql"/>
+        FROM tb_tenant_type_role t
+        where t.role_name=#{roleName};
+    </select>
+
+    <!--查询当前角色下是否存在账户角色关系-->
+    <select id="finRole" resultType="java.lang.Integer">
+        select count(1)
+        from tb_user_role r
+        where r.role_source = '1'
+          and r.role_id = #{id}
+    </select>
+
+    <!--获取用户类别下的应用系统-->
+    <select id="getUserFunctionalResources" resultType="map">
+        select t2.app_type_code, t2.app_type_name
+        from tb_tenant_type t,
+             tb_tenant_type_resource t1,
+             tb_resource_application_type t2
+        where t.zh_type_id = t1.zh_type_id
+          and t1.app_type_code = t2.app_type_code
+          and t.zh_type_id = #{zhTypeId}
+          and t2.app_type_code = #{appTypeCode}
+        GROUP BY t1.app_type_code
+    </select>
+
+    <!--原有的数据清空-->
+    <delete id="delRoleResources" parameterType="java.lang.String">
+        delete
+        from tb_tenant_type_role_resource
+        where role_id = #{roleId}
+    </delete>
+
+    <!--添加角色应用资源-->
+    <insert id="insertRoleResources" parameterType="java.util.List">
+        insert into tb_tenant_type_role_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            role_id,
+            resource_id,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.roleId},
+                #{item.resourceId},
+            </trim>
+        </foreach>
+    </insert>
+    <!-- 查询租户类型下角色编码为admin的 -->
+    <select id="getByzhTypeIdAndRoleCode" resultMap="resultMap">
+        select
+        <include refid="columnSql"/>
+        FROM tb_tenant_type_role t
+        where t.zh_type_id = #{zhTypeId} and t.role_code = 'admin'
+    </select>
+</mapper>

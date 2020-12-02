@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeResourceDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeResource"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeResource">
+		<result property="id" column="id"/>
+		<result property="zhTypeId" column="zh_type_id"/>
+		<result property="resourceId" column="resource_id"/>
+	</resultMap>
+
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_type_id,
+			t.resource_id,
+		</trim>
+	</sql>
+
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+		<include refid="columnSql"></include>
+		from tb_tenant_type_resource t
+		<where>
+			<if test="zhTypeId != null and zhTypeId != ''">
+				and t.zh_type_id = #{zhTypeId}
+			</if>
+			<if test="resourceId != null and resourceId != ''">
+				and t.resource_id = #{resourceId}
+			</if>
+		</where>
+	</select>
+
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+		<include refid="columnSql"></include>
+		from tb_tenant_type_resource t
+		where t.id = #{value}
+	</select>
+
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_type_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			resource_id,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhTypeId},
+			#{resourceId},
+		</trim>
+	</insert>
+
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_type_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			resource_id,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhTypeId},
+				#{item.resourceId},
+			</trim>
+		</foreach>
+	</insert>
+
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_type_resource
+		<set>
+			zh_type_id = #{zhTypeId},
+			resource_id = #{resourceId},
+		</set>
+		where id = #{id}
+	</update>
+
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_type_resource
+		<set>
+			<if test="zhTypeId != null">
+				zh_type_id = #{zhTypeId},
+			</if>
+			<if test="resourceId != null">
+				resource_id = #{resourceId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<delete id="delete" parameterType="java.lang.String">
+		delete
+		from tb_tenant_type_resource
+		where id = #{value}
+	</delete>
+
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_type_resource where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--根据用户类型id和资源code删除功能资源-->
+	<delete id="deleteFunctionList" parameterType="java.lang.String">
+		delete from tb_tenant_type_resource
+		where zh_type_id = #{zhTypeId}
+		and app_type_code = #{appTypeCode}
+	</delete>
+
+	<!--保存用户类型对应功能清单-->
+	<insert id="saveFunctionList" parameterType="java.util.List">
+		insert into tb_tenant_type_resource
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			resource_id,
+		    app_type_code,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhTypeId},
+				#{item.resourceId},
+		        #{item.appTypeCode},
+			</trim>
+		</foreach>
+	</insert>
+</mapper>

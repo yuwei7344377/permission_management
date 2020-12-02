@@ -1,0 +1,3 @@
+2020-07-23 15:14:26.485 [main] INFO  com.dhcc.jn.tenant.TenantServerApplication - Starting TenantServerApplication on LAPTOP-9JR6DTA3 with PID 4012 (D:\project\dhcc-project\project\晋能新框架\jn_tenant_system_server\target\classes started by jj in D:\project\dhcc-project\project\晋能新框架\jn_tenant_system_server)
+2020-07-23 15:14:26.536 [main] INFO  com.dhcc.jn.tenant.TenantServerApplication - No active profile set, falling back to default profiles: default
+2020-07-23 15:14:48.856 [main] INFO  com.dhcc.jn.tenant.TenantServerApplication - Started TenantServerApplication in 25.772 seconds (JVM running for 32.397)

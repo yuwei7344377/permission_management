@@ -1,0 +1,125 @@
+package com.dhcc.jn.tenant.service;
+
+import java.util.List;
+import java.util.Map;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbResource;
+import com.dhcc.jn.tenant.entity.TbTenantTypeResource;
+import com.dhcc.jn.tenant.entity.TbUser;
+
+/**
+ * 功能资源service接口
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+public interface TbResourceService {
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	分页查询
+     * </pre>
+     *
+     * @param tbResource
+     * @param page
+     * @return
+     */
+    public Page<TbResource> findByPage(TbResource tbResource, Page<TbResource> page);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	查询
+     * </pre>
+     *
+     * @param tbResource
+     * @return
+     */
+    public List<TbResource> findBySearch(TbResource tbResource);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	通过ID查询
+     * </pre>
+     *
+     * @param
+     * @return
+     */
+    public TbResource getById(String resourceId);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	新增
+     * </pre>
+     *
+     * @param tbResource
+     */
+    public void add(TbResource tbResource, TbTenantTypeResource tbTenantTypeResource, TbUser user,String zhTypeIds);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	修改
+     * </pre>
+     *
+     * @param tbResource
+     */
+    public void updateNotNull(TbResource tbResource, TbTenantTypeResource tbTenantTypeResource, TbUser user);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	删除
+     * </pre>
+     *
+     * @param resourceId
+     */
+    public void delete(String resourceId);
+
+    /**
+     * 获取父级别菜单list信息
+     */
+    List<TbResource> getParentMenu(String appTypeCode);
+
+    /**
+     * 判断功能资源标识唯一性
+     * @param resourceFlag
+     * @return
+     */
+    Boolean findEffectiveResourceLogo(String resourceFlag);
+
+    /**
+     * 获取角色下的应用资源父节点
+     */
+    List<TbResource> findRoleResourcesParent();
+
+    /**
+     * 获取角色下的应用资源
+     *
+     * @param roleId
+     * @param zhTypeId
+     * @param appTypeCode
+     * @return
+     */
+    List<Map<String, Object>> getUserRoleResources(String roleId, String zhTypeId, String appTypeCode);
+}

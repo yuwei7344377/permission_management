@@ -1,0 +1,126 @@
+package com.dhcc.jn.tenant.service.impl;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.alibaba.druid.util.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.dhcc.jn.tenant.common.ResourceUtils;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbTenantTypeResourceDao;
+import com.dhcc.jn.tenant.entity.TbResource;
+import com.dhcc.jn.tenant.entity.TbTenantTypeResource;
+import com.dhcc.jn.tenant.service.TbTenantTypeResourceService;
+
+/**
+ * 租户类型功能清单service实现类
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+@Service("tbTenantTypeResourceService")
+public class TbTenantTypeResourceServiceImpl implements TbTenantTypeResourceService {
+
+    @Autowired
+    private TbTenantTypeResourceDao tbTenantTypeResourceDao;
+
+    @Override
+    @Transactional
+    public Page<TbTenantTypeResource> findByPage(TbTenantTypeResource tbTenantTypeResource, Page<TbTenantTypeResource> page) {
+
+        page.setResult(tbTenantTypeResourceDao.find(tbTenantTypeResource, page));
+
+        return page;
+    }
+
+    @Override
+    @Transactional
+    public List<TbTenantTypeResource> findBySearch(TbTenantTypeResource tbTenantTypeResource) {
+
+        return tbTenantTypeResourceDao.find(tbTenantTypeResource);
+    }
+
+    @Override
+    @Transactional
+    public TbTenantTypeResource getById(String id) {
+
+        return tbTenantTypeResourceDao.getById(id);
+    }
+
+    @Override
+    @Transactional
+    public int add(TbTenantTypeResource tbTenantTypeResource, TbResource tbResource) {
+
+        if (tbTenantTypeResource != null) {
+
+            //添加用户类型关系
+            tbTenantTypeResource.setId(ResourceUtils.getUUID().replace("-", ""));
+            tbTenantTypeResource.setResourceId(tbResource.getResourceId());
+            tbTenantTypeResource.setZhTypeId(tbTenantTypeResource.getZhTypeId());
+
+        }
+
+        return tbTenantTypeResourceDao.add(tbTenantTypeResource);
+    }
+
+    @Override
+    @Transactional
+    public void update(TbTenantTypeResource tbTenantTypeResource) {
+
+        tbTenantTypeResourceDao.update(tbTenantTypeResource);
+    }
+
+    @Override
+    @Transactional
+    public void delete(String id) {
+
+        tbTenantTypeResourceDao.delete(id);
+    }
+
+
+    @Override
+    @Transactional
+    public void saveFunctionList(String zhTypeId, String appTypeCode, String treeData) {
+
+        //原有的数据清空
+        tbTenantTypeResourceDao.deleteFunctionList(zhTypeId, appTypeCode);
+
+        if (!StringUtils.isEmpty(treeData)){
+            String[] datas = treeData.split(",");
+
+            TbTenantTypeResource tb = new TbTenantTypeResource();
+            List<TbTenantTypeResource> tbList = new ArrayList<>();
+            //存入保存数据
+            for (String data : datas) {
+            	tb = new TbTenantTypeResource();
+                tb.setId(ResourceUtils.getUUID().replace("-",""));
+                tb.setZhTypeId(zhTypeId);
+                tb.setResourceId(data);
+                tb.setAppTypeCode(appTypeCode);
+                tbList.add(tb);
+            }
+
+            tbTenantTypeResourceDao.saveFunctionList(tbList);
+        }
+
+    }
+}

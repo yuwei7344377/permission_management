@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbUserOrgDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbUserOrg"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbUserOrg">
+		<result property="id" column="id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="userId" column="user_id"/>
+		<result property="orgId" column="org_id"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_id,
+			t.user_id,
+			t.org_id,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user_org t
+		<where>
+			<if test="zhId != null and zhId != ''">
+				and t.zh_id = #{zhId}			
+			</if>
+			<if test="userId != null and userId != ''">
+				and t.user_id = #{userId}			
+			</if>
+			<if test="orgId != null and orgId != ''">
+				and t.org_id = #{orgId}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user_org t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_user_org
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			user_id,
+			org_id,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhId},
+			#{userId},
+			#{orgId},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_user_org
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_id,
+			user_id,
+			org_id,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhId},
+				#{item.userId},
+				#{item.orgId},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_user_org
+		<set>
+			zh_id = #{zhId},
+			user_id = #{userId},
+			org_id = #{orgId},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_user_org
+		<set>
+			<if test="zhId != null">
+			zh_id = #{zhId},
+			</if>
+			<if test="userId != null">
+			user_id = #{userId},
+			</if>
+			<if test="orgId != null">
+			org_id = #{orgId},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_user_org where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_user_org where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

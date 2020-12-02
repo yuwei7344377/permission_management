@@ -1,0 +1,151 @@
+package com.dhcc.jn.tenant.service;
+import java.util.List;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbOrg;
+import com.dhcc.jn.tenant.entity.TbUser;
+
+/**
+ * 
+ * 组织表service接口
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbOrgService{
+	
+ 	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbOrg
+	 * @param page
+	 * @return
+	 */
+	public Page<TbOrg> findByPage(TbOrg tbOrg,Page<TbOrg> page);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	查询
+	 * </pre>
+	 * 
+	 * @param tbOrg
+	 * @return
+	 */
+	public List<TbOrg> findBySearch(TbOrg tbOrg);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	通过ID查询
+	 * </pre>
+	 * 
+	 * @param TbOrg
+	 * @return
+	 */
+	public TbOrg getById(String orgId);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增
+	 * </pre>
+	 * 
+	 * @param tbOrg
+	 */
+	public void add(TbOrg tbOrg);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param orgId
+	 */
+	public void delete(String orgId);
+
+	/**
+	 * 获取所有组织
+	 * @return
+	 */
+	public List<TbOrg> findAll();
+
+	/**
+	 * // 获取租户下的所有的组织（组织名称（模糊查询）、级别（精确查询）；）
+	 * @param zhId
+	 * @param orgName
+	 * @param orgType
+	 * @return
+	 */
+	public List<TbOrg> findOrgByzhId(String zhId);
+
+	/**
+	 * 组织名唯一校验
+	 * @param orgName
+	 * @return
+	 */
+	public TbOrg getByOrgName(String orgName,String zhId);
+
+	/**
+	 * 新增组织
+	 * @param entity
+	 * @return
+	 */
+	public boolean save(TbUser user,TbOrg entity);
+
+	/**
+	 * // 编辑组织
+	 * @param user
+	 * @param entity
+	 * @return
+	 */
+	public boolean update(TbUser user, TbOrg entity);
+
+	/**
+	 * //（组织名称（模糊查询）、级别（精确查询）；）
+	 * @param orgName
+	 * @param orgType
+	 * @return
+	 */
+	public List<TbOrg> getByOrgNameAndOrgType(String orgName, String orgType);
+
+	/**
+	 * 查询市级
+	 * @return
+	 */
+	public List<TbOrg> getTbOrgTree();
+
+	/**
+	 * 获取parentOrgId下所有子节点
+	 * @param parentOrgId
+	 * @return
+	 */
+	public List<TbOrg> findBySearch(String parentOrgId);
+}

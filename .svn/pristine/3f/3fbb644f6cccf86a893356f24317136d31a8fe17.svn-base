@@ -1,0 +1,478 @@
+package com.dhcc.jn.tenant.entity;
+
+import java.beans.Transient;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.dhcc.jn.tenant.common.base.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+/**
+ * 功能资源实体类.
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+public class TbResource extends BaseEntity implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * 资源id
+     */
+    private String resourceId;
+    /**
+     * 资源标识
+     **/
+    private String resourceFlag;
+    /**
+     * 资源名称
+     */
+    private String resourceName;
+    /**
+     * 资源等级
+     */
+    private Integer resourceLevel;
+    /**
+     * 资源地址
+     */
+    private String resourceUrl;
+    /**
+     * 资源排序
+     */
+    private Integer resourceOrder;
+    /**
+     * 父菜单ID
+     */
+    private String parentResourceId;
+    /**
+     * 资源应用code
+     */
+    private String appTypeCode;
+    /**
+     * 资源图标
+     */
+    private String resourceIcon;
+    /**
+     * 创建人ID
+     */
+    private String createId;
+    /**
+     * 创建人
+     */
+    private String createName;
+    /**
+     * 创建时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date createDate;
+    /**
+     * 更新人ID
+     */
+    private String updateId;
+    /**
+     * 更新人
+     */
+    private String updateName;
+    /**
+     * 更新时间
+     */
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date updateDate;
+    /**
+     * 图标ID
+     */
+    private String iconid;
+    /**
+     * 桌面图标ID
+     */
+    private String deskIconid;
+    /**
+     * 是否开启  1:开启  0:未开启
+     */
+    private String isopen;
+    /**
+     * 备注
+     */
+    private String remark;
+    /**
+     * 0/1 是否选中
+     **/
+
+    private Integer checked;
+
+    @Transient
+    public Integer getChecked() {
+        return checked;
+    }
+
+    private List<TbResource> children = null;
+
+    public List<TbResource> getChildren() {
+        return children;
+    }
+
+    public void setChecked(Integer checked) {
+        this.checked = checked;
+    }
+
+    public void setChildren(List<TbResource> children) {
+        this.children = children;
+    }
+
+    private List<TbResource> listTbResources = new ArrayList<>();
+
+
+    public List<TbResource> getListTbResources() {
+        return listTbResources;
+    }
+
+    public void setListTbResources(List<TbResource> listTbResources) {
+        this.listTbResources = listTbResources;
+    }
+
+    public String getResourceFlag() {
+        return resourceFlag;
+    }
+
+    public void setResourceFlag(String resourceFlag) {
+        this.resourceFlag = resourceFlag;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  资源id
+     */
+    public String getResourceId() {
+        return this.resourceId;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  资源id
+     */
+    public void setResourceId(String resourceId) {
+        this.resourceId = resourceId;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  资源名称
+     */
+    public String getResourceName() {
+        return this.resourceName;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  资源名称
+     */
+    public void setResourceName(String resourceName) {
+        this.resourceName = resourceName;
+    }
+
+    /**
+     * 方法: 取得Integer
+     *
+     * @return: Integer  资源等级
+     */
+    public Integer getResourceLevel() {
+        return this.resourceLevel;
+    }
+
+    /**
+     * 方法: 设置Integer
+     *
+     * @param: Integer  资源等级
+     */
+    public void setResourceLevel(Integer resourceLevel) {
+        this.resourceLevel = resourceLevel;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  资源地址
+     */
+    public String getResourceUrl() {
+        return this.resourceUrl;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  资源地址
+     */
+    public void setResourceUrl(String resourceUrl) {
+        this.resourceUrl = resourceUrl;
+    }
+
+    /**
+     * 方法: 取得Integer
+     *
+     * @return: Integer  资源排序
+     */
+    public Integer getResourceOrder() {
+        return this.resourceOrder;
+    }
+
+    /**
+     * 方法: 设置Integer
+     *
+     * @param: Integer  资源排序
+     */
+    public void setResourceOrder(Integer resourceOrder) {
+        this.resourceOrder = resourceOrder;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  父菜单ID
+     */
+    public String getParentResourceId() {
+        return this.parentResourceId;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  父菜单ID
+     */
+    public void setParentResourceId(String parentResourceId) {
+        this.parentResourceId = parentResourceId;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  资源应用code
+     */
+    public String getAppTypeCode() {
+        return this.appTypeCode;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  资源应用code
+     */
+    public void setAppTypeCode(String appTypeCode) {
+        this.appTypeCode = appTypeCode;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  资源图标
+     */
+    public String getResourceIcon() {
+        return this.resourceIcon;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  资源图标
+     */
+    public void setResourceIcon(String resourceIcon) {
+        this.resourceIcon = resourceIcon;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  创建人ID
+     */
+    public String getCreateId() {
+        return this.createId;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  创建人ID
+     */
+    public void setCreateId(String createId) {
+        this.createId = createId;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  创建人
+     */
+    public String getCreateName() {
+        return this.createName;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  创建人
+     */
+    public void setCreateName(String createName) {
+        this.createName = createName;
+    }
+
+    /**
+     * 方法: 取得Date
+     *
+     * @return: Date  创建时间
+     */
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    /**
+     * 方法: 设置Date
+     *
+     * @param: Date  创建时间
+     */
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  更新人ID
+     */
+    public String getUpdateId() {
+        return this.updateId;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  更新人ID
+     */
+    public void setUpdateId(String updateId) {
+        this.updateId = updateId;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  更新人
+     */
+    public String getUpdateName() {
+        return this.updateName;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  更新人
+     */
+    public void setUpdateName(String updateName) {
+        this.updateName = updateName;
+    }
+
+    /**
+     * 方法: 取得Date
+     *
+     * @return: Date  更新时间
+     */
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    /**
+     * 方法: 设置Date
+     *
+     * @param: Date  更新时间
+     */
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  图标ID
+     */
+    public String getIconid() {
+        return this.iconid;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  图标ID
+     */
+    public void setIconid(String iconid) {
+        this.iconid = iconid;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  桌面图标ID
+     */
+    public String getDeskIconid() {
+        return this.deskIconid;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  桌面图标ID
+     */
+    public void setDeskIconid(String deskIconid) {
+        this.deskIconid = deskIconid;
+    }
+
+    /**
+     * 方法: 取得String
+     *
+     * @return: String  是否开启  1:开启  0:未开启
+     */
+    public String getIsopen() {
+        return this.isopen;
+    }
+
+    /**
+     * 方法: 设置String
+     *
+     * @param: String  是否开启  1:开启  0:未开启
+     */
+    public void setIsopen(String isopen) {
+        this.isopen = isopen;
+    }
+
+
+}

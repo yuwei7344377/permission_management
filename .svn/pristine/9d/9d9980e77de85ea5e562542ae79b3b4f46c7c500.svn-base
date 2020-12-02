@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbResourceDao">
+
+    <parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbResource"></parameterMap>
+    <resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbResource">
+        <result property="resourceId" column="resource_id"/>
+        <result property="resourceName" column="resource_name"/>
+        <result property="resourceLevel" column="resource_level"/>
+        <result property="resourceUrl" column="resource_url"/>
+        <result property="resourceOrder" column="resource_order"/>
+        <result property="parentResourceId" column="parent_resource_id"/>
+        <result property="appTypeCode" column="app_type_code"/>
+        <result property="resourceIcon" column="resource_icon"/>
+        <result property="createId" column="create_id"/>
+        <result property="createName" column="create_name"/>
+        <result property="createDate" column="create_date"/>
+        <result property="updateId" column="update_id"/>
+        <result property="updateName" column="update_name"/>
+        <result property="updateDate" column="update_date"/>
+        <result property="iconid" column="iconid"/>
+        <result property="deskIconid" column="desk_iconid"/>
+        <result property="isopen" column="isopen"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.resource_id,
+            t.resource_name,
+            t.resource_level,
+            t.resource_url,
+            t.resource_order,
+            t.parent_resource_id,
+            t.app_type_code,
+            t.resource_icon,
+            t.create_id,
+            t.create_name,
+            t.create_date,
+            t.update_id,
+            t.update_name,
+            t.update_date,
+            t.iconid,
+            t.desk_iconid,
+            t.isopen,
+            t.remark,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_resource t
+        <where>
+            <if test="resourceId != null and resourceId != ''">
+                and t.resource_id = #{resourceId}
+            </if>
+            <if test="resourceName != null and resourceName != ''">
+                and t.resource_name = #{resourceName}
+            </if>
+            <if test="resourceLevel != null and resourceLevel != ''">
+                and t.resource_level = #{resourceLevel}
+            </if>
+            <if test="resourceUrl != null and resourceUrl != ''">
+                and t.resource_url = #{resourceUrl}
+            </if>
+            <if test="parentResourceId != null and parentResourceId != ''">
+                and t.parent_resource_id = #{parentResourceId}
+            </if>
+            <if test="appTypeCode != null and appTypeCode != ''">
+                and t.app_type_code = #{appTypeCode}
+            </if>
+            <if test="isopen != null and isopen != ''">
+                and t.isopen = #{isopen}
+            </if>
+            <if test="remark != null and remark != ''">
+                and t.remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_resource t
+        where t.resource_id = #{value}
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into tb_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            resource_id,
+            resource_name,
+            resource_level,
+            resource_url,
+            resource_order,
+            parent_resource_id,
+            app_type_code,
+            resource_icon,
+            create_id,
+            create_name,
+            create_date,
+            update_id,
+            update_name,
+            update_date,
+            iconid,
+            desk_iconid,
+            isopen,
+            remark,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{resourceId},
+            #{resourceName},
+            #{resourceLevel},
+            #{resourceUrl},
+            #{resourceOrder},
+            #{parentResourceId},
+            #{appTypeCode},
+            #{resourceIcon},
+            #{createId},
+            #{createName},
+            #{createDate},
+            #{updateId},
+            #{updateName},
+            #{updateDate},
+            #{iconid},
+            #{deskIconid},
+            #{isopen},
+            #{remark},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into tb_resource
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            resource_id,
+            resource_name,
+            resource_level,
+            resource_url,
+            resource_order,
+            parent_resource_id,
+            app_type_code,
+            resource_icon,
+            create_id,
+            create_name,
+            create_date,
+            update_id,
+            update_name,
+            update_date,
+            iconid,
+            desk_iconid,
+            isopen,
+            remark,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.resourceId},
+                #{item.resourceName},
+                #{item.resourceLevel},
+                #{item.resourceUrl},
+                #{item.resourceOrder},
+                #{item.parentResourceId},
+                #{item.appTypeCode},
+                #{item.resourceIcon},
+                #{item.createId},
+                #{item.createName},
+                #{item.createDate},
+                #{item.updateId},
+                #{item.updateName},
+                #{item.updateDate},
+                #{item.iconid},
+                #{item.deskIconid},
+                #{item.isopen},
+                #{item.remark},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update tb_resource
+        <set>
+            resource_name = #{resourceName},
+            resource_level = #{resourceLevel},
+            resource_url = #{resourceUrl},
+            resource_order = #{resourceOrder},
+            parent_resource_id = #{parentResourceId},
+            app_type_code = #{appTypeCode},
+            resource_icon = #{resourceIcon},
+            create_id = #{createId},
+            create_name = #{createName},
+            create_date = #{createDate},
+            update_id = #{updateId},
+            update_name = #{updateName},
+            update_date = #{updateDate},
+            iconid = #{iconid},
+            desk_iconid = #{deskIconid},
+            isopen = #{isopen},
+            remark = #{remark},
+        </set>
+        where resource_id = #{resourceId}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update tb_resource
+        <set>
+            <if test="resourceName != null">
+                resource_name = #{resourceName},
+            </if>
+            <if test="resourceLevel != null">
+                resource_level = #{resourceLevel},
+            </if>
+            <if test="resourceUrl != null">
+                resource_url = #{resourceUrl},
+            </if>
+            <if test="resourceOrder != null">
+                resource_order = #{resourceOrder},
+            </if>
+            <if test="parentResourceId != null">
+                parent_resource_id = #{parentResourceId},
+            </if>
+            <if test="appTypeCode != null">
+                app_type_code = #{appTypeCode},
+            </if>
+            <if test="resourceIcon != null">
+                resource_icon = #{resourceIcon},
+            </if>
+            <if test="createId != null">
+                create_id = #{createId},
+            </if>
+            <if test="createName != null">
+                create_name = #{createName},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="updateId != null">
+                update_id = #{updateId},
+            </if>
+            <if test="updateName != null">
+                update_name = #{updateName},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="iconid != null">
+                iconid = #{iconid},
+            </if>
+            <if test="deskIconid != null">
+                desk_iconid = #{deskIconid},
+            </if>
+            <if test="isopen != null">
+                isopen = #{isopen},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where resource_id = #{resourceId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete
+        from tb_resource
+        where resource_id = #{value}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_resource where resource_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+    <!--查找对应系统下的菜单资源信息-->
+    <select id="getParentMenu" parameterMap="parameterMap" resultType="map">
+        select
+        <include refid="columnSql"></include>
+        from tb_resource t
+        <where>
+            <if test="appTypeCode != null and appTypeCode != ''">
+                and t.app_type_code = #{appTypeCode}
+            </if>
+        </where>
+    </select>
+
+    <!--判断功能资源标识唯一性-->
+    <select id="findEffectiveResourceLogo" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(1)
+        from tb_resource t
+        where t.resource_flag = #{resourceFlag}
+    </select>
+
+
+    <!--获取角色下的应用资源-->
+    <select id="findRoleResourcesParent" resultMap="resultMap">
+        select *
+        from tb_resource r where r.app_type_code = #{appTypeCode} and (r.parent_resource_id is null or r.parent_resource_id = '')
+    </select>
+
+    <!--获取角色下的应用资源-->
+    <select id="getUserRoleResources" resultType="map">
+        select t.resource_id,r.parent_resource_id, case when t1.id is null then false else true end checked, r.resource_name
+        from tb_tenant_type_resource t
+                 left join tb_tenant_type_role_resource t1 on t.resource_id = t1.resource_id and t1.role_id = #{roleId}
+                 left join tb_resource r on r.resource_id = t.resource_id
+        where t.zh_type_id = #{zhTypeId}
+          and t.app_type_code = #{appTypeCode}
+    </select>
+</mapper>

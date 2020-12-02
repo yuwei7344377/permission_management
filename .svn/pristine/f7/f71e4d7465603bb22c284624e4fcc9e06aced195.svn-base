@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbUserDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbUser"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbUser">
+		<result property="userId" column="user_id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="realname" column="realname"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="userState" column="user_state"/>
+		<result property="deleteFlag" column="delete_flag"/>
+		<result property="validateCode" column="validate_code"/>
+		<result property="lockTime" column="lock_time"/>
+		<result property="landingTimes" column="landing_times"/>
+		<result property="lastUpdatePdTime" column="last_update_pd_time"/>
+		<result property="createBy" column="create_by"/>
+		<result property="createName" column="create_name"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="updateName" column="update_name"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="bsUserType" column="bs_user_type"/>
+		<result property="driver" column="driver"/>
+		<result property="status" column="status"/>
+		<result property="activitisync" column="activitisync"/>
+		<result property="browser" column="browser"/>
+		<result property="signature" column="signature"/>
+		<result property="userkey" column="userkey"/>
+		<result property="departid" column="departid"/>
+		<result property="userNameEn" column="user_name_en"/>
+		<result property="portrait" column="portrait"/>
+		<result property="imsign" column="imsign"/>
+		<result property="devFlag" column="dev_flag"/>
+		<result property="userType" column="user_type"/>
+		<result property="personType" column="person_type"/>
+		<result property="sex" column="sex"/>
+		<result property="empNo" column="emp_no"/>
+		<result property="citizenNo" column="citizen_no"/>
+		<result property="fax" column="fax"/>
+		<result property="address" column="address"/>
+		<result property="post" column="post"/>
+		<result property="memo" column="memo"/>
+		<result property="officephone" column="officephone"/>
+		<result property="signaturefile" column="signaturefile"/>
+		<result property="remark" column="remark"/>
+		<result property="lockType" column="lock_type"/>
+	</resultMap>
+	
+	<resultMap id="getRoleIdAndOrgByUserIdMap" type="com.dhcc.jn.tenant.entity.TbUser">
+		<result property="userId" column="user_id"/>
+		<result property="zhId" column="zh_id"/>
+		<result property="username" column="username"/>
+		<result property="password" column="password"/>
+		<result property="realname" column="realname"/>
+		<result property="phone" column="phone"/>
+		<result property="email" column="email"/>
+		<result property="userState" column="user_state"/>
+		<result property="deleteFlag" column="delete_flag"/>
+		<result property="validateCode" column="validate_code"/>
+		<result property="lockTime" column="lock_time"/>
+		<result property="landingTimes" column="landing_times"/>
+		<result property="lastUpdatePdTime" column="last_update_pd_time"/>
+		<result property="createBy" column="create_by"/>
+		<result property="createName" column="create_name"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="updateName" column="update_name"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="lockType" column="lock_type"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.user_id,
+			t.zh_id,
+			t.username,
+			t.password,
+			t.realname,
+			t.phone,
+			t.email,
+			t.user_state,
+			t.delete_flag,
+			t.validate_code,
+			t.lock_time,
+			t.landing_times,
+			t.last_update_pd_time,
+			t.create_by,
+			t.create_name,
+			t.create_date,
+			t.update_by,
+			t.update_name,
+			t.update_date,
+			t.lock_type,
+	 	</trim>
+	</sql>
+	
+	<sql id="getRoleIdAndOrgByUserId">
+		<trim suffixOverrides=",">
+			t.user_id,
+			t.zh_id,
+			t.username,
+			t.password,
+			t.realname,
+			t.phone,
+			t.email,
+			t.user_state,
+			t.delete_flag,
+			t.validate_code,
+			t.lock_time,
+			t.landing_times,
+			t.last_update_pd_time,
+			t.create_by,
+			t.create_name,
+			t.create_date,
+			t.update_by,
+			t.update_name,
+			t.update_date,
+			t.bs_user_type,
+			t.lock_type,
+			ur.role_id,
+			uo.org_id,			
+	 	</trim>
+	</sql>
+	
+		<!-- 根据组织ID查询用户 -->
+	<select id="getByOrgId" resultMap="resultMap">
+		SELECT
+			<include refid="columnSql" />
+		FROM tb_user_org uo,tb_user t
+		where uo.user_id = t.user_id and uo.org_id like '${orgId}%' and t.delete_flag in ('0','2')
+			<if test="username != null and username != ''">
+				and t.username like '%${username}%'
+			</if>
+			<if test="realname != null and realname != ''">
+				and t.realname like '%${realname}%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and t.phone like '%${phone}%'
+			</if>
+		order by t.user_state,t.user_id
+	</select>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user t
+		<where> 1=1 and t.delete_flag in ('0','2')
+			<if test="zhId != null and zhId != ''">
+				and t.zh_id = #{zhId}
+			</if>
+			<if test="username != null and username != ''">
+				and t.username like '%${username}%'
+			</if>
+			<if test="realname != null and realname != ''">
+				and t.realname like '%${realname}%'
+			</if>
+			<if test="phone != null and phone != ''">
+				and t.phone like '%${phone}%'
+			</if>
+			<if test="userState != null and userState != ''">
+				and t.user_state = #{userState}
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+				and t.delete_flag = #{deleteFlag}
+			</if>
+		</where>
+		order by t.user_state
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_user t
+		where t.user_id = #{value}
+	</select>
+	
+	<select id="getRoleIdAndOrgByUserId" parameterType="java.lang.String" resultMap="getRoleIdAndOrgByUserIdMap">
+		select <include refid="getRoleIdAndOrgByUserId"></include>
+		FROM tb_user t
+		left join 
+		(   select user_id,GROUP_CONCAT(CONCAT(role_id,'@',role_source)) as role_id 
+		    from tb_user_role 
+			where user_id = #{userId}
+    	)ur on ur.user_id = t.user_id
+		LEFT JOIN tb_user_org uo ON t.zh_id = uo.zh_id AND t.user_id = uo.user_id
+		WHERE t.user_id = #{userId}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			user_id,
+			zh_id,
+			username,
+			password,
+			realname,
+			phone,
+			email,
+			user_state,
+			delete_flag,
+			validate_code,
+			lock_time,
+			landing_times,
+			last_update_pd_time,
+			create_by,
+			create_name,
+			create_date,
+			update_by,
+			update_name,
+			update_date,
+			bs_user_type,
+			driver,
+			status,
+			activitisync,
+			browser,
+			signature,
+			userkey,
+			departid,
+			user_name_en,
+			portrait,
+			imsign,
+			dev_flag,
+			user_type,
+			person_type,
+			sex,
+			emp_no,
+			citizen_no,
+			fax,
+			address,
+			post,
+			memo,
+			officephone,
+			signaturefile,
+			remark,
+			lock_type,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{userId},
+			#{zhId},
+			#{username},
+			#{password},
+			#{realname},
+			#{phone},
+			#{email},
+			#{userState},
+			#{deleteFlag},
+			#{validateCode},
+			#{lockTime},
+			#{landingTimes},
+			#{lastUpdatePdTime},
+			#{createBy},
+			#{createName},
+			#{createDate},
+			#{updateBy},
+			#{updateName},
+			#{updateDate},
+			#{bsUserType},
+			#{driver},
+			#{status},
+			#{activitisync},
+			#{browser},
+			#{signature},
+			#{userkey},
+			#{departid},
+			#{userNameEn},
+			#{portrait},
+			#{imsign},
+			#{devFlag},
+			#{userType},
+			#{personType},
+			#{sex},
+			#{empNo},
+			#{citizenNo},
+			#{fax},
+			#{address},
+			#{post},
+			#{memo},
+			#{officephone},
+			#{signaturefile},
+			#{remark},
+			#{lockType},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			user_id,
+			zh_id,
+			username,
+			password,
+			realname,
+			phone,
+			email,
+			user_state,
+			delete_flag,
+			validate_code,
+			lock_time,
+			landing_times,
+			last_update_pd_time,
+			create_by,
+			create_name,
+			create_date,
+			update_by,
+			update_name,
+			update_date,
+			bs_user_type,
+			driver,
+			status,
+			activitisync,
+			browser,
+			signature,
+			userkey,
+			departid,
+			user_name_en,
+			portrait,
+			imsign,
+			dev_flag,
+			user_type,
+			person_type,
+			sex,
+			emp_no,
+			citizen_no,
+			fax,
+			address,
+			post,
+			memo,
+			officephone,
+			signaturefile,
+			remark,
+			lock_type,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.userId},
+				#{item.zhId},
+				#{item.username},
+				#{item.password},
+				#{item.realname},
+				#{item.phone},
+				#{item.email},
+				#{item.userState},
+				#{item.deleteFlag},
+				#{item.validateCode},
+				#{item.lockTime},
+				#{item.landingTimes},
+				#{item.lastUpdatePdTime},
+				#{item.createBy},
+				#{item.createName},
+				#{item.createDate},
+				#{item.updateBy},
+				#{item.updateName},
+				#{item.updateDate},
+				#{item.bsUserType},
+				#{item.driver},
+				#{item.status},
+				#{item.activitisync},
+				#{item.browser},
+				#{item.signature},
+				#{item.userkey},
+				#{item.departid},
+				#{item.userNameEn},
+				#{item.portrait},
+				#{item.imsign},
+				#{item.devFlag},
+				#{item.userType},
+				#{item.personType},
+				#{item.sex},
+				#{item.empNo},
+				#{item.citizenNo},
+				#{item.fax},
+				#{item.address},
+				#{item.post},
+				#{item.memo},
+				#{item.officephone},
+				#{item.signaturefile},
+				#{item.remark},
+				#{item.lockType},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_user
+		<set>
+			zh_id = #{zhId},
+			username = #{username},
+			password = #{password},
+			realname = #{realname},
+			phone = #{phone},
+			email = #{email},
+			user_state = #{userState},
+			delete_flag = #{deleteFlag},
+			validate_code = #{validateCode},
+			lock_time = #{lockTime},
+			landing_times = #{landingTimes},
+			last_update_pd_time = #{lastUpdatePdTime},
+			create_by = #{createBy},
+			create_name = #{createName},
+			create_date = #{createDate},
+			update_by = #{updateBy},
+			update_name = #{updateName},
+			update_date = #{updateDate},
+			bs_user_type = #{bsUserType},
+			driver = #{driver},
+			status = #{status},
+			activitisync = #{activitisync},
+			browser = #{browser},
+			signature = #{signature},
+			userkey = #{userkey},
+			departid = #{departid},
+			user_name_en = #{userNameEn},
+			portrait = #{portrait},
+			imsign = #{imsign},
+			dev_flag = #{devFlag},
+			user_type = #{userType},
+			person_type = #{personType},
+			sex = #{sex},
+			emp_no = #{empNo},
+			citizen_no = #{citizenNo},
+			fax = #{fax},
+			address = #{address},
+			post = #{post},
+			memo = #{memo},
+			officephone = #{officephone},
+			signaturefile = #{signaturefile},
+			remark = #{remark},
+			lock_type = #{lockType},
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_user
+		<set>
+			<if test="zhId != null and zhId != ''">
+			zh_id = #{zhId},
+			</if>
+			<if test="username != null and username != ''">
+			username = #{username},
+			</if>
+			<if test="password != null and password != ''">
+			password = #{password},
+			</if>
+			<if test="realname != null and realname != ''">
+			realname = #{realname},
+			</if>
+			<if test="phone != null and phone != ''">
+			phone = #{phone},
+			</if>
+			<if test="email != null and email != ''">
+			email = #{email},
+			</if>
+			<if test="userState != null and userState != ''">
+			user_state = #{userState},
+			</if>
+			<if test="deleteFlag != null and deleteFlag != ''">
+			delete_flag = #{deleteFlag},
+			</if>
+			<if test="validateCode != null and validateCode != ''">
+			validate_code = #{validateCode},
+			</if>
+			<if test="lockTime != ''">
+			lock_time = #{lockTime},
+			</if>
+			<if test="landingTimes != null and landingTimes != ''">
+			landing_times = #{landingTimes},
+			</if>
+			<if test="lastUpdatePdTime != null and lastUpdatePdTime != ''">
+			last_update_pd_time = #{lastUpdatePdTime},
+			</if>
+			<if test="createBy != null and createBy != ''">
+			create_by = #{createBy},
+			</if>
+			<if test="createName != null and createName != ''">
+			create_name = #{createName},
+			</if>
+			<if test="createDate != null and createDate != ''">
+			create_date = #{createDate},
+			</if>
+			<if test="updateBy != null and updateBy != ''">
+			update_by = #{updateBy},
+			</if>
+			<if test="updateName != null and updateName != ''">
+			update_name = #{updateName},
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+			update_date = #{updateDate},
+			</if>
+			<if test="bsUserType != null and bsUserType != ''">
+			bs_user_type = #{bsUserType},
+			</if>
+			<if test="driver != null and driver != ''">
+			driver = #{driver},
+			</if>
+			<if test="status != null and status != ''">
+			status = #{status},
+			</if>
+			<if test="activitisync != null and activitisync != ''">
+			activitisync = #{activitisync},
+			</if>
+			<if test="browser != null and browser != ''">
+			browser = #{browser},
+			</if>
+			<if test="signature != null and signature != ''">
+			signature = #{signature},
+			</if>
+			<if test="userkey != null and userkey != ''">
+			userkey = #{userkey},
+			</if>
+			<if test="departid != null and departid != ''">
+			departid = #{departid},
+			</if>
+			<if test="userNameEn != null and userNameEn != ''">
+			user_name_en = #{userNameEn},
+			</if>
+			<if test="portrait != null and portrait != ''">
+			portrait = #{portrait},
+			</if>
+			<if test="imsign != null and imsign != ''">
+			imsign = #{imsign},
+			</if>
+			<if test="devFlag != null and devFlag != ''">
+			dev_flag = #{devFlag},
+			</if>
+			<if test="userType != null and userType != ''">
+			user_type = #{userType},
+			</if>
+			<if test="personType != null and personType != ''">
+			person_type = #{personType},
+			</if>
+			<if test="sex != null and sex != ''">
+			sex = #{sex},
+			</if>
+			<if test="empNo != null and empNo != ''">
+			emp_no = #{empNo},
+			</if>
+			<if test="citizenNo != null and citizenNo != ''">
+			citizen_no = #{citizenNo},
+			</if>
+			<if test="fax != null and fax != ''">
+			fax = #{fax},
+			</if>
+			<if test="address != null and address != ''">
+			address = #{address},
+			</if>
+			<if test="post != null and post != ''">
+			post = #{post},
+			</if>
+			<if test="memo != null and memo != ''">
+			memo = #{memo},
+			</if>
+			<if test="officephone != null and officephone != ''">
+			officephone = #{officephone},
+			</if>
+			<if test="signaturefile != null and signaturefile != ''">
+			signaturefile = #{signaturefile},
+			</if>
+			<if test="remark != null and remark != ''">
+			remark = #{remark},
+			</if>
+			<if test="lockType != null and lockType != ''">
+			lock_type = #{lockType},
+			</if>
+		</set>
+		where user_id = #{userId}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_user where user_id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_user where user_id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<!-- 根据租户ID查询-->
+	<select id="getByzhId" resultMap="resultMap">
+		SELECT t.user_id
+		from tb_user t
+ 		WHERE t.zh_id=#{zhId}
+ 		and t.delete_flag in ('0','2')
+	</select>
+	<!--根据用户名称查询 -->
+	<select id="getByUserName" resultMap="resultMap">
+		SELECT  t.user_id
+		from tb_user t
+ 		WHERE t.username=#{userName}
+	</select>
+	<!--根据用户手机号查询 -->
+	<select id="getByPhone" resultMap="resultMap">
+		SELECT t.user_id
+		from tb_user t
+ 		WHERE t.phone=#{phone}
+	</select>
+	
+	<!-- 查询租户下为系统用户的账户 -->
+	<select id="getByzhIdAndState" resultMap="resultMap">
+		SELECT
+			<include refid="columnSql" />
+		FROM
+			tb_user t
+		WHERE
+			t.zh_id = #{zhId}
+		AND t.user_state = #{userState}
+		and t.delete_flag in ('0','2')
+	</select>
+	
+	<!--  删除角色前，先判断角色下是否分配了账号 -->
+	<select id="getUserCountByRoleId" resultMap="resultMap">
+		select count(*)
+		from tb_user_role  t
+		where t.role_id = #{roleId} and t.role_source ='2'
+	</select>
+	
+</mapper>

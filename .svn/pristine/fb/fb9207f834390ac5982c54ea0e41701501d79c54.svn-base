@@ -1,0 +1,134 @@
+package com.dhcc.jn.tenant.service;
+import java.util.List;
+import java.util.Map;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.VDataCatalog;
+
+/**
+ * 
+ * 数据目录service接口
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface VDataCatalogService{
+	
+ 	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param vDataCatalog
+	 * @param page
+	 * @return
+	 */
+	public Page<VDataCatalog> findByPage(VDataCatalog vDataCatalog,Page<VDataCatalog> page);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	查询
+	 * </pre>
+	 * 
+	 * @param vDataCatalog
+	 * @return
+	 */
+	public List<VDataCatalog> findBySearch(VDataCatalog vDataCatalog);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	通过ID查询
+	 * </pre>
+	 * 
+	 * @param VDataCatalog
+	 * @return
+	 */
+	public VDataCatalog getById(String id);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	新增
+	 * </pre>
+	 * 
+	 * @param vDataCatalog
+	 */
+	public void add(VDataCatalog vDataCatalog);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	修改
+	 * </pre>
+	 * 
+	 * @param vDataCatalog
+	 */
+	public void update(VDataCatalog vDataCatalog);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-23 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param id
+	 */
+	public void delete(String id);
+
+	/**
+	 * 保存用户类型对应数据清单功能
+	 * @param zhTypeId
+	 * @param parentIds
+	 * @param treeData
+	 */
+    void saveUserData(String zhTypeId, String parentIds, String treeData);
+
+	/**
+	 * 获取角色中的数据产品资源是否选中
+	 * @param roleId
+	 * @param zhTypeId
+	 * @return
+	 */
+	List<Map<String, Object>> getRoleDataProductResources(String roleId, String zhTypeId);
+
+	/**
+	 * 分配数据资源
+	 * @param roleId
+	 * @param parentIds
+	 * @param treeData
+	 */
+    void saveDataResources(String roleId, String parentIds, String treeData);
+
+	/**
+	 * 查找数据展示列父节点
+	 * @return
+	 */
+	List<VDataCatalog> findParentId();
+}

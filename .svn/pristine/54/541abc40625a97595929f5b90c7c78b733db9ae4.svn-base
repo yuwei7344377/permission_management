@@ -1,0 +1,421 @@
+package com.dhcc.jn.tenant.controller;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.dao.TbUserDao;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.service.TbUserService;
+
+/**
+ * 
+ * 账户controller
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Controller
+@RequestMapping("/tbUser")
+public class TbUserController extends BaseController {
+
+
+	 private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private TbUserService tbUserService;
+	
+	@Autowired
+	private TbUserDao tbUserDao;
+	
+	/**
+	 * //查询租户下所有的账号信息（tb_user）
+	 * 用户账号、用户名称、手机号、状态
+	 * 分页查询
+	 * @param adId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/findAll")
+	@ResponseBody
+	public JSONObject findAll(TbUser tbUser,Page<TbUser> page) {
+		Page<TbUser> page1 = tbUserService.findByPage(tbUser, page);
+		return ResponseMessage.returnInfo(true,page1,null,null);
+	}
+	
+	
+	/**
+	 * //删除账户
+	 * @param userId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/delete")
+	@ResponseBody
+	public JSONObject delete(String userId ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != userId) {
+				boolean seccess = tbUserService.deleteUser(user,userId);
+				if (seccess) {
+					return ResponseMessage.returnInfo(true,null,null,"delete_success");
+				}else {
+					return ResponseMessage.returnInfo(false,null,null,"delete_fail");
+				}
+			}else {
+				return ResponseMessage.returnInfo(false,null,null,"delete_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	
+	/**
+	 * //锁定账户
+	 * @param userId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/operateLockUser")
+	@ResponseBody
+	public JSONObject lockUser(String userId) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != userId) {
+				boolean seccess = tbUserService.operateLockUser(user,userId);
+				if (seccess) {
+					return ResponseMessage.returnInfo(true,null,null,"operate_success");
+				}else {
+					return ResponseMessage.returnInfo(false,null,null,"operate_fail");
+				}
+			}else {
+				return ResponseMessage.returnInfo(false,null,null,"operate_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	
+	/**
+	 * //激活账户
+	 * @param userId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/operateActivate")
+	@ResponseBody
+	public JSONObject activate(String userId ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != userId) {
+				boolean seccess = tbUserService.operateActivate(user,userId);
+				if (seccess) {
+					return ResponseMessage.returnInfo(true,null,null,"operate_success");
+				}else {
+					return ResponseMessage.returnInfo(false,null,null,"operate_fail");
+				}
+			}else {
+				return ResponseMessage.returnInfo(false,null,null,"operate_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	
+	/**
+	 * //重置密码
+	 * @param password
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/updatePwd")
+	@ResponseBody
+	public JSONObject updatePwd(String password,String userId ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			boolean seccess = tbUserService.updatePwd(user,userId,password);
+			if (seccess) {
+				return ResponseMessage.returnInfo(true,null,null,"operate_success");
+			}else {
+				return ResponseMessage.returnInfo(false,null,null,"operate_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * //新增账户
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/add")
+	@ResponseBody
+	public JSONObject add(TbUser entity,String roleId,String orgId,String roleSource) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			boolean seccess = tbUserService.save(user, roleId, orgId,entity,roleSource);
+			if (seccess) {
+				return ResponseMessage.returnInfo(true,null,null,"save_success");
+			}else {
+				return ResponseMessage.returnInfo(false,null,null,"save_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * 	//用户账号唯一校验
+	 * 	//管理员账户唯一校验
+	 * @param userName
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByUserName")
+	@ResponseBody
+	public JSONObject getByUserName(String userName ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != userName) {
+				TbUser entity = tbUserService.getByUserName(userName);
+				if (null != entity) {
+					return ResponseMessage.returnInfo(false,null,null,"账户already_exists");
+				}else {
+					return ResponseMessage.returnInfo(true,null,null,null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false,null,null,"请输入账号");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * //手机唯一校验
+	 * //手机号唯一校验
+	 * @param phone
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByPhone")
+	@ResponseBody
+	public JSONObject getByPhone(String phone) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != phone) {
+				TbUser entity = tbUserService.getByPhone(phone);
+				if (null != entity) {
+					return ResponseMessage.returnInfo(false,null,null,"手机号already_exists");
+				}else {
+					return ResponseMessage.returnInfo(true,null,null,null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false,null,null,"请输入手机号");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * //修改账户
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/update")
+	@ResponseBody
+	public JSONObject updateUser(TbUser entity ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			TbUser tbUser = tbUserService.getById(entity.getUserId());
+			if (null != tbUser) {
+				tbUserDao.updateNotNull(entity);
+				return ResponseMessage.returnInfo(true,null,null,"save_success");
+			}else {
+				return ResponseMessage.returnInfoSpecial(false,null,null,"请选择要修改的账户");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * 根据组织ID查询用户
+	 * @param orgId
+	 * @return
+	 */
+	@PostMapping("/getByOrgId")
+	@ResponseBody
+	public JSONObject getByOrgId(String orgId) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != orgId) {
+				List<TbUser> list = tbUserService.getByOrgId(orgId);
+				if (null != list && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				}else {
+					return ResponseMessage.returnInfo(true, null, null, null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择组织");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	@PostMapping("/getById")
+	@ResponseBody
+	public JSONObject getById(String userId) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != userId) {
+				TbUser entity = tbUserService.getById(userId);
+				return ResponseMessage.returnInfo(true, entity, null, null);
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择用户");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbUser
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/list")
+	public String list(TbUser tbUser,Page<TbUser> page,HttpServletRequest request){
+		
+		try {
+			
+			request.setAttribute("page", tbUserService.findByPage(tbUser, page));
+		} catch (Exception e) {
+		
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/tbUserList";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增修改页面初始化
+	 * </pre>
+	 * 
+	 * @param userId
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/tbUser")
+	public String tbUser(String userId,HttpServletRequest request){
+		
+		try {
+			
+			if(ValidateUtils.isNotEmpty(userId)){
+				
+				TbUser tbUser = tbUserService.getById(userId);
+				request.setAttribute("tbUser", tbUser);
+			}
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/tbUser";
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	保存
+	 * </pre>
+	 * 
+	 * @param tbUser
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(TbUser tbUser){
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			// 修改
+			if(ValidateUtils.isNotEmpty(tbUser.getUserId())){
+				
+				tbUserService.update(tbUser);
+			}
+			// 新增
+			else{
+				
+				tbUserService.add(tbUser);
+			}
+			json.put("result", "save_success");
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+			json.put("result", "save_fail");
+		}
+		
+		return json.toString();
+	}
+	
+}

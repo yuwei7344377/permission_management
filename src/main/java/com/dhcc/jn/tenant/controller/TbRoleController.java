@@ -1,0 +1,454 @@
+package com.dhcc.jn.tenant.controller;
+
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbRole;
+import com.dhcc.jn.tenant.entity.TbRoleData;
+import com.dhcc.jn.tenant.entity.TbRoleOrgYy;
+import com.dhcc.jn.tenant.entity.TbRoleResource;
+import com.dhcc.jn.tenant.entity.TbTenantTypeRole;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.service.TbRoleDataService;
+import com.dhcc.jn.tenant.service.TbRoleResourceService;
+import com.dhcc.jn.tenant.service.TbRoleService;
+import com.dhcc.jn.tenant.service.TbTenantTypeRoleService;
+import com.dhcc.jn.tenant.service.TbUserService;
+
+/**
+ * 角色表controller
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+@RestController
+@RequestMapping("/tbRole")
+public class TbRoleController extends BaseController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private TbRoleService tbRoleService;
+    
+	@Autowired
+	private TbUserService tbUserService;
+
+	@Autowired
+	private TbTenantTypeRoleService tbTenantTypeRoleService;
+
+	@Autowired
+	private TbRoleResourceService tbRoleResourceService;
+
+	@Autowired
+	private TbRoleDataService tbRoleDataService;
+
+
+    /**
+     * 获取所有角色
+     *
+     * @param
+     * @return
+     */
+    @PostMapping("/findAll")
+    @ResponseBody
+    public JSONObject findAll(String zhTypeId,String zhId) {
+        //获取登录用户信息
+        TbUser user = getCurrentUser();
+        if (null != user.getUserId()) {
+        	List<Map<String, Object>> list = tbRoleService.findAll(zhTypeId,zhId);
+            if (list != null && !list.isEmpty()) {
+                return ResponseMessage.returnInfo(true, list, null, null);
+            } else {
+                return ResponseMessage.returnInfo(true, null, null, null);
+            }
+        } else {
+            return ResponseMessage.returnInfo(false, null, null, "error");
+        }
+    }
+
+    /**
+     * 根据角色Id查询角色详情
+     *
+     * @param roleId
+     * @return
+     */
+    @PostMapping("/getById")
+    @ResponseBody
+    public JSONObject getById(String roleId) {
+        TbUser user = getCurrentUser();
+        if (null != user.getUserId()) {
+            if (null != roleId) {
+                TbRole role = tbRoleService.getById(roleId);
+                return ResponseMessage.returnInfo(true, role, null, null);
+            } else {
+                return ResponseMessage.returnInfoSpecial(false, null, null, "请选择角色");
+            }
+        } else {
+            return ResponseMessage.returnInfo(false, null, null, "error");
+        }
+    }
+
+	
+	/**
+	 * //查询该租户下所有的角色（tb_role） 角色编号、角色名称
+	 * 
+	 * @param zhId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByzhId")
+	@ResponseBody
+	public JSONObject getByzhId(TbRole tbRole, Page<TbRole> page) {
+		// 获取登录用户信息
+		TbUser user =getCurrentUser();
+		if (null != user.getUserId()) {
+			Page<TbRole> page1 = tbRoleService.findByPage(tbRole, page);
+			return ResponseMessage.returnInfo(true, page1, null, null);
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * //新增该租户下的角色
+	 * 
+	 * @param role
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/addRole")
+	@ResponseBody
+	public JSONObject addRole(TbRole role ,TbRoleOrgYy tbRoleOrgYy) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			boolean seccess = tbRoleService.save(user,role,tbRoleOrgYy);
+			if (seccess) {
+				return ResponseMessage.returnInfo(true, null, null, "save_success");
+			}else {
+				return ResponseMessage.returnInfo(false, null, null, "save_fail");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+
+	/**
+	 * //修改该租户下角色信息
+	 * 
+	 * @param role
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/updateRole")
+	@ResponseBody
+	public JSONObject updateRole(TbRole role ,TbRoleOrgYy tbRoleOrgYy) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != role.getRoleId()) {
+				TbRole entity = tbRoleService.getById(role.getRoleId());
+				if (null != entity) {
+					boolean seccess = tbRoleService.edit(user,role,tbRoleOrgYy);
+					if (seccess) {
+						return ResponseMessage.returnInfo(true, null, null, "save_success");
+					}else {
+						return ResponseMessage.returnInfo(false, null, null, "save_fail");
+					}
+				} else {
+					return ResponseMessage.returnInfoSpecial(false, null, null, "未查询到角色信息");
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择角色");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	新增修改页面初始化
+     * </pre>
+     *
+     * @param roleId
+     * @param request
+     * @return
+     */
+    @RequestMapping("/tbRole")
+    public String tbRole(String roleId, HttpServletRequest request) {
+
+        try {
+
+            if (ValidateUtils.isNotEmpty(roleId)) {
+
+                TbRole tbRole = tbRoleService.getById(roleId);
+                request.setAttribute("tbRole", tbRole);
+            }
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+        }
+
+        return "test/tbRole";
+    }
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	保存
+     * </pre>
+     *
+     * @param tbRole
+     * @return
+     */
+    @RequestMapping("/save")
+    @ResponseBody
+    public String save(TbRole tbRole) {
+
+        JSONObject json = new JSONObject();
+
+        try {
+
+            // 修改
+            if (ValidateUtils.isNotEmpty(tbRole.getRoleId())) {
+
+                tbRoleService.update(tbRole);
+            }
+            // 新增
+            else {
+
+                tbRoleService.add(tbRole);
+            }
+            json.put("result", "save_success");
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+            json.put("result", "save_fail");
+        }
+
+        return json.toString();
+    }
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	删除
+     * </pre>
+     *
+     * @param roleId
+     * @return
+     */
+    @RequestMapping("/delete")
+    @ResponseBody
+    public String delete(String roleId) {
+
+        JSONObject json = new JSONObject();
+
+        try {
+
+            tbRoleService.delete(roleId);
+            json.put("result", "delete_success");
+        } catch (Exception e) {
+
+            logger.error(e.getMessage(), e);
+            json.put("result", "delete_fail");
+        }
+
+        return json.toString();
+    }
+	
+
+	/**
+	 * //删除该租户下角色信息
+	 * 
+	 * @param zhId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/deleteRole")
+	@ResponseBody
+	public JSONObject deleteRole(TbRole role ) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != role.getRoleId()) {
+				/**
+				 * 删除角色前，先判断角色下是否分配了账号
+				 * @param roleId
+				 * @return
+				 */
+				String count = tbUserService.getUserCountByRoleId(role.getRoleId());
+				if(null != count && !count.equals("")){
+					return ResponseMessage.returnInfoSpecial(false, null, null, "角色下有账号信息，不可删除");
+				}
+				else {
+					
+					// 验证角色是否分配功能资源
+					List<TbRoleResource> roleResourcesList = tbRoleResourceService.getzhIdAndroleIdByRoleResource(role.getZhId(),role.getRoleId());
+					if (null != roleResourcesList && !roleResourcesList.isEmpty()) {
+						return ResponseMessage.returnInfoSpecial(false, null, null, "角色下有分配功能资源，不可删除");
+					} else {
+						// 验证角色是否分配数据资源
+						List<TbRoleData> roleDataList = tbRoleDataService.getzhIdAndroleIdByRoleData(role.getZhId(),role.getRoleId());
+						if (null != roleDataList && !roleDataList.isEmpty()) {
+							return ResponseMessage.returnInfoSpecial(false, null, null, "角色下有分配数据资源，不可删除");
+						} else {
+							tbRoleService.delete(role.getRoleId());
+							return ResponseMessage.returnInfo(true, null, null, "delete_success");
+						}
+					}
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择角色");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+    
+	/**
+	 * //角色编码唯一校验 在role表中查询，zhid不同，编码可重复
+	 * 角色ID，新增界面该字段为空；编辑界面该字段必填
+	 * @param roleCode
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByRoleCode")
+	@ResponseBody
+	public JSONObject getByRoleCode(String zhId, String roleCode) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != roleCode) {
+				if (null != zhId) {
+					TbTenantTypeRole tRole = tbTenantTypeRoleService.getByRoleCode(roleCode);//先去大角色表中查找
+					TbRole role = tbRoleService.getByzhIdAndRoleCode(zhId, roleCode);//再去小角色表中查找
+					if (null != tRole || null != role) {
+						return ResponseMessage.returnInfo(false, null, null, "角色编码already_exists");
+					} else {
+						return ResponseMessage.returnInfoSpecial(true, null, null, null);
+					}
+				} else {
+					return ResponseMessage.returnInfoSpecial(false, null, null, "没有租户ID");
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请输入角色编码");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * //角色名称唯一校验 在role表中查询，zhid不同，编码可重复
+	 * 角色ID，新增界面该字段为空；编辑界面该字段必填
+	 * @param roleName
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByRoleName")
+	@ResponseBody
+	public JSONObject getByRoleName(String zhId, String roleName ) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != roleName) {
+				if (null != zhId) {
+					TbTenantTypeRole tRole = tbTenantTypeRoleService.getByRoleName(roleName);//先去大角色表中查找
+					TbRole role = tbRoleService.getByzhIdAndRoleName(zhId, roleName);//再去小角色表中查找
+					if (null != tRole || null != role) {
+						return ResponseMessage.returnInfo(false, null, null, "角色名称already_exists");
+					} else {
+						return ResponseMessage.returnInfo(true, null, null, null);
+					}
+				} else {
+					return ResponseMessage.returnInfoSpecial(false, null, null, "没有租户ID");
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请输入角色名称");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * 获取某行政区划下的运营角色
+	 * @param orgCode
+	 * @return
+	 */
+	@PostMapping("/getRoleByOrgCode")
+	@ResponseBody
+	public JSONObject getRoleByOrgCode(String orgCode) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if(null != orgCode) {
+				List<TbRole> list = tbRoleService.getRoleByOrgCode(orgCode);
+				if (list != null && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				} else {
+					return ResponseMessage.returnInfo(true, null, null, null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "没有行政区划");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+
+	/**
+	 * 获取角色类型
+	 * @return
+	 */
+	@PostMapping("/findroleType")
+	@ResponseBody
+	public JSONObject findroleType() {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			List<Map<String, Object>> list = tbRoleService.findroleType();
+            if (list != null && !list.isEmpty()) {
+                return ResponseMessage.returnInfo(true, list, null, null);
+            } else {
+                return ResponseMessage.returnInfo(true, null, null, null);
+            }
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+}

@@ -1,0 +1,300 @@
+package com.dhcc.jn.tenant.controller;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.dao.TbOrgDao;
+import com.dhcc.jn.tenant.entity.TbAdministrativeDivision;
+import com.dhcc.jn.tenant.entity.TbOrg;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.entity.TbUserOrg;
+import com.dhcc.jn.tenant.service.TbOrgService;
+import com.dhcc.jn.tenant.service.TbUserOrgService;
+
+/**
+ * 
+ * 组织表controller
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Controller
+@RequestMapping("/tbOrg")
+public class TbOrgController extends BaseController {
+
+	@Autowired
+	private TbOrgService tbOrgService;
+	
+	@Autowired
+	private TbUserOrgService tbUserOrgService;
+	
+	@Autowired
+	private TbOrgDao tbOrgDao;
+	
+	/**
+	 * 获取组织树
+	 * @return
+	 */
+	@PostMapping("/getTbOrgTree")
+	@ResponseBody
+	public JSONObject getTbOrgTree() {
+		List<TbOrg> list = tbOrgService.getTbOrgTree();
+		if(null != list && !list.isEmpty()) {
+			for(int i=0 ;i<list.size();i++) {
+				TbOrg tbOrg = list.get(i);
+				List<TbOrg> list1 = getTbOrgByParentOrgId(tbOrg.getOrgId());
+				if(null != list1 && !list1.isEmpty()) {
+					tbOrg.setChildren(list1);
+				}
+			}
+			return ResponseMessage.returnInfo(true,list,null,null);
+		}
+		return ResponseMessage.returnInfo(true,null,null,null);
+	}
+	
+	/**
+	 * 获取租户下组织树
+	 * @return
+	 */
+	@PostMapping("/getTbOrgTreeByzhId")
+	@ResponseBody
+	public JSONObject getTbOrgTreeByzhId(String zhId) {
+		List<TbOrg> list = tbOrgService.getTbOrgTreeByzhId(zhId);
+		if(null != list && !list.isEmpty()) {
+			for(int i=0 ;i<list.size();i++) {
+				TbOrg tbOrg = list.get(i);
+				List<TbOrg> list1 = getTbOrgByParentOrgId(tbOrg.getOrgId());
+				if(null != list1 && !list1.isEmpty()) {
+					tbOrg.setChildren(list1);
+				}
+			}
+			return ResponseMessage.returnInfo(true,list,null,null);
+		}
+		return ResponseMessage.returnInfo(true,null,null,null);
+	}
+	
+	/**
+	 * 获取parentOrgId下所有子节点
+	 * @param parentOrgId
+	 * @return
+	 */
+	public List<TbOrg> getTbOrgByParentOrgId(String parentOrgId){
+		List<TbOrg> list = tbOrgService.findBySearch(parentOrgId);
+		if(null != list && list.size()>0){
+			for(int i=0 ;i<list.size();i++) {
+				TbOrg tbOrg = list.get(i);
+				List<TbOrg> list1 = getTbOrgByParentOrgId(tbOrg.getOrgId());
+				if(null != list1 && list1.size()>0){
+					tbOrg.setChildren(list1);	
+				}
+			}
+			return list;
+		}
+		return null;	
+	}
+	
+	/**
+	 * //获取所有组织
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/findAll")
+	@ResponseBody
+	public JSONObject findAll(String zhId ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			List<Map<String, Object>> list = tbOrgService.findOrgByzhId(zhId);
+			if (list != null && !list.isEmpty()) {
+				return ResponseMessage.returnInfo(true,list,null,null);
+			} else {
+				return ResponseMessage.returnInfo(true,null,null,null);
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * // 获取租户下的所有的组织
+	 * @param org
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/findOrgByzhId")
+	@ResponseBody
+	public JSONObject findOrgByzhId(String zhId) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != zhId) {
+				List<Map<String, Object>> list = tbOrgService.findByzhId(zhId);
+				if (list != null && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				} else {
+					return ResponseMessage.returnInfo(true, null, null, null);
+				}
+			} else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "租户信息为空");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	
+	/**
+	 * //（组织名称（模糊查询）、级别（精确查询）；）
+	 * @param orgName
+	 * @param orgType
+	 * @return
+	 */
+	@PostMapping("/getByOrgNameAndOrgType")
+	@ResponseBody
+	public JSONObject getByOrgNameAndOrgType(String zhId,String orgName,String orgType) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			List<TbOrg> list = tbOrgService.getByOrgNameAndOrgType(zhId,orgName,orgType);
+			if (null != list && !list.isEmpty()) {
+				return ResponseMessage.returnInfo(true,list,null,null);
+			} else {
+				return ResponseMessage.returnInfo(true,null,null,null);
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+	
+	/**
+	 * // 组织名唯一校验
+	 * @param orgName
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/getByOrgName")
+	@ResponseBody
+	public JSONObject getByOrgName(String orgName ,String zhId) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != orgName) {
+				TbOrg org = tbOrgService.getByOrgName(zhId,orgName);
+				if (null != org) {
+					return ResponseMessage.returnInfo(false,null,null,"组织名称already_exists");
+				}else {
+					return ResponseMessage.returnInfo(true,null,null,null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false,null,null,"请输入组织名称");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+
+	
+	/**
+	 * // 新增组织
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/save")
+	@ResponseBody
+	public JSONObject save(TbOrg entity ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			boolean seccess = tbOrgService.save(user,entity);
+			if (seccess) {
+				return ResponseMessage.returnInfo(true,null,null,"save_success");
+			}else{
+				return ResponseMessage.returnInfo(false,null,null,"save_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+
+	
+	/**
+	 * // 编辑组织
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/update")
+	@ResponseBody
+	public JSONObject update(TbOrg entity ) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			TbOrg tbOrg = tbOrgService.getById(entity.getOrgId());
+			if (null != tbOrg) {
+				tbOrgDao.updateNotNull(entity);
+				return ResponseMessage.returnInfo(true,null,null,"save_success");
+			}else{
+				return ResponseMessage.returnInfo(false,null,null,"save_fail");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+
+	
+	/**
+	 * // 删除组织（验证组织下是否有账户信息，有则不能删除，顶级组织也不可删除）
+	 * @param orgId
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/delete")
+	@ResponseBody
+	public JSONObject delete(String orgId) {
+		//获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			//验证组织是否是顶级组织
+			TbOrg org = tbOrgService.getById(orgId);
+			if (org.getOrgType().equals("1")) {
+				return ResponseMessage.returnInfoSpecial(true,null,null,"该组织是顶级组织，不可删除！");
+			}else {
+				//验证组织下是否有账户信息
+				List<TbUserOrg> list = tbUserOrgService.findByOrgId(orgId);
+				if (list != null && !list.isEmpty()) {
+					return ResponseMessage.returnInfoSpecial(true,null,null,"组织下有账户信息，不可删除！");
+				} else {
+					tbOrgService.delete(orgId);
+					return ResponseMessage.returnInfo(true,null,null,"delete_success");
+				}
+			}
+		}else {
+			return ResponseMessage.returnInfo(false,null,null,"error");
+		}
+	}
+
+}

@@ -1,0 +1,222 @@
+package com.dhcc.jn.tenant.entity;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.dhcc.jn.tenant.common.base.BaseEntity;
+
+/**
+ * 
+ * 数据目录实体类.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public class VDataCatalog extends BaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**主键*/
+	private String id;
+	/**上级目录*/
+	private String pid;
+	/**目录名称*/
+	private String name;
+	/**目录编码*/
+	private String code;
+	/**描述*/
+	private String description;
+	/**createBy*/
+	private String createBy;
+	/**createTime*/
+	private Date createTime;
+	/**updateBy*/
+	private String updateBy;
+	/**updateTime*/
+	private Date updateTime;
+	/**排序**/
+	private String sortOrder;
+
+	private List<VDataCatalog> vDataCatalogList = new ArrayList<>();
+
+	public List<VDataCatalog> getvDataCatalogList() {
+		return vDataCatalogList;
+	}
+
+	public void setvDataCatalogList(List<VDataCatalog> vDataCatalogList) {
+		this.vDataCatalogList = vDataCatalogList;
+	}
+
+	public String getSortOrder() {
+		return sortOrder;
+	}
+
+	public void setSortOrder(String sortOrder) {
+		this.sortOrder = sortOrder;
+	}
+
+	/**
+	 *方法: 取得String
+	 *@return: String  主键
+	 */
+	public String getId(){
+		return this.id;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  主键
+	 */
+	public void setId(String id){
+		this.id = id;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  上级目录
+	 */
+	public String getPid(){
+		return this.pid;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  上级目录
+	 */
+	public void setPid(String pid){
+		this.pid = pid;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  目录名称
+	 */
+	public String getName(){
+		return this.name;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  目录名称
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  目录编码
+	 */
+	public String getCode(){
+		return this.code;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  目录编码
+	 */
+	public void setCode(String code){
+		this.code = code;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  描述
+	 */
+	public String getDescription(){
+		return this.description;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  描述
+	 */
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  createBy
+	 */
+	public String getCreateBy(){
+		return this.createBy;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  createBy
+	 */
+	public void setCreateBy(String createBy){
+		this.createBy = createBy;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  createTime
+	 */
+	public Date getCreateTime(){
+		return this.createTime;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  createTime
+	 */
+	public void setCreateTime(Date createTime){
+		this.createTime = createTime;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  updateBy
+	 */
+	public String getUpdateBy(){
+		return this.updateBy;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  updateBy
+	 */
+	public void setUpdateBy(String updateBy){
+		this.updateBy = updateBy;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  updateTime
+	 */
+	public Date getUpdateTime(){
+		return this.updateTime;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  updateTime
+	 */
+	public void setUpdateTime(Date updateTime){
+		this.updateTime = updateTime;
+	}
+	
+	
+}

@@ -1,0 +1,158 @@
+package com.dhcc.jn.tenant.service;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbResource;
+import com.dhcc.jn.tenant.entity.TbResourceApplicationType;
+import com.dhcc.jn.tenant.entity.TbTenantTypeRole;
+
+import java.util.List;
+import java.util.Map;
+
+/**
+ * 租户类型默认角色service接口
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+public interface TbTenantTypeRoleService {
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	分页查询
+     * </pre>
+     *
+     * @param tbTenantTypeRole
+     * @param page
+     * @return
+     */
+    public Page<TbTenantTypeRole> findByPage(TbTenantTypeRole tbTenantTypeRole, Page<TbTenantTypeRole> page);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	查询
+     * </pre>
+     *
+     * @param tbTenantTypeRole
+     * @return
+     */
+    public List<TbTenantTypeRole> findBySearch(TbTenantTypeRole tbTenantTypeRole);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	通过ID查询
+     * </pre>
+     *
+     * @param id
+     * @return
+     */
+    public TbTenantTypeRole getById(String id);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	新增
+     * </pre>
+     *
+     * @param tbTenantTypeRole
+     */
+    public void add(TbTenantTypeRole tbTenantTypeRole);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	修改
+     * </pre>
+     *
+     * @param tbTenantTypeRole
+     */
+    public void update(TbTenantTypeRole tbTenantTypeRole);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	删除
+     * </pre>
+     *
+     * @param id
+     */
+    public void delete(String id);
+
+    /**
+     * 根据角色编码查询
+     *
+     * @param roleCode
+     * @return
+     */
+    public TbTenantTypeRole getByRoleCode(String roleCode);
+
+    /**
+     * 根据角色名称查询
+     *
+     * @param roleName
+     * @return
+     */
+    public TbTenantTypeRole getByRoleName(String roleName);
+
+    /**
+     * 获取某一个用户类型下所有角色列表
+     *
+     * @param zhTypeId
+     * @param page
+     * @return
+     */
+    Page<TbTenantTypeRole> getUserTypeFunctionList(String zhTypeId, String roleName, Page<TbTenantTypeRole> page);
+
+    /**
+     * 通过roleCode验证角色编码
+     *
+     * @param roleCode
+     * @return
+     */
+    Boolean getEffectiveCoding(String zhTypeId, String roleCode);
+
+    /**
+     * 删除角色信息
+     *
+     * @param id
+     * @return
+     */
+    Boolean delRoleContent(String id);
+
+    /**
+     * 获取用户类别下的应用系统
+     *
+     * @param zhTypeId
+     * @return
+     */
+    List<TbResourceApplicationType> getUserFunctionalResources(String zhTypeId, String appTypeCode);
+
+
+    /**
+     * 分配角色应用资源
+     *
+     * @param roleId
+     */
+    void saveRoleResources(String roleId, String treeData);
+
+
+
+}

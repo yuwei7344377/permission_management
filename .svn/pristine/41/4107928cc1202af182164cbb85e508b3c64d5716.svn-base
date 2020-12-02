@@ -1,0 +1,319 @@
+package com.dhcc.jn.tenant.controller;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.alibaba.fastjson.JSONObject;
+import com.dhcc.jn.tenant.common.ResponseMessage;
+import com.dhcc.jn.tenant.common.ValidateUtils;
+import com.dhcc.jn.tenant.common.base.BaseController;
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbRoleData;
+import com.dhcc.jn.tenant.entity.TbUser;
+import com.dhcc.jn.tenant.entity.VDataCatalog;
+import com.dhcc.jn.tenant.service.TbRoleDataService;
+import com.dhcc.jn.tenant.service.VDataCatalogService;
+
+/**
+ * 
+ * 角色数据资源清单表controller
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+@Controller
+@RequestMapping("/tbRoleData")
+public class TbRoleDataController extends BaseController {
+
+	 private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private TbRoleDataService tbRoleDataService;
+	
+	@Autowired
+	private VDataCatalogService vDataCatalogService;
+    
+	
+	/**
+	 * 查询tb_tenant_type_role_data和tb_tenant_type_role中rolecode=admin拥有 的最大的资源
+	 * 数据资源目录（右侧树）
+	 * @param zhTypeId
+	 * @return
+	 */
+	@PostMapping("/findDataTree")
+	@ResponseBody
+	public JSONObject findDataTree(String roleId,String zhTypeId) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != zhTypeId) {
+				List<Map<String, Object>> list = tbRoleDataService.findDataTree(roleId,zhTypeId);
+				if (list != null && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				}else {
+					return ResponseMessage.returnInfo(false, null, null, null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择租户类型");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * 获取数据资源右侧树
+	 * @param zhTypeId
+	 * @param roleId
+	 * @param catalogId
+	 * @return
+	 */
+	@PostMapping("/getRoleDataTree")
+	@ResponseBody
+	public JSONObject getRoleDataTree(String zhTypeId,String dataFrom) {
+		List<VDataCatalog> list = vDataCatalogService.getRoleDataTree(zhTypeId,dataFrom);
+		if (null != list && !list.isEmpty()) {
+			for (int i = 0; i < list.size(); i++) {
+				VDataCatalog vDataCatalog = list.get(i);
+				List<VDataCatalog> list1 = getVDataCatalogByPid(vDataCatalog.getId());
+				if (null != list1 && !list1.isEmpty()) {
+					vDataCatalog.setChildren(list1);
+				}
+			}
+			return ResponseMessage.returnInfo(true,list,null,null);
+		}
+		return ResponseMessage.returnInfo(true,null,null,null);
+	}
+	
+	/**
+	 * 获取PID下所有子节点
+	 * @param zhTypeId
+	 * @param dataFrom
+	 * @param Pid
+	 * @return
+	 */
+	public List<VDataCatalog> getVDataCatalogByPid(String Pid) {
+		List<VDataCatalog> list = vDataCatalogService.findBySearch(Pid);
+		if (null != list && !list.isEmpty()) {
+			for (int i = 0; i < list.size(); i++) {
+				VDataCatalog vDataCatalog = list.get(i);
+				List<VDataCatalog> list1 = getVDataCatalogByPid(vDataCatalog.getId());
+				if (null != list1 && !list1.isEmpty()) {
+					vDataCatalog.setChildren(list1);
+				}
+			}
+			return list;
+		}
+		return null;	
+	}
+	
+	
+	/**
+	 * // 根据该角色id列出所有数据目录+产品资源list
+	 * // tb_tenant_type_role_data和tb_tenant_type_role中rolecode=admin拥有 的最大的资源
+	 * @param roleId
+	 * @return
+	 */
+	@PostMapping("/findData")
+	@ResponseBody
+	public JSONObject findData(String zhTypeId,String roleId,String catalogId) {
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != roleId) {
+				List<Map<String, Object>> list = tbRoleDataService.findData(zhTypeId,roleId,catalogId);
+				if (list != null && !list.isEmpty()) {
+					return ResponseMessage.returnInfo(true, list, null, null);
+				}else {
+					return ResponseMessage.returnInfo(false, null, null, null);
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "请选择角色");
+			}
+		}else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	
+	/**
+	 * //为角色分配数据资源（）
+	 * 先查出原来分配的数据资源，删除后重新分配
+	 * @param entity
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("/saveRoleData")
+	@ResponseBody
+	public JSONObject roleData(String zhId,String roleId,String dataIds) {
+		// 获取登录用户信息
+		TbUser user = getCurrentUser();
+		if (null != user.getUserId()) {
+			if (null != zhId) {
+				if(null != roleId) {
+					if (null != dataIds) {
+						boolean seccess = tbRoleDataService.operateRoleData(user, zhId,roleId,dataIds);
+						if (seccess) {
+							return ResponseMessage.returnInfo(true, null, null, "operate_success");
+						} else {
+							return ResponseMessage.returnInfo(false, null, null, "operate_fail");
+						}
+					}else {
+						return ResponseMessage.returnInfoSpecial(false, null, null, "资源ID缺失");
+					}
+				}else {
+					return ResponseMessage.returnInfoSpecial(false, null, null, "角色ID缺失");
+				}
+			}else {
+				return ResponseMessage.returnInfoSpecial(false, null, null, "租户ID缺失");
+			}
+		} else {
+			return ResponseMessage.returnInfo(false, null, null, "error");
+		}
+	}
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbRoleData
+	 * @param page
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/list")
+	public String list(TbRoleData tbRoleData,Page<TbRoleData> page,HttpServletRequest request){
+		
+		try {
+			
+			request.setAttribute("page", tbRoleDataService.findByPage(tbRoleData, page));
+		} catch (Exception e) {
+		
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/tbRoleDataList";
+	}
+
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增修改页面初始化
+	 * </pre>
+	 * 
+	 * @param id
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping("/tbRoleData")
+	public String tbRoleData(String id,HttpServletRequest request){
+		
+		try {
+			
+			if(ValidateUtils.isNotEmpty(id)){
+				
+				TbRoleData tbRoleData = tbRoleDataService.getById(id);
+				request.setAttribute("tbRoleData", tbRoleData);
+			}
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+		}
+		
+		return "test/tbRoleData";
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	保存
+	 * </pre>
+	 * 
+	 * @param tbRoleData
+	 * @return
+	 */
+	@RequestMapping("/save")
+	@ResponseBody
+	public String save(TbRoleData tbRoleData){
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			// 修改
+			if(ValidateUtils.isNotEmpty(tbRoleData.getId())){
+				
+				tbRoleDataService.update(tbRoleData);
+			}
+			// 新增
+			else{
+				
+				tbRoleDataService.add(tbRoleData);
+			}
+			json.put("result", "save_success");
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+			json.put("result", "save_fail");
+		}
+		
+		return json.toString();
+	}
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("/delete")
+	@ResponseBody
+	public String delete(String id){
+		
+		JSONObject json = new JSONObject();
+		
+		try {
+			
+			tbRoleDataService.delete(id);
+			json.put("result", "delete_success");
+		} catch (Exception e) {
+			
+			logger.error(e.getMessage(), e);
+			json.put("result", "delete_fail");
+		}
+		
+		return json.toString();
+	}
+}

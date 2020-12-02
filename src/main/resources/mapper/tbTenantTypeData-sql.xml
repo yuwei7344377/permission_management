@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbTenantTypeDataDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeData"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbTenantTypeData">
+		<result property="id" column="id"/>
+		<result property="zhTypeId" column="zh_type_id"/>
+		<result property="dataId" column="data_id"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="dataFrom" column="data_from"/>
+		<result property="catalogName" column="catalog_name"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.zh_type_id,
+			t.data_id,
+            t.parent_id,
+            t.data_from,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_data t
+		<where>
+			<if test="zhTypeId != null and zhTypeId != ''">
+				and t.zh_type_id = #{zhTypeId}			
+			</if>
+			<if test="dataId != null and dataId != ''">
+				and t.data_id = #{dataId}
+			</if>
+            <if test="parentId != null and parentId != ''">
+                and t.parent_id = #{parentId}
+            </if>
+            <if test="dataFrom != null and dataFrom != ''">
+                and t.data_from = #{dataFrom}
+            </if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_tenant_type_data t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_tenant_type_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			data_id,
+            parent_id,
+            data_from,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{zhTypeId},
+			#{dataId},
+			#{parentId},
+			#{dataFrom},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_tenant_type_data
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			zh_type_id,
+			data_id,
+            parent_id,
+            data_from,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.zhTypeId},
+				#{item.dataId},
+				#{item.parentId},
+				#{item.dataFrom},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_tenant_type_data
+		<set>
+			zh_type_id = #{zhTypeId},
+			data_id = #{dataId},
+            parent_id = #{parentId},
+            data_from = #{dataFrom},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_tenant_type_data
+		<set>
+			<if test="zhTypeId != null">
+			zh_type_id = #{zhTypeId},
+			</if>
+			<if test="dataId != null">
+			data_id = #{dataId},
+			</if>
+            <if test="parentId != null">
+            parent_id = #{parentId}
+            </if>
+            <if test="dataFrom != null">
+            data_from = #{dataFrom}
+            </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_tenant_type_data where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_tenant_type_data where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+
+	<!--查找数据目录的父节点-->
+	<select id="findParentId" resultMap="resultMap">
+		<!--  
+			select t.id,t.zh_type_id,t.data_id,t.parent_id,v.name catalog_name from tb_tenant_type_data t,v_data_catalog v
+			where t.data_id = v.id and t.data_from = '0' and t.zh_type_id = #{zhTypeId} and (t.parent_id is null or t.parent_id = '')
+		-->
+		select distinct t.zh_type_id,t.data_id,v.name as catalog_name ,v.pid as parent_id
+		from tb_tenant_type_data t,v_data_catalog v
+		where t.data_id = v.id and t.data_from = '0' and t.zh_type_id = #{zhTypeId}
+			and (v.pid  is null or v.pid = '')
+		order by v.sort_order 	
+	</select>
+
+    <!---->
+    <select id="getUserTypeData" parameterType="java.lang.String" resultMap="resultMap">
+        select t.data_id,v.pid as parent_id,v.name as catalog_name 
+        from tb_tenant_type_data t,v_data_catalog v
+        where t.data_id = v.id and t.data_from ='0' and t.zh_type_id = #{zhTypeId} and t.parent_id = #{dataId}
+        order by v.sort_order 	
+    </select>
+
+</mapper>

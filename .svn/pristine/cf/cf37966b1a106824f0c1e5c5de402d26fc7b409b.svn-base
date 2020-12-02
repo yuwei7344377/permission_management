@@ -1,0 +1,149 @@
+package com.dhcc.jn.tenant.service;
+import java.util.List;
+import java.util.Map;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbResource;
+import com.dhcc.jn.tenant.entity.TbRoleResource;
+import com.dhcc.jn.tenant.entity.TbUser;
+
+/**
+ * 
+ * 角色资源清单service接口
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public interface TbRoleResourceService{
+	
+ 	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	分页查询
+	 * </pre>
+	 * 
+	 * @param tbRoleResource
+	 * @param page
+	 * @return
+	 */
+	public Page<TbRoleResource> findByPage(TbRoleResource tbRoleResource,Page<TbRoleResource> page);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	查询
+	 * </pre>
+	 * 
+	 * @param tbRoleResource
+	 * @return
+	 */
+	public List<TbRoleResource> findBySearch(TbRoleResource tbRoleResource);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	通过ID查询
+	 * </pre>
+	 * 
+	 * @param TbRoleResource
+	 * @return
+	 */
+	public TbRoleResource getById(String id);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	新增
+	 * </pre>
+	 * 
+	 * @param tbRoleResource
+	 */
+	public void add(TbRoleResource tbRoleResource);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	修改
+	 * </pre>
+	 * 
+	 * @param tbRoleResource
+	 */
+	public void update(TbRoleResource tbRoleResource);
+	
+	/**
+	 * 
+	 * <pre>
+	 * 	2020-07-22 jlf
+	 * 	删除
+	 * </pre>
+	 * 
+	 * @param id
+	 */
+	public void delete(String id);
+
+	/**
+	 * 验证角色是否分配功能资源
+	 * @param zhId
+	 * @param roleId
+	 * @return
+	 */
+	public List<TbRoleResource> getzhIdAndroleIdByRoleResource(String zhId, String roleId);
+	
+	/**
+	 * 获取功能资源树
+	 * @param roleId
+	 * @param zhTypeId
+	 * @return
+	 */
+	public List<Map<String, Object>> findResourceTree(String roleId, String zhTypeId);
+	
+    /**
+     * 根据该角色id列出所有应用系统+功能资源list
+     * @param roleId
+     * @param roleId2 
+     * @return
+     */
+    public List<TbResource> findResource(String zhTypeId,String roleId,String appTypeCode);
+    
+    /**
+     * 列出菜单树子节点
+     * @param map
+     * @return
+     */
+    public List<TbResource> findRoleResourcesParentResourceId(Map map);
+	
+
+	/**
+	 * 给角色分配功能资源
+	 * @param user
+	 * @param zhId
+	 * @param roleId
+	 * @param resourceIds
+	 * @return
+	 */
+	public boolean operateRoleResource(TbUser user, String zhId, String roleId, String resourceIds,String appTypeCode);
+
+}

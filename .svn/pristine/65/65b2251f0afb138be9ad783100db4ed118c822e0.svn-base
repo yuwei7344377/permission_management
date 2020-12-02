@@ -1,0 +1,1119 @@
+package com.dhcc.jn.tenant.entity;
+import java.io.Serializable;
+import java.util.Date;
+
+import com.dhcc.jn.tenant.common.base.BaseEntity;
+
+/**
+ * 
+ * 企业表实体类.
+ * 
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-23 jlf
+ * 	新建文件
+ * </pre>
+ * 
+ * @author 
+ * <pre>
+ * SD
+ * 	jlf
+ * PG
+ *	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ *
+ * <p/> $Id$
+ *
+ */
+public class TbCoalRelated extends BaseEntity implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
+	
+	/**id*/
+	private String id;
+	/**企业编码*/
+	private String code;
+	/**企业名称*/
+	private String name;
+	/**企业简称*/
+	private String orgShortName;
+	/**上级机构id*/
+	private String parentId;
+	/**上级机构编码*/
+	private String parentCode;
+	/**上级机构名称*/
+	private String parentName;
+	/**上级机构简称*/
+	private String parentShortName;
+	/**企业级别 0：全国，1：省，2：市，3：县， 4：企业*/
+	private String orgLevel;
+	/**经度*/
+	private String jd;
+	/**维度*/
+	private String wd;
+	/**创建人名称*/
+	private String createName;
+	/**创建人账号*/
+	private String createBy;
+	/**创建日期*/
+	private Date createDate;
+	/**更新人名称*/
+	private String updateName;
+	/**更新人账号*/
+	private String updateBy;
+	/**更新日期*/
+	private Date updateDate;
+	/**运营模式购销合同*/
+	private String opPurchase;
+	/**运营模式派车单*/
+	private String opDispatch;
+	/**运营模式承运合同*/
+	private String opCarriage;
+	/**运营模式无*/
+	private String opNone;
+	/**公司地址*/
+	private String address;
+	/**法定代表人*/
+	private String legalPerson;
+	/**委托代理人*/
+	private String agent;
+	/**电报/挂号*/
+	private String telegraph;
+	/**电话*/
+	private String telephone;
+	/**开户银行*/
+	private String openingBank;
+	/**银行账户*/
+	private String bankAccount;
+	/**纳税人登记号*/
+	private String taxpayerIdentification;
+	/**邮政编码*/
+	private String postalCode;
+	/**是否为采集点*/
+	private String isCollect;
+	/**企业类型1生产企业、2洗选加工企业、3、经营企业、10承运企业  11个体户*/
+	private String companyType;
+	/**所属企业id*/
+	private String parnetOrgId;
+	/**所属企业编码*/
+	private String parentOrgCode;
+	/**所属企业名称*/
+	private String parentOrgName;
+	/**所属企业简称*/
+	private String parentOrgShortName;
+	/**机构类型编码1行政区域 2.企业*/
+	private String orgTypeCode;
+	/**机构类型名称*/
+	private String orgTypeName;
+	/**企业行业归属编码*/
+	private String orgIndustryCode;
+	/**企业行业归属名称（该企业的行业类型，包括露天矿、洗煤厂等）*/
+	private String orgIndustryName;
+	/**审核状态*/
+	private String checkStatus;
+	/**审核人*/
+	private String checkerId;
+	/**审核时间*/
+	private Date checkTime;
+	/**是否开通： 1开通 0 未开通*/
+	private String isOpening;
+	/**公司简介*/
+	private String profile;
+	/**企业属性编码*/
+	private String attributeCode;
+	/**企业属性名称*/
+	private String attributeName;
+	/**磅房作业模式poundStyle1，自动；0手动*/
+	private String poundStyle;
+	/** 治超over_con 0无，1司机*/
+	private String overControl;
+	/**治税tax_con 0无 1购销合同2承运合同3派车单*/
+	private String taxControl;
+	/**核定生产力*/
+	private String authorizedProductivity;
+	/**联系人*/
+	private String contactName;
+	/**固话区号*/
+	private String contactTelCode;
+	/**联系人固话*/
+	private String contactTel;
+	/**联系人手机号*/
+	private String contactCellPhone;
+	/**有效期限*/
+	private Date expireDateEnd;
+	/**生效日期*/
+	private Date expireDateStart;
+	/**省*/
+	private String province;
+	/**市*/
+	private String city;
+	/**县*/
+	private String county;
+	
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  id
+	 */
+	public String getId(){
+		return this.id;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  id
+	 */
+	public void setId(String id){
+		this.id = id;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业编码
+	 */
+	public String getCode(){
+		return this.code;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业编码
+	 */
+	public void setCode(String code){
+		this.code = code;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业名称
+	 */
+	public String getName(){
+		return this.name;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业名称
+	 */
+	public void setName(String name){
+		this.name = name;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业简称
+	 */
+	public String getOrgShortName(){
+		return this.orgShortName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业简称
+	 */
+	public void setOrgShortName(String orgShortName){
+		this.orgShortName = orgShortName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  上级机构id
+	 */
+	public String getParentId(){
+		return this.parentId;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  上级机构id
+	 */
+	public void setParentId(String parentId){
+		this.parentId = parentId;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  上级机构编码
+	 */
+	public String getParentCode(){
+		return this.parentCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  上级机构编码
+	 */
+	public void setParentCode(String parentCode){
+		this.parentCode = parentCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  上级机构名称
+	 */
+	public String getParentName(){
+		return this.parentName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  上级机构名称
+	 */
+	public void setParentName(String parentName){
+		this.parentName = parentName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  上级机构简称
+	 */
+	public String getParentShortName(){
+		return this.parentShortName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  上级机构简称
+	 */
+	public void setParentShortName(String parentShortName){
+		this.parentShortName = parentShortName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业级别 0：全国，1：省，2：市，3：县， 4：企业
+	 */
+	public String getOrgLevel(){
+		return this.orgLevel;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业级别 0：全国，1：省，2：市，3：县， 4：企业
+	 */
+	public void setOrgLevel(String orgLevel){
+		this.orgLevel = orgLevel;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  经度
+	 */
+	public String getJd(){
+		return this.jd;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  经度
+	 */
+	public void setJd(String jd){
+		this.jd = jd;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  维度
+	 */
+	public String getWd(){
+		return this.wd;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  维度
+	 */
+	public void setWd(String wd){
+		this.wd = wd;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  创建人名称
+	 */
+	public String getCreateName(){
+		return this.createName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  创建人名称
+	 */
+	public void setCreateName(String createName){
+		this.createName = createName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  创建人账号
+	 */
+	public String getCreateBy(){
+		return this.createBy;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  创建人账号
+	 */
+	public void setCreateBy(String createBy){
+		this.createBy = createBy;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  创建日期
+	 */
+	public Date getCreateDate(){
+		return this.createDate;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  创建日期
+	 */
+	public void setCreateDate(Date createDate){
+		this.createDate = createDate;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  更新人名称
+	 */
+	public String getUpdateName(){
+		return this.updateName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  更新人名称
+	 */
+	public void setUpdateName(String updateName){
+		this.updateName = updateName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  更新人账号
+	 */
+	public String getUpdateBy(){
+		return this.updateBy;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  更新人账号
+	 */
+	public void setUpdateBy(String updateBy){
+		this.updateBy = updateBy;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  更新日期
+	 */
+	public Date getUpdateDate(){
+		return this.updateDate;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  更新日期
+	 */
+	public void setUpdateDate(Date updateDate){
+		this.updateDate = updateDate;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  运营模式购销合同
+	 */
+	public String getOpPurchase(){
+		return this.opPurchase;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  运营模式购销合同
+	 */
+	public void setOpPurchase(String opPurchase){
+		this.opPurchase = opPurchase;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  运营模式派车单
+	 */
+	public String getOpDispatch(){
+		return this.opDispatch;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  运营模式派车单
+	 */
+	public void setOpDispatch(String opDispatch){
+		this.opDispatch = opDispatch;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  运营模式承运合同
+	 */
+	public String getOpCarriage(){
+		return this.opCarriage;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  运营模式承运合同
+	 */
+	public void setOpCarriage(String opCarriage){
+		this.opCarriage = opCarriage;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  运营模式无
+	 */
+	public String getOpNone(){
+		return this.opNone;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  运营模式无
+	 */
+	public void setOpNone(String opNone){
+		this.opNone = opNone;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  公司地址
+	 */
+	public String getAddress(){
+		return this.address;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  公司地址
+	 */
+	public void setAddress(String address){
+		this.address = address;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  法定代表人
+	 */
+	public String getLegalPerson(){
+		return this.legalPerson;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  法定代表人
+	 */
+	public void setLegalPerson(String legalPerson){
+		this.legalPerson = legalPerson;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  委托代理人
+	 */
+	public String getAgent(){
+		return this.agent;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  委托代理人
+	 */
+	public void setAgent(String agent){
+		this.agent = agent;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  电报/挂号
+	 */
+	public String getTelegraph(){
+		return this.telegraph;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  电报/挂号
+	 */
+	public void setTelegraph(String telegraph){
+		this.telegraph = telegraph;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  电话
+	 */
+	public String getTelephone(){
+		return this.telephone;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  电话
+	 */
+	public void setTelephone(String telephone){
+		this.telephone = telephone;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  开户银行
+	 */
+	public String getOpeningBank(){
+		return this.openingBank;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  开户银行
+	 */
+	public void setOpeningBank(String openingBank){
+		this.openingBank = openingBank;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  银行账户
+	 */
+	public String getBankAccount(){
+		return this.bankAccount;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  银行账户
+	 */
+	public void setBankAccount(String bankAccount){
+		this.bankAccount = bankAccount;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  纳税人登记号
+	 */
+	public String getTaxpayerIdentification(){
+		return this.taxpayerIdentification;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  纳税人登记号
+	 */
+	public void setTaxpayerIdentification(String taxpayerIdentification){
+		this.taxpayerIdentification = taxpayerIdentification;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  邮政编码
+	 */
+	public String getPostalCode(){
+		return this.postalCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  邮政编码
+	 */
+	public void setPostalCode(String postalCode){
+		this.postalCode = postalCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  是否为采集点
+	 */
+	public String getIsCollect(){
+		return this.isCollect;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  是否为采集点
+	 */
+	public void setIsCollect(String isCollect){
+		this.isCollect = isCollect;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业类型1生产企业、2洗选加工企业、3、经营企业、10承运企业  11个体户
+	 */
+	public String getCompanyType(){
+		return this.companyType;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业类型1生产企业、2洗选加工企业、3、经营企业、10承运企业  11个体户
+	 */
+	public void setCompanyType(String companyType){
+		this.companyType = companyType;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  所属企业id
+	 */
+	public String getParnetOrgId(){
+		return this.parnetOrgId;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  所属企业id
+	 */
+	public void setParnetOrgId(String parnetOrgId){
+		this.parnetOrgId = parnetOrgId;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  所属企业编码
+	 */
+	public String getParentOrgCode(){
+		return this.parentOrgCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  所属企业编码
+	 */
+	public void setParentOrgCode(String parentOrgCode){
+		this.parentOrgCode = parentOrgCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  所属企业名称
+	 */
+	public String getParentOrgName(){
+		return this.parentOrgName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  所属企业名称
+	 */
+	public void setParentOrgName(String parentOrgName){
+		this.parentOrgName = parentOrgName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  所属企业简称
+	 */
+	public String getParentOrgShortName(){
+		return this.parentOrgShortName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  所属企业简称
+	 */
+	public void setParentOrgShortName(String parentOrgShortName){
+		this.parentOrgShortName = parentOrgShortName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  机构类型编码1行政区域 2.企业
+	 */
+	public String getOrgTypeCode(){
+		return this.orgTypeCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  机构类型编码1行政区域 2.企业
+	 */
+	public void setOrgTypeCode(String orgTypeCode){
+		this.orgTypeCode = orgTypeCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  机构类型名称
+	 */
+	public String getOrgTypeName(){
+		return this.orgTypeName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  机构类型名称
+	 */
+	public void setOrgTypeName(String orgTypeName){
+		this.orgTypeName = orgTypeName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业行业归属编码
+	 */
+	public String getOrgIndustryCode(){
+		return this.orgIndustryCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业行业归属编码
+	 */
+	public void setOrgIndustryCode(String orgIndustryCode){
+		this.orgIndustryCode = orgIndustryCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业行业归属名称（该企业的行业类型，包括露天矿、洗煤厂等）
+	 */
+	public String getOrgIndustryName(){
+		return this.orgIndustryName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业行业归属名称（该企业的行业类型，包括露天矿、洗煤厂等）
+	 */
+	public void setOrgIndustryName(String orgIndustryName){
+		this.orgIndustryName = orgIndustryName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  审核状态
+	 */
+	public String getCheckStatus(){
+		return this.checkStatus;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  审核状态
+	 */
+	public void setCheckStatus(String checkStatus){
+		this.checkStatus = checkStatus;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  审核人
+	 */
+	public String getCheckerId(){
+		return this.checkerId;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  审核人
+	 */
+	public void setCheckerId(String checkerId){
+		this.checkerId = checkerId;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  审核时间
+	 */
+	public Date getCheckTime(){
+		return this.checkTime;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  审核时间
+	 */
+	public void setCheckTime(Date checkTime){
+		this.checkTime = checkTime;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  是否开通： 1开通 0 未开通
+	 */
+	public String getIsOpening(){
+		return this.isOpening;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  是否开通： 1开通 0 未开通
+	 */
+	public void setIsOpening(String isOpening){
+		this.isOpening = isOpening;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  公司简介
+	 */
+	public String getProfile(){
+		return this.profile;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  公司简介
+	 */
+	public void setProfile(String profile){
+		this.profile = profile;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业属性编码
+	 */
+	public String getAttributeCode(){
+		return this.attributeCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业属性编码
+	 */
+	public void setAttributeCode(String attributeCode){
+		this.attributeCode = attributeCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  企业属性名称
+	 */
+	public String getAttributeName(){
+		return this.attributeName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  企业属性名称
+	 */
+	public void setAttributeName(String attributeName){
+		this.attributeName = attributeName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  磅房作业模式poundStyle1，自动；0手动
+	 */
+	public String getPoundStyle(){
+		return this.poundStyle;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  磅房作业模式poundStyle1，自动；0手动
+	 */
+	public void setPoundStyle(String poundStyle){
+		this.poundStyle = poundStyle;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String   治超over_con 0无，1司机
+	 */
+	public String getOverControl(){
+		return this.overControl;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String   治超over_con 0无，1司机
+	 */
+	public void setOverControl(String overControl){
+		this.overControl = overControl;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  治税tax_con 0无 1购销合同2承运合同3派车单
+	 */
+	public String getTaxControl(){
+		return this.taxControl;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  治税tax_con 0无 1购销合同2承运合同3派车单
+	 */
+	public void setTaxControl(String taxControl){
+		this.taxControl = taxControl;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  核定生产力
+	 */
+	public String getAuthorizedProductivity(){
+		return this.authorizedProductivity;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  核定生产力
+	 */
+	public void setAuthorizedProductivity(String authorizedProductivity){
+		this.authorizedProductivity = authorizedProductivity;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  联系人
+	 */
+	public String getContactName(){
+		return this.contactName;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  联系人
+	 */
+	public void setContactName(String contactName){
+		this.contactName = contactName;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  固话区号
+	 */
+	public String getContactTelCode(){
+		return this.contactTelCode;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  固话区号
+	 */
+	public void setContactTelCode(String contactTelCode){
+		this.contactTelCode = contactTelCode;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  联系人固话
+	 */
+	public String getContactTel(){
+		return this.contactTel;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  联系人固话
+	 */
+	public void setContactTel(String contactTel){
+		this.contactTel = contactTel;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  联系人手机号
+	 */
+	public String getContactCellPhone(){
+		return this.contactCellPhone;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  联系人手机号
+	 */
+	public void setContactCellPhone(String contactCellPhone){
+		this.contactCellPhone = contactCellPhone;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  有效期限
+	 */
+	public Date getExpireDateEnd(){
+		return this.expireDateEnd;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  有效期限
+	 */
+	public void setExpireDateEnd(Date expireDateEnd){
+		this.expireDateEnd = expireDateEnd;
+	}
+	
+	/**
+	 *方法: 取得Date
+	 *@return: Date  生效日期
+	 */
+	public Date getExpireDateStart(){
+		return this.expireDateStart;
+	}
+
+	/**
+	 *方法: 设置Date
+	 *@param: Date  生效日期
+	 */
+	public void setExpireDateStart(Date expireDateStart){
+		this.expireDateStart = expireDateStart;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  省
+	 */
+	public String getProvince(){
+		return this.province;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  省
+	 */
+	public void setProvince(String province){
+		this.province = province;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  市
+	 */
+	public String getCity(){
+		return this.city;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  市
+	 */
+	public void setCity(String city){
+		this.city = city;
+	}
+	
+	/**
+	 *方法: 取得String
+	 *@return: String  县
+	 */
+	public String getCounty(){
+		return this.county;
+	}
+
+	/**
+	 *方法: 设置String
+	 *@param: String  县
+	 */
+	public void setCounty(String county){
+		this.county = county;
+	}
+	
+	
+}

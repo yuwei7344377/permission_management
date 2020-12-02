@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbResourceApplicationTypeDao">
+
+    <parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbResourceApplicationType"></parameterMap>
+    <resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbResourceApplicationType">
+        <result property="appTypeId" column="app_type_id"/>
+        <result property="appTypeCode" column="app_type_code"/>
+        <result property="appTypeName" column="app_type_name"/>
+        <result property="appTypeShortName" column="app_type_short_name"/>
+        <result property="appTypeOrder" column="app_type_order"/>
+        <result property="remark" column="remark"/>
+    </resultMap>
+
+    <sql id="columnSql">
+        <trim suffixOverrides=",">
+            t.app_type_id,
+            t.app_type_code,
+            t.app_type_name,
+            t.app_type_short_name,
+            t.app_type_order,
+            t.remark,
+        </trim>
+    </sql>
+
+    <select id="find" parameterMap="parameterMap" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_resource_application_type t
+        <where>
+            <if test="appTypeId != null and appTypeId != ''">
+                and t.app_type_id = #{appTypeId}
+            </if>
+            <if test="appTypeCode != null and appTypeCode != ''">
+                and t.app_type_code like '%${appTypeCode}%'
+            </if>
+            <if test="appTypeName != null and appTypeName != ''">
+                and t.app_type_name like '%${appTypeName}%'
+            </if>
+            <if test="appTypeShortName != null and appTypeShortName != ''">
+                and t.app_type_short_name = #{appTypeShortName}
+            </if>
+            <if test="remark != null and remark != ''">
+                and t.remark = #{remark}
+            </if>
+        </where>
+        order by t.app_type_order
+    </select>
+
+    <select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+        select
+        <include refid="columnSql"></include>
+        from tb_resource_application_type t
+        where 1=1
+        <if test="appTypeId != null and appTypeId != ''">
+            and t.app_type_id = #{appTypeId}
+        </if>
+        <if test="appTypeCode != null and appTypeCode != ''">
+            and t.app_type_code = #{appTypeCode}
+        </if>
+        <if test="appTypeName != null and appTypeName != ''">
+            and t.app_type_name = #{appTypeName}
+        </if>
+        <if test="appTypeShortName != null and appTypeShortName != ''">
+            and t.app_type_short_name = #{appTypeShortName}
+        </if>
+        <if test="remark != null and remark != ''">
+            and t.remark = #{remark}
+        </if>
+    </select>
+
+    <insert id="add" parameterMap="parameterMap">
+        insert into tb_resource_application_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            app_type_id,
+            app_type_code,
+            app_type_name,
+            app_type_short_name,
+            app_type_order,
+            remark,
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            #{appTypeId},
+            #{appTypeCode},
+            #{appTypeName},
+            #{appTypeShortName},
+            #{appTypeOrder},
+            #{remark},
+        </trim>
+    </insert>
+
+    <insert id="batchAdd" parameterType="java.util.List">
+        insert into tb_resource_application_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            app_type_id,
+            app_type_code,
+            app_type_name,
+            app_type_short_name,
+            app_type_order,
+            remark,
+        </trim>
+        values
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.appTypeId},
+                #{item.appTypeCode},
+                #{item.appTypeName},
+                #{item.appTypeShortName},
+                #{item.appTypeOrder},
+                #{item.remark},
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterMap="parameterMap">
+        update tb_resource_application_type
+        <set>
+            app_type_code = #{appTypeCode},
+            app_type_name = #{appTypeName},
+            app_type_short_name = #{appTypeShortName},
+            app_type_order = #{appTypeOrder},
+            remark = #{remark},
+        </set>
+        where app_type_id = #{appTypeId}
+    </update>
+
+    <update id="updateNotNull" parameterMap="parameterMap">
+        update tb_resource_application_type
+        <set>
+            <if test="appTypeCode != null">
+                app_type_code = #{appTypeCode},
+            </if>
+            <if test="appTypeName != null">
+                app_type_name = #{appTypeName},
+            </if>
+            <if test="appTypeShortName != null">
+                app_type_short_name = #{appTypeShortName},
+            </if>
+            <if test="appTypeOrder != null">
+                app_type_order = #{appTypeOrder},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+        </set>
+        where app_type_id = #{appTypeId}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete
+        from tb_resource_application_type
+        where app_type_id = #{value}
+    </delete>
+
+    <delete id="batchDelete" parameterType="java.util.List">
+        delete from tb_resource_application_type where app_type_id in
+        <foreach collection="list" item="item" open="(" close=")" separator=",">
+            #{item}
+        </foreach>
+    </delete>
+
+    <!--验证应用管理系统下面是否存在功能资源清单 -->
+    <select id="findResourcesByTypeId" resultType="java.lang.Integer">
+        select count(1)
+        from tb_resource_application_type t,
+             tb_resource r
+        where t.app_type_code = r.app_type_code
+          and t.app_type_id = #{appTypeId}
+    </select>
+
+    <!--验证系统编码,名称,简称是否唯一sql -->
+    <select id="findEffective" parameterMap="parameterMap" resultType="java.lang.Integer">
+        select count(1)
+        from tb_resource_application_type t
+        <where>
+            <if test="appTypeId != null and appTypeId != '' ">
+                <![CDATA[   and t.app_type_id <>  #{appTypeId}  ]]>
+            </if>
+            <if test="appTypeCode != null and appTypeCode != ''">
+                and t.app_type_code = #{appTypeCode}
+            </if>
+            <if test="appTypeName != null and appTypeName != ''">
+                and t.app_type_name = #{appTypeName}
+            </if>
+            <if test="appTypeShortName != null and appTypeShortName != ''">
+                and t.app_type_short_name = #{appTypeShortName}
+            </if>
+        </where>
+    </select>
+
+    <select id="getFunctionList" resultType="map">
+        select t1.resource_id,
+               t1.app_type_code,
+               t1.resource_name,
+               t1.resource_flag,
+               t1.isopen,
+               t1.parent_resource_id,
+               case when t.resource_id is null then false else true end as checked
+        from tb_resource t1
+        left join tb_tenant_type_resource t  on t.resource_id = t1.resource_id and t.zh_type_id = #{zhTypeId} and  t.app_type_code = #{appTypeCode}
+        where t1.app_type_code = #{appTypeCode}
+        order by t1.parent_resource_id, t1.resource_order
+    </select>
+
+</mapper>

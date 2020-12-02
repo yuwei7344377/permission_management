@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.TbCoalRelatedDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.TbCoalRelated"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.TbCoalRelated">
+		<result property="id" column="id"/>
+		<result property="code" column="code"/>
+		<result property="name" column="name"/>
+		<result property="orgShortName" column="org_short_name"/>
+		<result property="parentId" column="parent_id"/>
+		<result property="parentCode" column="parent_code"/>
+		<result property="parentName" column="parent_name"/>
+		<result property="parentShortName" column="parent_short_name"/>
+		<result property="orgLevel" column="org_level"/>
+		<result property="jd" column="jd"/>
+		<result property="wd" column="wd"/>
+		<result property="createName" column="create_name"/>
+		<result property="createBy" column="create_by"/>
+		<result property="createDate" column="create_date"/>
+		<result property="updateName" column="update_name"/>
+		<result property="updateBy" column="update_by"/>
+		<result property="updateDate" column="update_date"/>
+		<result property="opPurchase" column="op_purchase"/>
+		<result property="opDispatch" column="op_dispatch"/>
+		<result property="opCarriage" column="op_carriage"/>
+		<result property="opNone" column="op_none"/>
+		<result property="address" column="address"/>
+		<result property="legalPerson" column="legal_person"/>
+		<result property="agent" column="agent"/>
+		<result property="telegraph" column="telegraph"/>
+		<result property="telephone" column="telephone"/>
+		<result property="openingBank" column="opening_bank"/>
+		<result property="bankAccount" column="bank_account"/>
+		<result property="taxpayerIdentification" column="taxpayer_identification"/>
+		<result property="postalCode" column="postal_code"/>
+		<result property="isCollect" column="is_collect"/>
+		<result property="companyType" column="company_type"/>
+		<result property="parnetOrgId" column="parnet_org_id"/>
+		<result property="parentOrgCode" column="parent_org_code"/>
+		<result property="parentOrgName" column="parent_org_name"/>
+		<result property="parentOrgShortName" column="parent_org_short_name"/>
+		<result property="orgTypeCode" column="org_type_code"/>
+		<result property="orgTypeName" column="org_type_name"/>
+		<result property="orgIndustryCode" column="org_industry_code"/>
+		<result property="orgIndustryName" column="org_industry_name"/>
+		<result property="checkStatus" column="check_status"/>
+		<result property="checkerId" column="checker_id"/>
+		<result property="checkTime" column="check_time"/>
+		<result property="isOpening" column="is_opening"/>
+		<result property="profile" column="profile"/>
+		<result property="attributeCode" column="attribute_code"/>
+		<result property="attributeName" column="attribute_name"/>
+		<result property="poundStyle" column="pound_style"/>
+		<result property="overControl" column="over_control"/>
+		<result property="taxControl" column="tax_control"/>
+		<result property="authorizedProductivity" column="authorized_productivity"/>
+		<result property="contactName" column="contact_name"/>
+		<result property="contactTelCode" column="contact_tel_code"/>
+		<result property="contactTel" column="contact_tel"/>
+		<result property="contactCellPhone" column="contact_cell_phone"/>
+		<result property="expireDateEnd" column="expire_date_end"/>
+		<result property="expireDateStart" column="expire_date_start"/>
+		<result property="province" column="province"/>
+		<result property="city" column="city"/>
+		<result property="county" column="county"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.code,
+			t.name,
+			t.org_short_name,
+			t.parent_id,
+			t.parent_code,
+			t.parent_name,
+			t.parent_short_name,
+			t.org_level,
+			t.jd,
+			t.wd,
+			t.create_name,
+			t.create_by,
+			t.create_date,
+			t.update_name,
+			t.update_by,
+			t.update_date,
+			t.op_purchase,
+			t.op_dispatch,
+			t.op_carriage,
+			t.op_none,
+			t.address,
+			t.legal_person,
+			t.agent,
+			t.telegraph,
+			t.telephone,
+			t.opening_bank,
+			t.bank_account,
+			t.taxpayer_identification,
+			t.postal_code,
+			t.is_collect,
+			t.company_type,
+			t.parnet_org_id,
+			t.parent_org_code,
+			t.parent_org_name,
+			t.parent_org_short_name,
+			t.org_type_code,
+			t.org_type_name,
+			t.org_industry_code,
+			t.org_industry_name,
+			t.check_status,
+			t.checker_id,
+			t.check_time,
+			t.is_opening,
+			t.profile,
+			t.attribute_code,
+			t.attribute_name,
+			t.pound_style,
+			t.over_control,
+			t.tax_control,
+			t.authorized_productivity,
+			t.contact_name,
+			t.contact_tel_code,
+			t.contact_tel,
+			t.contact_cell_phone,
+			t.expire_date_end,
+			t.expire_date_start,
+			t.province,
+			t.city,
+			t.county,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_coal_related t
+		<where>
+			<if test="code != null and code != ''">
+				and t.code = #{code}			
+			</if>
+			<if test="name != null and name != ''">
+				and t.name = #{name}			
+			</if>
+			<if test="orgShortName != null and orgShortName != ''">
+				and t.org_short_name = #{orgShortName}			
+			</if>
+			<if test="parentId != null and parentId != ''">
+				and t.parent_id = #{parentId}			
+			</if>
+			<if test="parentCode != null and parentCode != ''">
+				and t.parent_code = #{parentCode}			
+			</if>
+			<if test="parentName != null and parentName != ''">
+				and t.parent_name = #{parentName}			
+			</if>
+			<if test="parentShortName != null and parentShortName != ''">
+				and t.parent_short_name = #{parentShortName}			
+			</if>
+			<if test="orgLevel != null and orgLevel != ''">
+				and t.org_level = #{orgLevel}			
+			</if>
+			<if test="isCollect != null and isCollect != ''">
+				and t.is_collect = #{isCollect}			
+			</if>
+			<if test="companyType != null and companyType != ''">
+				and t.company_type = #{companyType}			
+			</if>
+			<if test="isOpening != null and isOpening != ''">
+				and t.is_opening = #{isOpening}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from tb_coal_related t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into tb_coal_related
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			code,
+			name,
+			org_short_name,
+			parent_id,
+			parent_code,
+			parent_name,
+			parent_short_name,
+			org_level,
+			jd,
+			wd,
+			create_name,
+			create_by,
+			create_date,
+			update_name,
+			update_by,
+			update_date,
+			op_purchase,
+			op_dispatch,
+			op_carriage,
+			op_none,
+			address,
+			legal_person,
+			agent,
+			telegraph,
+			telephone,
+			opening_bank,
+			bank_account,
+			taxpayer_identification,
+			postal_code,
+			is_collect,
+			company_type,
+			parnet_org_id,
+			parent_org_code,
+			parent_org_name,
+			parent_org_short_name,
+			org_type_code,
+			org_type_name,
+			org_industry_code,
+			org_industry_name,
+			check_status,
+			checker_id,
+			check_time,
+			is_opening,
+			profile,
+			attribute_code,
+			attribute_name,
+			pound_style,
+			over_control,
+			tax_control,
+			authorized_productivity,
+			contact_name,
+			contact_tel_code,
+			contact_tel,
+			contact_cell_phone,
+			expire_date_end,
+			expire_date_start,
+			province,
+			city,
+			county,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{code},
+			#{name},
+			#{orgShortName},
+			#{parentId},
+			#{parentCode},
+			#{parentName},
+			#{parentShortName},
+			#{orgLevel},
+			#{jd},
+			#{wd},
+			#{createName},
+			#{createBy},
+			#{createDate},
+			#{updateName},
+			#{updateBy},
+			#{updateDate},
+			#{opPurchase},
+			#{opDispatch},
+			#{opCarriage},
+			#{opNone},
+			#{address},
+			#{legalPerson},
+			#{agent},
+			#{telegraph},
+			#{telephone},
+			#{openingBank},
+			#{bankAccount},
+			#{taxpayerIdentification},
+			#{postalCode},
+			#{isCollect},
+			#{companyType},
+			#{parnetOrgId},
+			#{parentOrgCode},
+			#{parentOrgName},
+			#{parentOrgShortName},
+			#{orgTypeCode},
+			#{orgTypeName},
+			#{orgIndustryCode},
+			#{orgIndustryName},
+			#{checkStatus},
+			#{checkerId},
+			#{checkTime},
+			#{isOpening},
+			#{profile},
+			#{attributeCode},
+			#{attributeName},
+			#{poundStyle},
+			#{overControl},
+			#{taxControl},
+			#{authorizedProductivity},
+			#{contactName},
+			#{contactTelCode},
+			#{contactTel},
+			#{contactCellPhone},
+			#{expireDateEnd},
+			#{expireDateStart},
+			#{province},
+			#{city},
+			#{county},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into tb_coal_related
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			code,
+			name,
+			org_short_name,
+			parent_id,
+			parent_code,
+			parent_name,
+			parent_short_name,
+			org_level,
+			jd,
+			wd,
+			create_name,
+			create_by,
+			create_date,
+			update_name,
+			update_by,
+			update_date,
+			op_purchase,
+			op_dispatch,
+			op_carriage,
+			op_none,
+			address,
+			legal_person,
+			agent,
+			telegraph,
+			telephone,
+			opening_bank,
+			bank_account,
+			taxpayer_identification,
+			postal_code,
+			is_collect,
+			company_type,
+			parnet_org_id,
+			parent_org_code,
+			parent_org_name,
+			parent_org_short_name,
+			org_type_code,
+			org_type_name,
+			org_industry_code,
+			org_industry_name,
+			check_status,
+			checker_id,
+			check_time,
+			is_opening,
+			profile,
+			attribute_code,
+			attribute_name,
+			pound_style,
+			over_control,
+			tax_control,
+			authorized_productivity,
+			contact_name,
+			contact_tel_code,
+			contact_tel,
+			contact_cell_phone,
+			expire_date_end,
+			expire_date_start,
+			province,
+			city,
+			county,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.code},
+				#{item.name},
+				#{item.orgShortName},
+				#{item.parentId},
+				#{item.parentCode},
+				#{item.parentName},
+				#{item.parentShortName},
+				#{item.orgLevel},
+				#{item.jd},
+				#{item.wd},
+				#{item.createName},
+				#{item.createBy},
+				#{item.createDate},
+				#{item.updateName},
+				#{item.updateBy},
+				#{item.updateDate},
+				#{item.opPurchase},
+				#{item.opDispatch},
+				#{item.opCarriage},
+				#{item.opNone},
+				#{item.address},
+				#{item.legalPerson},
+				#{item.agent},
+				#{item.telegraph},
+				#{item.telephone},
+				#{item.openingBank},
+				#{item.bankAccount},
+				#{item.taxpayerIdentification},
+				#{item.postalCode},
+				#{item.isCollect},
+				#{item.companyType},
+				#{item.parnetOrgId},
+				#{item.parentOrgCode},
+				#{item.parentOrgName},
+				#{item.parentOrgShortName},
+				#{item.orgTypeCode},
+				#{item.orgTypeName},
+				#{item.orgIndustryCode},
+				#{item.orgIndustryName},
+				#{item.checkStatus},
+				#{item.checkerId},
+				#{item.checkTime},
+				#{item.isOpening},
+				#{item.profile},
+				#{item.attributeCode},
+				#{item.attributeName},
+				#{item.poundStyle},
+				#{item.overControl},
+				#{item.taxControl},
+				#{item.authorizedProductivity},
+				#{item.contactName},
+				#{item.contactTelCode},
+				#{item.contactTel},
+				#{item.contactCellPhone},
+				#{item.expireDateEnd},
+				#{item.expireDateStart},
+				#{item.province},
+				#{item.city},
+				#{item.county},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update tb_coal_related
+		<set>
+			code = #{code},
+			name = #{name},
+			org_short_name = #{orgShortName},
+			parent_id = #{parentId},
+			parent_code = #{parentCode},
+			parent_name = #{parentName},
+			parent_short_name = #{parentShortName},
+			org_level = #{orgLevel},
+			jd = #{jd},
+			wd = #{wd},
+			create_name = #{createName},
+			create_by = #{createBy},
+			create_date = #{createDate},
+			update_name = #{updateName},
+			update_by = #{updateBy},
+			update_date = #{updateDate},
+			op_purchase = #{opPurchase},
+			op_dispatch = #{opDispatch},
+			op_carriage = #{opCarriage},
+			op_none = #{opNone},
+			address = #{address},
+			legal_person = #{legalPerson},
+			agent = #{agent},
+			telegraph = #{telegraph},
+			telephone = #{telephone},
+			opening_bank = #{openingBank},
+			bank_account = #{bankAccount},
+			taxpayer_identification = #{taxpayerIdentification},
+			postal_code = #{postalCode},
+			is_collect = #{isCollect},
+			company_type = #{companyType},
+			parnet_org_id = #{parnetOrgId},
+			parent_org_code = #{parentOrgCode},
+			parent_org_name = #{parentOrgName},
+			parent_org_short_name = #{parentOrgShortName},
+			org_type_code = #{orgTypeCode},
+			org_type_name = #{orgTypeName},
+			org_industry_code = #{orgIndustryCode},
+			org_industry_name = #{orgIndustryName},
+			check_status = #{checkStatus},
+			checker_id = #{checkerId},
+			check_time = #{checkTime},
+			is_opening = #{isOpening},
+			profile = #{profile},
+			attribute_code = #{attributeCode},
+			attribute_name = #{attributeName},
+			pound_style = #{poundStyle},
+			over_control = #{overControl},
+			tax_control = #{taxControl},
+			authorized_productivity = #{authorizedProductivity},
+			contact_name = #{contactName},
+			contact_tel_code = #{contactTelCode},
+			contact_tel = #{contactTel},
+			contact_cell_phone = #{contactCellPhone},
+			expire_date_end = #{expireDateEnd},
+			expire_date_start = #{expireDateStart},
+			province = #{province},
+			city = #{city},
+			county = #{county},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update tb_coal_related
+		<set>
+			<if test="code != null">
+			code = #{code},
+			</if>
+			<if test="name != null">
+			name = #{name},
+			</if>
+			<if test="orgShortName != null">
+			org_short_name = #{orgShortName},
+			</if>
+			<if test="parentId != null">
+			parent_id = #{parentId},
+			</if>
+			<if test="parentCode != null">
+			parent_code = #{parentCode},
+			</if>
+			<if test="parentName != null">
+			parent_name = #{parentName},
+			</if>
+			<if test="parentShortName != null">
+			parent_short_name = #{parentShortName},
+			</if>
+			<if test="orgLevel != null">
+			org_level = #{orgLevel},
+			</if>
+			<if test="jd != null">
+			jd = #{jd},
+			</if>
+			<if test="wd != null">
+			wd = #{wd},
+			</if>
+			<if test="createName != null">
+			create_name = #{createName},
+			</if>
+			<if test="createBy != null">
+			create_by = #{createBy},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="updateName != null">
+			update_name = #{updateName},
+			</if>
+			<if test="updateBy != null">
+			update_by = #{updateBy},
+			</if>
+			<if test="updateDate != null">
+			update_date = #{updateDate},
+			</if>
+			<if test="opPurchase != null">
+			op_purchase = #{opPurchase},
+			</if>
+			<if test="opDispatch != null">
+			op_dispatch = #{opDispatch},
+			</if>
+			<if test="opCarriage != null">
+			op_carriage = #{opCarriage},
+			</if>
+			<if test="opNone != null">
+			op_none = #{opNone},
+			</if>
+			<if test="address != null">
+			address = #{address},
+			</if>
+			<if test="legalPerson != null">
+			legal_person = #{legalPerson},
+			</if>
+			<if test="agent != null">
+			agent = #{agent},
+			</if>
+			<if test="telegraph != null">
+			telegraph = #{telegraph},
+			</if>
+			<if test="telephone != null">
+			telephone = #{telephone},
+			</if>
+			<if test="openingBank != null">
+			opening_bank = #{openingBank},
+			</if>
+			<if test="bankAccount != null">
+			bank_account = #{bankAccount},
+			</if>
+			<if test="taxpayerIdentification != null">
+			taxpayer_identification = #{taxpayerIdentification},
+			</if>
+			<if test="postalCode != null">
+			postal_code = #{postalCode},
+			</if>
+			<if test="isCollect != null">
+			is_collect = #{isCollect},
+			</if>
+			<if test="companyType != null">
+			company_type = #{companyType},
+			</if>
+			<if test="parnetOrgId != null">
+			parnet_org_id = #{parnetOrgId},
+			</if>
+			<if test="parentOrgCode != null">
+			parent_org_code = #{parentOrgCode},
+			</if>
+			<if test="parentOrgName != null">
+			parent_org_name = #{parentOrgName},
+			</if>
+			<if test="parentOrgShortName != null">
+			parent_org_short_name = #{parentOrgShortName},
+			</if>
+			<if test="orgTypeCode != null">
+			org_type_code = #{orgTypeCode},
+			</if>
+			<if test="orgTypeName != null">
+			org_type_name = #{orgTypeName},
+			</if>
+			<if test="orgIndustryCode != null">
+			org_industry_code = #{orgIndustryCode},
+			</if>
+			<if test="orgIndustryName != null">
+			org_industry_name = #{orgIndustryName},
+			</if>
+			<if test="checkStatus != null">
+			check_status = #{checkStatus},
+			</if>
+			<if test="checkerId != null">
+			checker_id = #{checkerId},
+			</if>
+			<if test="checkTime != null">
+			check_time = #{checkTime},
+			</if>
+			<if test="isOpening != null">
+			is_opening = #{isOpening},
+			</if>
+			<if test="profile != null">
+			profile = #{profile},
+			</if>
+			<if test="attributeCode != null">
+			attribute_code = #{attributeCode},
+			</if>
+			<if test="attributeName != null">
+			attribute_name = #{attributeName},
+			</if>
+			<if test="poundStyle != null">
+			pound_style = #{poundStyle},
+			</if>
+			<if test="overControl != null">
+			over_control = #{overControl},
+			</if>
+			<if test="taxControl != null">
+			tax_control = #{taxControl},
+			</if>
+			<if test="authorizedProductivity != null">
+			authorized_productivity = #{authorizedProductivity},
+			</if>
+			<if test="contactName != null">
+			contact_name = #{contactName},
+			</if>
+			<if test="contactTelCode != null">
+			contact_tel_code = #{contactTelCode},
+			</if>
+			<if test="contactTel != null">
+			contact_tel = #{contactTel},
+			</if>
+			<if test="contactCellPhone != null">
+			contact_cell_phone = #{contactCellPhone},
+			</if>
+			<if test="expireDateEnd != null">
+			expire_date_end = #{expireDateEnd},
+			</if>
+			<if test="expireDateStart != null">
+			expire_date_start = #{expireDateStart},
+			</if>
+			<if test="province != null">
+			province = #{province},
+			</if>
+			<if test="city != null">
+			city = #{city},
+			</if>
+			<if test="county != null">
+			county = #{county},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from tb_coal_related where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from tb_coal_related where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	<!--  查询某行政区划下最大的ID -->
+	<select id="getByMaxID" parameterType="java.lang.String">
+		SELECT max(t.id) id FROM tb_coal_related t where t.parent_code = #{parentCode} and t.code is not null
+	</select>
+</mapper>

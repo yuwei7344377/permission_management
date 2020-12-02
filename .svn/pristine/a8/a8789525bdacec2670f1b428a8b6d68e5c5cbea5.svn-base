@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dhcc.jn.tenant.dao.VCompantypeDao">
+
+	<parameterMap id="parameterMap" type="com.dhcc.jn.tenant.entity.VCompantype"></parameterMap>
+	<resultMap id="resultMap" type="com.dhcc.jn.tenant.entity.VCompantype">
+		<result property="id" column="id"/>
+		<result property="typecode" column="typecode"/>
+		<result property="typename" column="typename"/>
+		<result property="typepid" column="typepid"/>
+		<result property="typegroupid" column="typegroupid"/>
+		<result property="createDate" column="create_date"/>
+		<result property="createName" column="create_name"/>
+		<result property="orderNum" column="order_num"/>
+	</resultMap>
+	
+	<sql id="columnSql">
+		<trim suffixOverrides=",">
+			t.id,
+			t.typecode,
+			t.typename,
+			t.typepid,
+			t.typegroupid,
+			t.create_date,
+			t.create_name,
+			t.order_num,
+	 	</trim>
+	</sql>
+	
+	<select id="find" parameterMap="parameterMap" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from v_compantype t
+		<where>
+			<if test="typecode != null and typecode != ''">
+				and t.typecode = #{typecode}			
+			</if>
+			<if test="typename != null and typename != ''">
+				and t.typename = #{typename}			
+			</if>
+			<if test="typegroupid != null and typegroupid != ''">
+				and t.typegroupid = #{typegroupid}			
+			</if>
+		</where>
+	</select>
+	
+	<select id="getById" parameterType="java.lang.String" resultMap="resultMap">
+		select
+			<include refid="columnSql"></include>
+		from v_compantype t
+		where t.id = #{value}
+	</select>
+	
+	<insert id="add" parameterMap="parameterMap">
+		insert into v_compantype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			typecode,
+			typename,
+			typepid,
+			typegroupid,
+			create_date,
+			create_name,
+			order_num,
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			#{id},
+			#{typecode},
+			#{typename},
+			#{typepid},
+			#{typegroupid},
+			#{createDate},
+			#{createName},
+			#{orderNum},
+		</trim>
+	</insert>
+	
+	<insert id="batchAdd" parameterType="java.util.List">
+		insert into v_compantype
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			id,
+			typecode,
+			typename,
+			typepid,
+			typegroupid,
+			create_date,
+			create_name,
+			order_num,
+		</trim>
+		values
+		<foreach collection="list" item="item" separator=",">
+			<trim prefix="(" suffix=")" suffixOverrides=",">
+				#{item.id},
+				#{item.typecode},
+				#{item.typename},
+				#{item.typepid},
+				#{item.typegroupid},
+				#{item.createDate},
+				#{item.createName},
+				#{item.orderNum},
+			</trim>
+		</foreach>
+	</insert>
+	
+	<update id="update" parameterMap="parameterMap">
+		update v_compantype
+		<set>
+			typecode = #{typecode},
+			typename = #{typename},
+			typepid = #{typepid},
+			typegroupid = #{typegroupid},
+			create_date = #{createDate},
+			create_name = #{createName},
+			order_num = #{orderNum},
+		</set>
+		where id = #{id}
+	</update>
+	
+	<update id="updateNotNull" parameterMap="parameterMap">
+		update v_compantype
+		<set>
+			<if test="typecode != null">
+			typecode = #{typecode},
+			</if>
+			<if test="typename != null">
+			typename = #{typename},
+			</if>
+			<if test="typepid != null">
+			typepid = #{typepid},
+			</if>
+			<if test="typegroupid != null">
+			typegroupid = #{typegroupid},
+			</if>
+			<if test="createDate != null">
+			create_date = #{createDate},
+			</if>
+			<if test="createName != null">
+			create_name = #{createName},
+			</if>
+			<if test="orderNum != null">
+			order_num = #{orderNum},
+			</if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		delete from v_compantype where id = #{value}
+	</delete>
+	
+	<delete id="batchDelete" parameterType="java.util.List">
+		delete from v_compantype where id in
+		<foreach collection="list" item="item" open="(" close=")" separator=",">
+			#{item}
+		</foreach>
+	</delete>
+	
+</mapper>

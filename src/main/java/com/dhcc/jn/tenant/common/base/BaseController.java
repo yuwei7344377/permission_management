@@ -1,0 +1,154 @@
+package com.dhcc.jn.tenant.common.base;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.net.URLEncoder;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.util.StringUtils;
+
+import com.dhcc.jn.tenant.entity.TbUser;
+
+import sun.misc.BASE64Encoder;
+
+/**
+ * 基础controller
+ * 
+ * @author King
+ *
+ */
+public class BaseController {
+    TbUser tbUser = new TbUser();
+	/**
+	 * 抽取由逗号分隔的主键列表
+	 * 
+	 * @param ids
+	 * @return
+	 */
+	protected List<String> extractIdListByComma(String ids) {
+        List<String> result = new ArrayList<String>();
+        if (StringUtils.hasText(ids)) {
+            for (String id : ids.split(",")) {
+                if (StringUtils.hasLength(id)) {
+                    result.add(id.trim());
+                }
+            }
+        }
+
+        return result;
+    }
+	
+	/**
+     * 下载文件时，针对不同浏览器，进行附件名的编码
+     * 
+     * @param filename
+     *            下载文件名
+     * @param agent
+     *            客户端浏览器
+     * @return 编码后的下载附件名
+     * @throws IOException
+     */
+    public static String encodeDownloadFilename(String filename, String agent)
+            throws IOException {
+        if (agent.contains("Firefox")) { // 火狐浏览器
+            filename = "=?UTF-8?B?"
+                    + new BASE64Encoder().encode(filename.getBytes("utf-8"))
+                    + "?=";
+            filename = filename.replaceAll("\r\n", "");
+        } else { // IE及其他浏览器
+            filename = URLEncoder.encode(filename, "utf-8");
+            filename = filename.replace("+"," ");
+        }
+        return filename;
+    }
+    
+    /**
+     * 
+     * @Title: getIP
+     * @Description: 获取IP地址信息
+     * @param request
+     * @return String
+     * @throws
+     */
+    public static String getIP(HttpServletRequest request) {
+        String ipAddress = null;
+        ipAddress = request.getHeader("x-forwarded-for");
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+            ipAddress = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
+        	ipAddress = request.getRemoteAddr();
+        	if ("127.0.0.1".equals(ipAddress)){
+                // 根据网卡取本机配置的IP
+                InetAddress inet = null;
+                try {
+                    inet = InetAddress.getLocalHost();
+                } catch (UnknownHostException e) {
+                    e.printStackTrace();
+                }
+               ipAddress = inet.getHostAddress();
+            }
+        }
+
+        // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
+        if (ipAddress != null && ipAddress.length() > 15) { // "***.***.***.***".length()
+            if (ipAddress.indexOf(",") > 0) {
+                ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
+            }
+        }
+        return ipAddress;
+    }
+    
+    public static List<Field> getFiledsInfo(String className) throws ClassNotFoundException {
+        List<Field> list = new ArrayList<>();
+        Class<?> clazz = Class.forName(className);
+        Field[] fields = clazz.getDeclaredFields();
+        list.addAll(Arrays.asList(fields));
+        Class<?> superClazz = clazz.getSuperclass();
+        if (superClazz != null) {
+            Field[] superFields = superClazz.getDeclaredFields();
+            list.addAll(Arrays.asList(superFields));
+        }
+        return list;
+    }
+	
+	public String getValueByPropName(Object object, String propName) {
+	    String value = null;
+	    try {
+	        // 通过属性获取对象的属性
+	        Field field = object.getClass().getDeclaredField(propName);
+	        // 对象的属性的访问权限设置为可访问
+	        field.setAccessible(true);
+	        // 获取属性的对应的值
+	        value = field.get(object).toString();
+	    } catch (Exception e) {
+	        return null;
+	    }
+	     
+	    return value;
+	}
+    
+	/**
+	 * 获取登录的当前用户信息
+	 * 
+	 * @return
+	 */
+	public TbUser getCurrentUser(){
+	    //aop方法拦截时下面一行放开
+	    //tbUser=  Constants.tbUser;
+	    //aop方法拦截时下面三行注掉
+	    tbUser.setUserId("1");
+        tbUser.setUsername("admin");
+        tbUser.setRealname("管理员");
+		return tbUser;
+	}
+}

@@ -1,0 +1,110 @@
+package com.dhcc.jn.tenant.service;
+
+import com.dhcc.jn.tenant.common.persistence.Page;
+import com.dhcc.jn.tenant.entity.TbTenantTypeData;
+
+import java.util.List;
+
+/**
+ * 租户类型数据资源清单service接口
+ *
+ * <pre>
+ * 	历史记录：
+ * 	2020-07-22 jlf
+ * 	新建文件
+ * </pre>
+ *
+ * @author <pre>
+ * SD
+ * 	jlf
+ * PG
+ * 	jlf
+ * UT
+ *
+ * MA
+ * </pre>
+ * @version $Rev$
+ * <p>
+ * <p/> $Id$
+ */
+public interface TbTenantTypeDataService {
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	分页查询
+     * </pre>
+     *
+     * @param tbTenantTypeData
+     * @param page
+     * @return
+     */
+    public Page<TbTenantTypeData> findByPage(TbTenantTypeData tbTenantTypeData, Page<TbTenantTypeData> page);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	查询
+     * </pre>
+     *
+     * @param tbTenantTypeData
+     * @return
+     */
+    public List<TbTenantTypeData> findBySearch(TbTenantTypeData tbTenantTypeData);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	通过ID查询
+     * </pre>
+     *
+     * @param
+     * @return
+     */
+    public TbTenantTypeData getById(String id);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	新增
+     * </pre>
+     *
+     * @param tbTenantTypeData
+     */
+    public void add(TbTenantTypeData tbTenantTypeData);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	修改
+     * </pre>
+     *
+     * @param tbTenantTypeData
+     */
+    public void update(TbTenantTypeData tbTenantTypeData);
+
+    /**
+     * <pre>
+     * 	2020-07-22 jlf
+     * 	删除
+     * </pre>
+     *
+     * @param id
+     */
+    public void delete(String id);
+
+    /**
+     * 查找数据目录的父节点
+     *
+     * @return
+     */
+    List<TbTenantTypeData> findParentId();
+
+    /**
+     * 获取用户类型下的数据目录
+     *
+     * @param zhTypeId
+     * @return
+     */
+    List<TbTenantTypeData> getUserTypeData(String zhTypeId, String dataId);
+}
